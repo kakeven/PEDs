@@ -40,7 +40,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" opacity="0.9" prefHeight="550.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" opacity="0.9" prefHeight="550.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+    xmlns:fx="http://javafx.com/fxml" fx:controller="Controller.Interface_loginController">
+
    <children>
       <Label layoutX="52.0" layoutY="108.0" prefHeight="25.0" prefWidth="50.0" text="Senha:" />
       <PasswordField layoutX="107.0" layoutY="108.0" promptText="Senha" />
