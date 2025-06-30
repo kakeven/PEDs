@@ -11,7 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Carrega o arquivo FXML
-        Parent root = FXMLLoader.load(getClass().getResource("/view/Interface_login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/View/Interface_login.fxml"));
 
         // Configura a janela
         primaryStage.setTitle("Minha Aplicação JavaFX");
