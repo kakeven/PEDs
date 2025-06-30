@@ -1,4 +1,4 @@
-module com.example.peds_tentativa_2 {
+module peds_tentativa_2 {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -11,6 +11,11 @@ module com.example.peds_tentativa_2 {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
 
-    opens com.example.peds_tentativa_2 to javafx.fxml;
-    exports com.example.peds_tentativa_2;
+    exports App;
+    exports Controller;
+    exports Model;
+    exports View;
+
+    opens Controller to javafx.fxml;
+    opens View to javafx.fxml;
 }
