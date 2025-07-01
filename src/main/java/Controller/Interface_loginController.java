@@ -35,10 +35,6 @@ public class Interface_loginController implements Initializable {
 
     @FXML
     private void aoClicarEntrar() {
-        try{
-            Parent arquivoJanela = FXMLLoader.load(getClass().getResource("View"))
-        }catch(Exception e){
 
-        }
     }
 }
