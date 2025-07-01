@@ -1,20 +1,23 @@
 package Controller;
+
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Button;
-
 import javafx.scene.layout.Pane;
-
+import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Interface_loginController implements Initializable {
     @FXML
-    public Pane focusTrap;
+    public Pane fundoInvisivel;
     public void initialize(URL location, ResourceBundle resources) {
-        focusTrap.requestFocus();
+        fundoInvisivel.requestFocus();
     }
 
     @FXML
@@ -26,11 +29,25 @@ public class Interface_loginController implements Initializable {
     @FXML
     private Button botaoLogin;
 
-
-
-
     @FXML
     private void aoClicarEntrar() {
         // deixar vazio — quem implementa é o responsável pela lógica
     }
+
+    @FXML
+    private Button BotaoIrCadastro;
+
+    @FXML
+    private void aoClicarNaoTemCadastro(){
+        try{
+            Parent arquivoJanela = FXMLLoader.load(getClass().getResource("View/Interface_cadastro.fxml"));
+            Stage JanelaAtual = (Stage)BotaoIrCadastro.getScene().getWindow();
+            JanelaAtual.setScene(new Scene(arquivoJanela));
+            JanelaAtual.setTitle("Cadastro");
+            JanelaAtual.show();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    //teste
 }
