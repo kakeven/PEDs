@@ -15,7 +15,7 @@ public class Main extends Application {
         Parent Login = FXMLLoader.load(getClass().getResource("/View/Interface_login.fxml"));
         // Configura a janela
         primaryStage.setTitle("Minha Aplicação JavaFX");
-        primaryStage.setScene(new Scene(Cadastro, 600, 400)); // tamanho opcional
+        primaryStage.setScene(new Scene(Login, 600, 400)); // tamanho opcional
 
         primaryStage.show();
 
