@@ -1,16 +1,9 @@
 package Controller;
-
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Button;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import javafx.scene.layout.Pane;
 
@@ -33,8 +26,11 @@ public class Interface_loginController implements Initializable {
     @FXML
     private Button botaoLogin;
 
+
+
+
     @FXML
     private void aoClicarEntrar() {
-
+        // deixar vazio — quem implementa é o responsável pela lógica
     }
 }
