@@ -5,9 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.net.URL;
@@ -35,16 +33,15 @@ public class Interface_loginController implements Initializable {
     }
 
     @FXML
-    private Button BotaoIrCadastro;
+    private Hyperlink botaoIrCadastro;
 
     @FXML
     private void aoClicarNaoTemCadastro(){
         try{
-            Parent arquivoJanela = FXMLLoader.load(getClass().getResource("View/Interface_cadastro.fxml"));
-            Stage JanelaAtual = (Stage)BotaoIrCadastro.getScene().getWindow();
+            Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_cadastro.fxml"));
+            Stage JanelaAtual = (Stage)botaoIrCadastro.getScene().getWindow();
             JanelaAtual.setScene(new Scene(arquivoJanela));
             JanelaAtual.setTitle("Cadastro");
-            JanelaAtual.show();
         }catch(Exception e){
             e.printStackTrace();
         }
