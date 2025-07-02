@@ -18,12 +18,15 @@ public class Interface_cadastroController {
     }
 
     @FXML
-    private TextField campoUsuario;
+    private TextField campoMatricula_login;
 
     @FXML
     private PasswordField campoSenha;
 
     @FXML
-    private Button botaoLogin;
+    private TextField campoNome;
+
+    @FXML
+    private Button botaoCadastro;
 
 }

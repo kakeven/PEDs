@@ -44,7 +44,7 @@
    <Pane fx:id="fundoInvisivel" focusTraversable="true" layoutX="0" layoutY="0" prefWidth="0" prefHeight="0" />
    <children>
       <Label layoutX="51.0" layoutY="102.0" prefHeight="25.0" prefWidth="50.0" text="Login:" />
-      <TextField fx:id="campoLogin"  layoutX="107.0" layoutY="102.0" promptText="Login" />
+      <TextField fx:id="campoMatricula_login"  layoutX="107.0" layoutY="102.0" promptText="Login" />
       <Label layoutX="51.0" layoutY="133.0" prefHeight="25.0" prefWidth="50.0" text="Senha:" />
       <PasswordField fx:id="campoSenha" layoutX="107.0" layoutY="133.0" promptText="Senha" />
       <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="92.0" text="Cadastro">
@@ -52,10 +52,8 @@
             <Font name="Calibri" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="51.0" layoutY="168.0" prefHeight="17.0" prefWidth="50.0" text="Matéria:" />
       <Button fx:id="botaoCadastro"  layoutX="43.0" layoutY="280.0" mnemonicParsing="false" text="Cadastrar" />
       <Label layoutX="51.0" layoutY="76.0" text="Nome:" />
       <TextField fx:id="campoNome" layoutX="107.0" layoutY="72.0" promptText="Nome" />
-      <TextField fx:id="campoMateria" layoutX="107.0" layoutY="164.0" promptText="Máteria" />
    </children>
 </AnchorPane>
