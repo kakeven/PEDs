@@ -35,13 +35,13 @@ public class Interface_loginController implements Initializable {
     }
 
     @FXML
-    private Button BotaoIrCadastro;
+    private Button botaoIrCadastro;
 
     @FXML
     private void aoClicarNaoTemCadastro(){
         try{
             Parent arquivoJanela = FXMLLoader.load(getClass().getResource("View/Interface_cadastro.fxml"));
-            Stage JanelaAtual = (Stage)BotaoIrCadastro.getScene().getWindow();
+            Stage JanelaAtual = (Stage)botaoIrCadastro.getScene().getWindow();
             JanelaAtual.setScene(new Scene(arquivoJanela));
             JanelaAtual.setTitle("Cadastro");
             JanelaAtual.show();
