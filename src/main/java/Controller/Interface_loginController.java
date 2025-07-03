@@ -29,7 +29,7 @@ public class Interface_loginController implements Initializable {
 
     @FXML
     private void aoClicarEntrar() {
-        // deixar vazio — quem implementa é o responsável pela lógica
+        // pega as variaveis que a view armazenou, joga pro model, model confere e retorna por controller, controller retorna para a view o resultado
     }
 
     @FXML
