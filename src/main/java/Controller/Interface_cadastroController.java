@@ -20,15 +20,6 @@ public class Interface_cadastroController {
     }
 
     @FXML
-    private TextField campoLogin;
-
-    @FXML
-    private PasswordField campoSenha;
-
-    @FXML
-    private TextField campoNome;
-
-    @FXML
     private Button botaoCadastro;
 
     @FXML
@@ -37,15 +28,16 @@ public class Interface_cadastroController {
 
     //variaveis dos campos
     @FXML
-    private String nome;
+    private TextField nome;
 
     @FXML
-    private String login;
+    private TextField login;
 
     @FXML
-    private String senha;
+    private TextField senha;
 
 
+    //metodos
     public void aoClicarJaTemLogin(){//muda de tela
         try{
             Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_login.fxml"));
@@ -55,6 +47,19 @@ public class Interface_cadastroController {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+    public void aoClicarCadastrar(){
+        String nomeParaMandar = "";
+        String loginParaMandar = "";
+        String senhaParaMandar = "";
 
+        if((nome.getText().isBlank() || login.getText().isBlank() || senha.getText().isBlank()) && senha.getText().length() < 8){
+            System.out.println("preencha todos os campos");
+        }else{
+            nomeParaMandar = nome.getText();
+            loginParaMandar = login.getText();
+            senhaParaMandar = senha.getText();
+            System.out.println(nomeParaMandar + loginParaMandar + senhaParaMandar);
+        }
     }
 }
