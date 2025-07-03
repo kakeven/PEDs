@@ -1,5 +1,6 @@
 package App;
 
+import View.Interface_login;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,13 +11,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Carrega o arquivo FXML
-        Parent Cadastro = FXMLLoader.load(getClass().getResource("/View/Interface_cadastro.fxml"));
-        Parent Login = FXMLLoader.load(getClass().getResource("/View/Interface_login.fxml"));
-        // Configura a janela
-        primaryStage.setTitle("Minha Aplicação JavaFX");
-        primaryStage.setScene(new Scene(Login, 600, 400)); // tamanho opcional
+        Interface_login login = new Interface_login(); //inicializa o objeto da view, no caso tela de login
+        Parent loginChamada = login.Interface_loginChamada();
 
+        primaryStage.setTitle("Minha Aplicação JavaFX");
+        primaryStage.setScene(new Scene(loginChamada, 600, 400)); //edita tamanho só
         primaryStage.show();
 
 

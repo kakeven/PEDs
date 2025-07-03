@@ -2,6 +2,7 @@ package Controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Button;
@@ -18,7 +19,7 @@ public class Interface_cadastroController {
     }
 
     @FXML
-    private TextField campoMatricula_login;
+    private TextField campoLogin;
 
     @FXML
     private PasswordField campoSenha;
@@ -29,4 +30,6 @@ public class Interface_cadastroController {
     @FXML
     private Button botaoCadastro;
 
+    @FXML
+    private Hyperlink link_login;
 }
