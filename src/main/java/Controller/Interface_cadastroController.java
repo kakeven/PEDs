@@ -1,12 +1,13 @@
 package Controller;
 
+import com.sun.jdi.StringReference;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.Button;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -19,17 +20,46 @@ public class Interface_cadastroController {
     }
 
     @FXML
-    private TextField campoLogin;
-
-    @FXML
-    private PasswordField campoSenha;
-
-    @FXML
-    private TextField campoNome;
-
-    @FXML
     private Button botaoCadastro;
 
     @FXML
-    private Hyperlink link_login;
+    private Hyperlink link_Login;
+
+
+    //variaveis dos campos
+    @FXML
+    private TextField nome;
+
+    @FXML
+    private TextField login;
+
+    @FXML
+    private TextField senha;
+
+
+    //metodos
+    public void aoClicarJaTemLogin(){//muda de tela
+        try{
+            Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_login.fxml"));
+            Stage janelaAtual = (Stage) link_Login.getScene().getWindow();
+            janelaAtual.setScene(new Scene(arquivoJanela));
+            janelaAtual.setTitle("Login");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void aoClicarCadastrar(){
+        String nomeParaMandar = "";
+        String loginParaMandar = "";
+        String senhaParaMandar = "";
+
+        if((nome.getText().isBlank() || login.getText().isBlank() || senha.getText().isBlank()) && senha.getText().length() < 8){
+            System.out.println("preencha todos os campos");
+        }else{
+            nomeParaMandar = nome.getText();
+            loginParaMandar = login.getText();
+            senhaParaMandar = senha.getText();
+            System.out.println(nomeParaMandar + loginParaMandar + senhaParaMandar);
+        }
+    }
 }

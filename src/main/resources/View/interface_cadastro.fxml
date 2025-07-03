@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Interface_cadastroController">
   <children>
     <VBox alignment="CENTER" spacing="15" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
       
@@ -26,13 +26,13 @@
       <GridPane alignment="CENTER" hgap="10" maxWidth="Infinity" prefHeight="278.0" prefWidth="537.0" vgap="10">
         
         <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <TextField fx:id="campoNome" maxWidth="300.0" prefHeight="15.0" prefWidth="270.0" promptText="Nome" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" />
+        <TextField fx:id="nome" maxWidth="300.0" prefHeight="15.0" prefWidth="270.0" promptText="Nome" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" />
         
         <Label text="Login:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <TextField fx:id="campoLogin" maxWidth="300.0" prefHeight="25.0" prefWidth="440.0" promptText="Login" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+        <TextField fx:id="login" maxWidth="300.0" prefHeight="25.0" prefWidth="440.0" promptText="Login" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
         
         <Label text="Senha:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <PasswordField fx:id="campoSenha" maxWidth="300.0" promptText="Senha" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
+        <PasswordField fx:id="senha" maxWidth="300.0" promptText="Senha" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
             <columnConstraints>
                <ColumnConstraints />
                <ColumnConstraints maxWidth="270.0" />
@@ -45,12 +45,12 @@
             </rowConstraints>
         
       </GridPane>
-         <Button fx:id="botaoCadastro" mnemonicParsing="false" text="Cadastrar">
+         <Button fx:id="botaoCadastro" onAction="#aoClicarCadastrar" mnemonicParsing="false" text="Cadastrar">
             <VBox.margin>
                <Insets bottom="10.0" />
             </VBox.margin>
          </Button>
-         <Hyperlink fx:id="link_Login" text="Já tem login?">
+         <Hyperlink fx:id="link_Login" onAction="#aoClicarJaTemLogin" text="Já tem login?">
             <VBox.margin>
                <Insets bottom="15.0" />
             </VBox.margin>

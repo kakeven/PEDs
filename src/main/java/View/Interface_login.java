@@ -2,7 +2,6 @@ package View;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-
 import java.io.IOException;
 
 public class Interface_login {

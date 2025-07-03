@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Model {
+public class Model{
     private static Model instancia;
     private List<Usuario> usuarios;
     private List<Disciplina> disciplinas;

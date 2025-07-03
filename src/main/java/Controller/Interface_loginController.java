@@ -36,7 +36,7 @@ public class Interface_loginController implements Initializable {
     private Hyperlink botaoIrCadastro;
 
     @FXML
-    private void aoClicarNaoTemCadastro() {
+    private void aoClicarNaoTemCadastro(){//muda de tela
         try {
             Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_cadastro.fxml"));
             Stage JanelaAtual = (Stage) botaoIrCadastro.getScene().getWindow();
