@@ -36,15 +36,14 @@ public class Interface_loginController implements Initializable {
     private Hyperlink botaoIrCadastro;
 
     @FXML
-    private void aoClicarNaoTemCadastro(){
-        try{
+    private void aoClicarNaoTemCadastro() {
+        try {
             Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_cadastro.fxml"));
-            Stage JanelaAtual = (Stage)botaoIrCadastro.getScene().getWindow();
+            Stage JanelaAtual = (Stage) botaoIrCadastro.getScene().getWindow();
             JanelaAtual.setScene(new Scene(arquivoJanela));
             JanelaAtual.setTitle("Cadastro");
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    //teste
 }
