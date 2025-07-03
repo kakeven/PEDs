@@ -1,5 +1,6 @@
 package Controller;
 
+import com.sun.jdi.StringReference;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,7 +34,19 @@ public class Interface_cadastroController {
     @FXML
     private Hyperlink link_Login;
 
-    public void aoClicarJaTemLogin(){
+
+    //variaveis dos campos
+    @FXML
+    private String nome;
+
+    @FXML
+    private String login;
+
+    @FXML
+    private String senha;
+
+
+    public void aoClicarJaTemLogin(){//muda de tela
         try{
             Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_login.fxml"));
             Stage janelaAtual = (Stage) link_Login.getScene().getWindow();
