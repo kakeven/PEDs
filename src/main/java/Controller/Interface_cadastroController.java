@@ -53,13 +53,15 @@ public class Interface_cadastroController {
         String loginParaMandar = "";
         String senhaParaMandar = "";
 
-        if((nome.getText().isBlank() || login.getText().isBlank() || senha.getText().isBlank()) && senha.getText().length() < 8){
-            System.out.println("preencha todos os campos");
-        }else{
+        if(senha.getText().length() >= 8 && (!nome.getText().isBlank() && !login.getText().isBlank() && !senha.getText().isBlank())){
             nomeParaMandar = nome.getText();
             loginParaMandar = login.getText();
             senhaParaMandar = senha.getText();
             System.out.println(nomeParaMandar + loginParaMandar + senhaParaMandar);
+        }else if(nome.getText().isBlank() || login.getText().isBlank() || senha.getText().isBlank()){
+            System.out.println("preencha todos os campos");
+        }else{
+            System.out.println("adicione mais caracteres na senha");
         }
     }
 }
