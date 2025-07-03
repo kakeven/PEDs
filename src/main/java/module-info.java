@@ -6,6 +6,7 @@ module peds_tentativa_2 {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires jdk.jdi;
+    requires java.sql;
 
 
     exports App;

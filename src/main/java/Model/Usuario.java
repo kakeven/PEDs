@@ -1,5 +1,10 @@
 package Model;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+
 public class Usuario {
     private String nome;	// nome completo do usuário
     private String login;	// login do usuário
@@ -40,4 +45,6 @@ public class Usuario {
     public String getSenha() {
         return senha;
     }
+
+
 }
