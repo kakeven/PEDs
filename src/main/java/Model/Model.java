@@ -56,7 +56,7 @@ public class Model{
         }
     }
 
-    // serviço das disciplinas
+    //serviço das disciplinas
     public void adicionarDisciplina(String nome) {
         disciplinas.add(new Disciplina(nome));
         salvarDisciplinas();
