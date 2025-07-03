@@ -16,7 +16,6 @@ public class Usuario {
         setSenha(senha);
     }
 
-
     //sets
     public void setNome(String nome) {
         if (nome != null) {
