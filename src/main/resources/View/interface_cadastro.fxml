@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Interface_cadastroController">
   <children>
     <VBox alignment="CENTER" spacing="15" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
       
@@ -50,7 +50,7 @@
                <Insets bottom="10.0" />
             </VBox.margin>
          </Button>
-         <Hyperlink fx:id="link_Login" text="Já tem login?">
+         <Hyperlink fx:id="link_Login" onAction="#aoClicarJaTemLogin" text="Já tem login?">
             <VBox.margin>
                <Insets bottom="15.0" />
             </VBox.margin>
