@@ -10,3 +10,4 @@ public class Interface_cadastro {
         Parent Cadastro = FXMLLoader.load(getClass().getResource("/View/Interface_cadastro.fxml"));
     }
 }
+//teste
