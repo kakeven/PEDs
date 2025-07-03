@@ -50,6 +50,12 @@ public class Model{
         return usuarioLogado;
     }
 
+    public void listarUsuariosCompletos() {
+        for (Usuario u : usuarios) {
+            System.out.println("Nome: " + u.getNome() + ", Login: " + u.getLogin() + ", Senha: " + u.getSenha());
+        }
+    }
+
     // serviço das disciplinas
     public void adicionarDisciplina(String nome) {
         disciplinas.add(new Disciplina(nome));
