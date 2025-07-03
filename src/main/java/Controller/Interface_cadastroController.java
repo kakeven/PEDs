@@ -1,12 +1,12 @@
 package Controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.Button;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -31,5 +31,17 @@ public class Interface_cadastroController {
     private Button botaoCadastro;
 
     @FXML
-    private Hyperlink link_login;
+    private Hyperlink link_Login;
+
+    public void aoClicarJaTemLogin(){
+        try{
+            Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_login.fxml"));
+            Stage janelaAtual = (Stage) link_Login.getScene().getWindow();
+            janelaAtual.setScene(new Scene(arquivoJanela));
+            janelaAtual.setTitle("Login");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 }
