@@ -17,8 +17,6 @@ public class Main extends Application {
         primaryStage.setTitle("Minha Aplicação JavaFX");
         primaryStage.setScene(new Scene(loginChamada, 600, 400)); //edita tamanho só
         primaryStage.show();
-
-
     }
 
     public static void main(String[] args) {

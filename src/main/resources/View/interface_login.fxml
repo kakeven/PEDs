@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Interface_loginController">
    <children>
       <VBox layoutX="66.0" layoutY="21.0" prefHeight="331.0" prefWidth="481.0">
          <children>
@@ -59,7 +59,7 @@
                         <Insets left="2.0" right="150.0" />
                      </GridPane.margin>
                   </PasswordField>
-                  <Hyperlink fx:id="link_Cadastro" text="é novo ? Cadastre-se" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Hyperlink fx:id="botaoIrCadastro" onAction="#aoClicarNaoTemCadastro" text="é novo? Cadastre-se" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>
