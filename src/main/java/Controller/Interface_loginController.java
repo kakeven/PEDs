@@ -29,7 +29,7 @@ public class Interface_loginController implements Initializable {
 
     @FXML
     private void aoClicarEntrar() {
-        // deixar vazio — quem implementa é o responsável pela lógica
+        // deixar vazio
     }
 
     @FXML
