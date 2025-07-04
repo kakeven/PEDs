@@ -1,14 +1,11 @@
 package Model;
 
-import java.io.*;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Model{
     private static Connection conectar;
 
-    //metodos
+    //metodos DB
     public static void seConectar(){
         try{
             if(conectar == null || conectar.isClosed()){
@@ -35,7 +32,6 @@ public class Model{
     }
     public static void salvarUsuario(Usuario usuario){
         String inserir = "INSERT INTO usuarios(nome, login, senha) VALUES (?, ?, ?)";
-
         try(PreparedStatement ps = conectar.prepareStatement(inserir)) {
             ps.setString(1, usuario.getNome());
             ps.setString(2, usuario.getLogin());
@@ -55,5 +51,23 @@ public class Model{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public static boolean LoginExiste(Usuario usuario){
+        String busca = "SELECT login FROM usuarios WHERE login = ?";
+
+        try{
+            PreparedStatement preparar = conectar.prepareStatement(busca);
+            preparar.setString(1, usuario.getLogin());
+            ResultSet resultado = preparar.executeQuery();
+
+            if(resultado.next()){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
