@@ -62,14 +62,15 @@ public class Interface_cadastroController implements Initializable {
             loginParaMandar = login.getText();
             senhaParaMandar = senha.getText();
 
-            //cria o usuario para adicionar no DB
+            //cria o usuario para adicionar no DB(se ja n existir no banco)
             Usuario usuarioNovo = new Usuario(nomeParaMandar, loginParaMandar, senhaParaMandar);
-            //adiciona no DB
-            Model.salvarUsuario(usuarioNovo);
-            //lista os usuarios(so para debug)
-            Model.listarUsuarios();
+            if(Model.LoginExiste(usuarioNovo) == false){
+                Model.salvarUsuario(usuarioNovo);
+                Model.listarUsuarios();
+            }else{
+                System.out.println("Usuario ja existe");
+            }
 
-            //System.out.println(nomeParaMandar + loginParaMandar + senhaParaMandar);
         }else if(nome.getText().isBlank() || login.getText().isBlank() || senha.getText().isBlank()){
             System.out.println("preencha todos os campos");
         }else{
