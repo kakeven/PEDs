@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Model;
+import Model.Usuario;
 import com.sun.jdi.StringReference;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,11 +56,20 @@ public class Interface_cadastroController implements Initializable {
         String loginParaMandar = "";
         String senhaParaMandar = "";
 
+
         if(senha.getText().length() >= 8 && (!nome.getText().isBlank() && !login.getText().isBlank() && !senha.getText().isBlank())){
             nomeParaMandar = nome.getText();
             loginParaMandar = login.getText();
             senhaParaMandar = senha.getText();
-            System.out.println(nomeParaMandar + loginParaMandar + senhaParaMandar);
+
+            //cria o usuario para adicionar no DB
+            Usuario usuarioNovo = new Usuario(nomeParaMandar, loginParaMandar, senhaParaMandar);
+            //adiciona no DB
+            Model.salvarUsuario(usuarioNovo);
+            //lista os usuarios(so para debug)
+            Model.listarUsuarios();
+
+            //System.out.println(nomeParaMandar + loginParaMandar + senhaParaMandar);
         }else if(nome.getText().isBlank() || login.getText().isBlank() || senha.getText().isBlank()){
             System.out.println("preencha todos os campos");
         }else{

@@ -45,5 +45,6 @@ public class Usuario {
         return senha;
     }
 
+    //metodos
 
 }
