@@ -2,7 +2,6 @@ package Controller;
 
 import Model.Model;
 import Model.Usuario;
-import com.sun.jdi.StringReference;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -65,8 +64,8 @@ public class Interface_cadastroController implements Initializable {
             //cria o usuario para adicionar no DB(se ja n existir no banco)
             Usuario usuarioNovo = new Usuario(nomeParaMandar, loginParaMandar, senhaParaMandar);
             if(Model.LoginExiste(usuarioNovo) == false){
-                Model.salvarUsuario(usuarioNovo);
-                Model.listarUsuarios();
+                Model.SalvarUsuario(usuarioNovo);
+                Model.ListarUsuarios();
             }else{
                 System.out.println("Usuario ja existe");
             }

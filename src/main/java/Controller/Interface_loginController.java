@@ -53,7 +53,7 @@ public class Interface_loginController implements Initializable {
             String senhaParaMandar = senha.getText();
 
             Usuario usuario = new Usuario(loginParaMandar, senhaParaMandar);
-            if(Model.LoginExiste(usuario)){
+            if(Model.LoginValido(usuario)){
                 Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_Menu.fxml"));
                 Stage JanelaAtual = (Stage) botaoLogin.getScene().getWindow();
                 JanelaAtual.setScene(new Scene(arquivoJanela));
