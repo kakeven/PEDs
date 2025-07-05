@@ -1,21 +1,65 @@
-<?import javafx.scene.layout.AnchorPane?><?import javafx.scene.control.Button?><?import javafx.scene.control.Label?><?import javafx.scene.text.Font?>e<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface_menuController">
    <children>
-      <Button layoutX="30.0" layoutY="101.0" mnemonicParsing="false" text="Adicionar Disciplina" />
-      <Button layoutX="30.0" layoutY="166.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Adicionar PEDs" />
-      <Button layoutX="30.0" layoutY="133.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Exibir Disciplinas" />
-      <Button layoutX="30.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Exibir PEDs" />
-      <Button layoutX="43.0" layoutY="316.0" mnemonicParsing="false" text="Sair" />
-      <Label layoutX="32.0" layoutY="25.0" text="Menu">
-         <font>
-            <Font name="Calibri" size="24.0" />
-         </font>
-      </Label>
+      <GridPane layoutX="8.0" layoutY="10.0" prefHeight="375.0" prefWidth="577.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="332.0" minWidth="10.0" prefWidth="317.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="260.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="111.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="111.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="111.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="112.0" minHeight="0.0" prefHeight="74.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="123.0" minHeight="10.0" prefHeight="123.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" text="Exibir PEDs" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="35.0" />
+               </GridPane.margin>
+            </Button>
+            <Label prefHeight="28.0" prefWidth="73.0" text="Menu">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="240.0" />
+               </GridPane.margin>
+            </Label>
+            <Button mnemonicParsing="false" text="Adicionar PEDs" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets bottom="42.0" left="28.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="botao_Logout" mnemonicParsing="false" text="Logout" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </Button>
+            <Button mnemonicParsing="false" text="Editar PEDs" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets bottom="90.0" left="40.0" />
+               </GridPane.margin>
+            </Button>
+            <Button mnemonicParsing="false" text="Portar para PDF" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets bottom="15.0" left="26.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

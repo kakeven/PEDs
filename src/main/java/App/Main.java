@@ -19,9 +19,10 @@ public class Main extends Application {
         Interface_login login = new Interface_login(); //inicializa o objeto da view, no caso tela de login
         Parent loginChamada = login.Interface_loginChamada();
 
-        primaryStage.setTitle("Minha Aplicação JavaFX");
+        primaryStage.setTitle("Projeto PEDs");
         primaryStage.setScene(new Scene(loginChamada, 600, 400)); //edita tamanho só
         primaryStage.show();
+        primaryStage.setResizable(false);
     }
 
     public static void main(String[] args) {
