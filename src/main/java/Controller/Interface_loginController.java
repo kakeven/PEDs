@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Model;
+import Model.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,11 +30,6 @@ public class Interface_loginController implements Initializable {
     private Button botaoLogin;
 
     @FXML
-    private void aoClicarEntrar() {
-        // deixar vazio
-    }
-
-    @FXML
     private Hyperlink botaoIrCadastro;
 
     @FXML
@@ -42,6 +39,25 @@ public class Interface_loginController implements Initializable {
             Stage JanelaAtual = (Stage) botaoIrCadastro.getScene().getWindow();
             JanelaAtual.setScene(new Scene(arquivoJanela));
             JanelaAtual.setTitle("Cadastro");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void aoClicarEntrar() {
+        try{
+            String loginParaMandar = campoUsuario.getText();
+            String senhaParaMandar = campoSenha.getText();
+
+            Usuario usuario = new Usuario(loginParaMandar, senhaParaMandar);
+            if(Model.LoginExiste(usuario)){
+                //MUDAR PARA O CAMINHO DO MENU Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_cadastro.fxml"));
+                //Stage JanelaAtual = (Stage) botaoIrCadastro.getScene().getWindow();
+                //JanelaAtual.setScene(new Scene(arquivoJanela));
+                //JanelaAtual.setTitle("Menu");
+            }else{
+                System.out.println("Usuario e/ou senha incorretos");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

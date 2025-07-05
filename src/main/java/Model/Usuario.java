@@ -10,8 +10,14 @@ public class Usuario {
     private String login;	// login do usuário
     private String senha;	// senha do usuário
 
+    //contrutor cadastro
     public Usuario(String nome, String login, String senha){
         setNome(nome);
+        setLogin(login);
+        setSenha(senha);
+    }
+    //construtor login
+    public Usuario(String login, String senha){
         setLogin(login);
         setSenha(senha);
     }
