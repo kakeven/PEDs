@@ -30,12 +30,12 @@ public class Model{
             e.printStackTrace();
         }
     }
-    public static void SalvarUsuario(Usuario usuario){
+    public static void SalvarUsuario(Professor professor){
         String inserir = "INSERT INTO usuarios(nome, login, senha) VALUES (?, ?, ?)";
         try(PreparedStatement ps = conectar.prepareStatement(inserir)) {
-            ps.setString(1, usuario.getNome());
-            ps.setString(2, usuario.getLogin());
-            ps.setString(3, usuario.getSenha());
+            ps.setString(1, professor.getNome());
+            ps.setString(2, professor.getLogin());
+            ps.setString(3, professor.getSenha());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -52,12 +52,12 @@ public class Model{
             e.printStackTrace();
         }
     }
-    public static boolean LoginExiste(Usuario usuario){
+    public static boolean LoginExiste(Professor professor){
         String busca = "SELECT login, senha FROM usuarios WHERE login = ?";
 
         try{
             PreparedStatement preparar = conectar.prepareStatement(busca);
-            preparar.setString(1, usuario.getLogin());
+            preparar.setString(1, professor.getLogin());
             ResultSet resultado = preparar.executeQuery();
 
             if(resultado.next()){
@@ -70,17 +70,17 @@ public class Model{
         }
         return false;
     }
-    public static boolean LoginValido(Usuario usuario){
+    public static boolean LoginValido(Professor professor){
         String busca = "SELECT login, senha FROM usuarios WHERE login = ?";
 
         try{
             PreparedStatement preparar = conectar.prepareStatement(busca);
-            preparar.setString(1, usuario.getLogin());
+            preparar.setString(1, professor.getLogin());
             ResultSet resultado = preparar.executeQuery();
 
             if(resultado.next()){
                 String senha = resultado.getString("senha"); //pega a senha do BANCO
-                return senha.equals(usuario.getSenha()); //compara cm a sneha q digitou
+                return senha.equals(professor.getSenha()); //compara cm a sneha q digitou
             }else{
                 return false;
             }

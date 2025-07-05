@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.Model;
-import Model.Usuario;
+import Model.Professor;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -52,8 +52,8 @@ public class Interface_loginController implements Initializable {
             String loginParaMandar = login.getText();
             String senhaParaMandar = senha.getText();
 
-            Usuario usuario = new Usuario(loginParaMandar, senhaParaMandar);
-            if(Model.LoginValido(usuario)){
+            Professor professor = new Professor(loginParaMandar, senhaParaMandar);
+            if(Model.LoginValido(professor)){
                 Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_Menu.fxml"));
                 Stage JanelaAtual = (Stage) botaoLogin.getScene().getWindow();
                 JanelaAtual.setScene(new Scene(arquivoJanela));
