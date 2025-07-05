@@ -21,16 +21,19 @@ public class Interface_loginController implements Initializable {
     }
 
     @FXML
-    private TextField campoUsuario;
-
-    @FXML
-    private PasswordField campoSenha;
-
-    @FXML
     private Button botaoLogin;
 
     @FXML
     private Hyperlink link_Cadastro;
+
+
+    //variaveis de campos
+    @FXML
+    private TextField login;
+
+    @FXML
+    private PasswordField senha;
+
 
     @FXML
     private void aoClicarNaoTemCadastro(){//muda de tela
@@ -46,8 +49,8 @@ public class Interface_loginController implements Initializable {
     @FXML
     private void aoClicarEntrar() {
         try{
-            String loginParaMandar = campoUsuario.getText();
-            String senhaParaMandar = campoSenha.getText();
+            String loginParaMandar = login.getText();
+            String senhaParaMandar = senha.getText();
 
             Usuario usuario = new Usuario(loginParaMandar, senhaParaMandar);
             if(Model.LoginExiste(usuario)){

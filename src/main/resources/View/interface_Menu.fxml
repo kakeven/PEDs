@@ -9,8 +9,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface_menuController">
+<?import javafx.scene.layout.Pane?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Interface_menuController">
    <children>
+       <Pane fx:id="fundoInvisivel" prefWidth="0" prefHeight="0" focusTraversable="true" />
       <GridPane layoutX="8.0" layoutY="10.0" prefHeight="375.0" prefWidth="577.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="332.0" minWidth="10.0" prefWidth="317.0" />

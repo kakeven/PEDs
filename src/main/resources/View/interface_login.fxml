@@ -48,7 +48,7 @@
                         <Insets left="110.0" top="30.0" />
                      </GridPane.margin>
                   </Label>
-                  <TextField fx:id="campoLogin" prefHeight="25.0" prefWidth="214.0" GridPane.columnIndex="1">
+                  <TextField fx:id="login" prefHeight="25.0" prefWidth="214.0" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="2.0" right="150.0" top="30.0" />
                      </GridPane.margin>
@@ -58,16 +58,16 @@
                         <Insets left="107.0" />
                      </GridPane.margin>
                   </Label>
-                  <PasswordField fx:id="campoSenha" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <PasswordField fx:id="senha" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="2.0" right="150.0" />
                      </GridPane.margin>
                   </PasswordField>
-                  <Hyperlink fx:id="link_Cadastro" text="É novo ? Cadastre-se" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Hyperlink fx:id="link_Cadastro" onAction="#aoClicarNaoTemCadastro" text="É novo ? Cadastre-se" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="60.0" />
                      </GridPane.margin></Hyperlink>
-                  <Button fx:id="botaoLogar" mnemonicParsing="false" onAction="#aoClicarEntrar" prefHeight="25.0" prefWidth="76.0" text="Logar" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Button fx:id="botaoLogin" mnemonicParsing="false" onAction="#aoClicarEntrar" prefHeight="25.0" prefWidth="76.0" text="Logar" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="37.0" />
                      </GridPane.margin></Button>
