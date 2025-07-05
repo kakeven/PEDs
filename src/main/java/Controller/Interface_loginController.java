@@ -51,10 +51,10 @@ public class Interface_loginController implements Initializable {
 
             Usuario usuario = new Usuario(loginParaMandar, senhaParaMandar);
             if(Model.LoginExiste(usuario)){
-                //MUDAR PARA O CAMINHO DO MENU Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_cadastro.fxml"));
-                //Stage JanelaAtual = (Stage) botaoIrCadastro.getScene().getWindow();
-                //JanelaAtual.setScene(new Scene(arquivoJanela));
-                //JanelaAtual.setTitle("Menu");
+                Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_Menu.fxml"));
+                Stage JanelaAtual = (Stage) botaoLogin.getScene().getWindow();
+                JanelaAtual.setScene(new Scene(arquivoJanela));
+                JanelaAtual.setTitle("Menu");
             }else{
                 System.out.println("Usuario e/ou senha incorretos");
             }
