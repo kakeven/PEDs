@@ -70,7 +70,6 @@ public class Interface_cadastroController implements Initializable {
             }else{
                 System.out.println("Usuario ja existe");
             }
-
         }else if(nome.getText().isBlank() || login.getText().isBlank() || senha.getText().isBlank()){
             System.out.println("preencha todos os campos");
         }else{
