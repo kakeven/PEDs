@@ -34,6 +34,8 @@ public class Interface_loginController implements Initializable {
     @FXML
     private PasswordField senha;
 
+    @FXML
+    private Label lblMensagemErro;
 
     @FXML
     private void aoClicarNaoTemCadastro(){//muda de tela
@@ -59,7 +61,7 @@ public class Interface_loginController implements Initializable {
                 JanelaAtual.setScene(new Scene(arquivoJanela));
                 JanelaAtual.setTitle("Menu");
             }else{
-                System.out.println("Usuario e/ou senha incorretos");
+                lblMensagemErro.setVisible(true);
             }
         } catch (Exception e) {
             e.printStackTrace();
