@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.Model;
-import Model.Usuario;
+import Model.Professor;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,16 +21,19 @@ public class Interface_loginController implements Initializable {
     }
 
     @FXML
-    private TextField campoUsuario;
-
-    @FXML
-    private PasswordField campoSenha;
-
-    @FXML
     private Button botaoLogin;
 
     @FXML
     private Hyperlink link_Cadastro;
+
+
+    //variaveis de campos
+    @FXML
+    private TextField login;
+
+    @FXML
+    private PasswordField senha;
+
 
     @FXML
     private void aoClicarNaoTemCadastro(){//muda de tela
@@ -46,11 +49,11 @@ public class Interface_loginController implements Initializable {
     @FXML
     private void aoClicarEntrar() {
         try{
-            String loginParaMandar = campoUsuario.getText();
-            String senhaParaMandar = campoSenha.getText();
+            String loginParaMandar = login.getText();
+            String senhaParaMandar = senha.getText();
 
-            Usuario usuario = new Usuario(loginParaMandar, senhaParaMandar);
-            if(Model.LoginExiste(usuario)){
+            Professor professor = new Professor(loginParaMandar, senhaParaMandar);
+            if(Model.LoginValido(professor)){
                 Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_Menu.fxml"));
                 Stage JanelaAtual = (Stage) botaoLogin.getScene().getWindow();
                 JanelaAtual.setScene(new Scene(arquivoJanela));

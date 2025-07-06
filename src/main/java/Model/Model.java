@@ -30,18 +30,18 @@ public class Model{
             e.printStackTrace();
         }
     }
-    public static void salvarUsuario(Usuario usuario){
+    public static void SalvarUsuario(Professor professor){
         String inserir = "INSERT INTO usuarios(nome, login, senha) VALUES (?, ?, ?)";
         try(PreparedStatement ps = conectar.prepareStatement(inserir)) {
-            ps.setString(1, usuario.getNome());
-            ps.setString(2, usuario.getLogin());
-            ps.setString(3, usuario.getSenha());
+            ps.setString(1, professor.getNome());
+            ps.setString(2, professor.getLogin());
+            ps.setString(3, professor.getSenha());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public static void listarUsuarios(){
+    public static void ListarUsuarios(){
         String sql = "SELECT * FROM usuarios";
 
         try (Statement state = conectar.createStatement(); ResultSet resultado = state.executeQuery(sql)){
@@ -52,16 +52,35 @@ public class Model{
             e.printStackTrace();
         }
     }
-    public static boolean LoginExiste(Usuario usuario){
-        String busca = "SELECT login FROM usuarios WHERE login = ?";
+    public static boolean LoginExiste(Professor professor){
+        String busca = "SELECT login, senha FROM usuarios WHERE login = ?";
 
         try{
             PreparedStatement preparar = conectar.prepareStatement(busca);
-            preparar.setString(1, usuario.getLogin());
+            preparar.setString(1, professor.getLogin());
             ResultSet resultado = preparar.executeQuery();
 
             if(resultado.next()){
                 return true;
+            }else{
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public static boolean LoginValido(Professor professor){
+        String busca = "SELECT login, senha FROM usuarios WHERE login = ?";
+
+        try{
+            PreparedStatement preparar = conectar.prepareStatement(busca);
+            preparar.setString(1, professor.getLogin());
+            ResultSet resultado = preparar.executeQuery();
+
+            if(resultado.next()){
+                String senha = resultado.getString("senha"); //pega a senha do BANCO
+                return senha.equals(professor.getSenha()); //compara cm a sneha q digitou
             }else{
                 return false;
             }
