@@ -21,7 +21,7 @@ public class Interface_loginController implements Initializable {
     }
 
     @FXML
-    private Button botaoLogin;
+    private Button botaoLogar;
 
     @FXML
     private Hyperlink link_Cadastro;
@@ -29,10 +29,10 @@ public class Interface_loginController implements Initializable {
 
     //variaveis de campos
     @FXML
-    private TextField login;
+    private TextField campoLogin;
 
     @FXML
-    private PasswordField senha;
+    private PasswordField campoSenha;
 
 
     @FXML
@@ -49,17 +49,17 @@ public class Interface_loginController implements Initializable {
     @FXML
     private void aoClicarEntrar() {
         try{
-            String loginParaMandar = login.getText();
-            String senhaParaMandar = senha.getText();
+            String loginParaMandar = campoLogin.getText();
+            String senhaParaMandar = campoSenha.getText();
 
             Professor professor = new Professor(loginParaMandar, senhaParaMandar);
             if(Model.LoginValido(professor)){
                 Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_Menu.fxml"));
-                Stage JanelaAtual = (Stage) botaoLogin.getScene().getWindow();
+                Stage JanelaAtual = (Stage) botaoLogar.getScene().getWindow();
                 JanelaAtual.setScene(new Scene(arquivoJanela));
                 JanelaAtual.setTitle("Menu");
             }else{
-                System.out.println("Usuario e/ou senha incorretos");
+                System.out.println("Login e/ou senha incorretos");
             }
         } catch (Exception e) {
             e.printStackTrace();
