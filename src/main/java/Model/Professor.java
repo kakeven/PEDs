@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class Professor {
     private String nome;
     private String login;
-    private String matricula;
     private String senha;
     private ArrayList<String> disciplinas;
 
@@ -36,14 +35,6 @@ public class Professor {
         this.nome = nome;
     }
 
-    public String getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
-
     public String getSenha() {
         return senha;
     }
@@ -60,11 +51,11 @@ public class Professor {
 
 
     public boolean isCompleto(){
-        if(nome!=null && matricula != null && senha != null){
+        if(nome!=null && login != null && senha != null){
             return true;
         }else{
             nome = null;
-            matricula = null;
+            login = null;
             senha = null;
             return false;
         }
