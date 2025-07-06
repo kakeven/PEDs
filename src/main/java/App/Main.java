@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.chart.PieChart;
+import javafx.scene.layout.StackPane;
 
 public class Main extends Application {
 

@@ -64,8 +64,18 @@ public class Interface_cadastroController implements Initializable {
             //cria o usuario para adicionar no DB(se ja n existir no banco)
             Professor professorNovo = new Professor(nomeParaMandar, loginParaMandar, senhaParaMandar);
             if(Model.LoginExiste(professorNovo) == false){
-                Model.SalvarUsuario(professorNovo);
-                Model.ListarUsuarios();
+                try{
+                    Model.SalvarUsuario(professorNovo);
+                    Model.ListarUsuarios();
+
+                    Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/interface_Menu.fxml"));
+                    Stage janelaAtual = (Stage) botaoCadastro.getScene().getWindow();
+                    janelaAtual.setScene(new Scene(arquivoJanela));
+                    janelaAtual.setTitle("Menu");
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
             }else{
                 System.out.println("Usuario ja existe");
             }
