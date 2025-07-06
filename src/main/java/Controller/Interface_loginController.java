@@ -29,10 +29,10 @@ public class Interface_loginController implements Initializable {
 
     //variaveis de campos
     @FXML
-    private TextField login;
+    private TextField campoLogin;
 
     @FXML
-    private PasswordField senha;
+    private PasswordField campoSenha;
 
     @FXML
     private Label lblMensagemErro;
@@ -51,8 +51,8 @@ public class Interface_loginController implements Initializable {
     @FXML
     private void aoClicarEntrar() {
         try{
-            String loginParaMandar = login.getText();
-            String senhaParaMandar = senha.getText();
+            String loginParaMandar = campoLogin.getText();
+            String senhaParaMandar = campoSenha.getText();
 
             Professor professor = new Professor(loginParaMandar, senhaParaMandar);
             if(Model.LoginValido(professor)){

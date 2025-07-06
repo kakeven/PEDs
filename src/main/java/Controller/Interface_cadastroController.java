@@ -30,14 +30,19 @@ public class Interface_cadastroController implements Initializable {
 
     //variaveis dos campos
     @FXML
-    private TextField nome;
+    private TextField campoNome;
 
     @FXML
-    private TextField login;
+    private TextField campoLogin;
 
     @FXML
-    private TextField senha;
+    private TextField campoSenha;
 
+    @FXML
+    private Label lblMensagemPreencher;
+
+    @FXML
+    private Label lblSenha8;
 
     //metodos
     public void aoClicarJaTemLogin(){//muda de tela
@@ -56,10 +61,10 @@ public class Interface_cadastroController implements Initializable {
         String senhaParaMandar = "";
 
 
-        if(senha.getText().length() >= 8 && (!nome.getText().isBlank() && !login.getText().isBlank() && !senha.getText().isBlank())){
-            nomeParaMandar = nome.getText();
-            loginParaMandar = login.getText();
-            senhaParaMandar = senha.getText();
+        if(campoSenha.getText().length() >= 8 && (!campoNome.getText().isBlank() && !campoLogin.getText().isBlank() && !campoSenha.getText().isBlank())){
+            nomeParaMandar = campoNome.getText();
+            loginParaMandar = campoLogin.getText();
+            senhaParaMandar = campoSenha.getText();
 
             //cria o usuario para adicionar no DB(se ja n existir no banco)
             Professor professorNovo = new Professor(nomeParaMandar, loginParaMandar, senhaParaMandar);
@@ -77,12 +82,14 @@ public class Interface_cadastroController implements Initializable {
                 }
 
             }else{
-                System.out.println("Usuario ja existe");
+                System.out.println("bnao sei");;
             }
-        }else if(nome.getText().isBlank() || login.getText().isBlank() || senha.getText().isBlank()){
-            System.out.println("preencha todos os campos");
+        }else if(campoNome.getText().isBlank() || campoLogin.getText().isBlank() || campoSenha.getText().isBlank()){
+            lblSenha8.setVisible(false);
+            lblMensagemPreencher.setVisible(true);
         }else{
-            System.out.println("adicione mais caracteres na senha");
+            lblMensagemPreencher.setVisible(false);
+            lblSenha8.setVisible(true);
         }
     }
 }

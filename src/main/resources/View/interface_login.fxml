@@ -6,14 +6,15 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 <?import javafx.scene.layout.Pane?>
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Interface_loginController">
     <Pane fx:id="fundoInvisivel" prefWidth="0" prefHeight="0"
           focusTraversable="true" />
@@ -38,8 +39,8 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="40.0" minHeight="0.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="56.0" minHeight="0.0" prefHeight="56.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="53.0" minHeight="0.0" prefHeight="53.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="56.0" minHeight="0.0" prefHeight="43.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="50.0" minHeight="0.0" prefHeight="14.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
@@ -64,14 +65,22 @@
                         <Insets left="2.0" right="150.0" />
                      </GridPane.margin>
                   </PasswordField>
-                  <Hyperlink fx:id="link_Cadastro" onAction="#aoClicarNaoTemCadastro"  text="É novo ? Cadastre-se" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <Hyperlink fx:id="link_Cadastro" onAction="#aoClicarNaoTemCadastro" text="É novo ? Cadastre-se" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <GridPane.margin>
-                        <Insets left="16.0" top="30.0" />
+                        <Insets left="15.0" />
                      </GridPane.margin></Hyperlink>
-                  <Button fx:id="botaoLogar" mnemonicParsing="false" onAction="#aoClicarEntrar" prefHeight="25.0" prefWidth="76.0" text="Logar" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Button fx:id="botaoLogin" mnemonicParsing="false" onAction="#aoClicarEntrar" prefHeight="25.0" prefWidth="76.0" text="Logar" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="37.0" top="30.0" />
                      </GridPane.margin></Button>
+                  <Label fx:id="lblMensagemErro" prefHeight="16.0" prefWidth="141.0" text="Login ou senha incorreto!" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="2" visible="false">
+                     <effect>
+                        <Blend />
+                     </effect>
+                     <padding>
+                        <Insets bottom="30.0" left="5.0" />
+                     </padding>
+                  </Label>
                </children>
             </GridPane>
          </children>
