@@ -2,6 +2,8 @@ package Controller;
 
 import Model.Model;
 import Model.Professor;
+import View.Interface_login;
+import View.Interface_menu;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,6 +14,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+//testeee
 
 public class Interface_cadastroController implements Initializable {
 
@@ -30,19 +34,24 @@ public class Interface_cadastroController implements Initializable {
 
     //variaveis dos campos
     @FXML
-    private TextField nome;
+    private TextField campoNome;
 
     @FXML
-    private TextField login;
+    private TextField campoLogin;
 
     @FXML
-    private TextField senha;
+    private TextField campoSenha;
 
+    @FXML
+    private Label lblMensagemPreencher;
+
+    @FXML
+    private Label lblSenha8;
 
     //metodos
     public void aoClicarJaTemLogin(){//muda de tela
         try{
-            Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_login.fxml"));
+            Parent arquivoJanela = Interface_login.Interface_loginChamada();
             Stage janelaAtual = (Stage) link_Login.getScene().getWindow();
             janelaAtual.setScene(new Scene(arquivoJanela));
             janelaAtual.setTitle("Login");
@@ -56,19 +65,18 @@ public class Interface_cadastroController implements Initializable {
         String senhaParaMandar = "";
 
 
-        if(senha.getText().length() >= 8 && (!nome.getText().isBlank() && !login.getText().isBlank() && !senha.getText().isBlank())){
-            nomeParaMandar = nome.getText();
-            loginParaMandar = login.getText();
-            senhaParaMandar = senha.getText();
+        if(campoSenha.getText().length() >= 8 && (!campoNome.getText().isBlank() && !campoLogin.getText().isBlank() && !campoSenha.getText().isBlank())){
+            nomeParaMandar = campoNome.getText();
+            loginParaMandar = campoLogin.getText();
+            senhaParaMandar = campoSenha.getText();
 
             //cria o usuario para adicionar no DB(se ja n existir no banco)
             Professor professorNovo = new Professor(nomeParaMandar, loginParaMandar, senhaParaMandar);
             if(Model.LoginExiste(professorNovo) == false){
                 try{
-                    Model.SalvarUsuario(professorNovo);
-                    Model.ListarUsuarios();
+                    Model.SalvarUsuario(professorNovo);//salva o usuario
 
-                    Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/interface_Menu.fxml"));
+                    Parent arquivoJanela = Interface_menu.Interface_menuChamada();
                     Stage janelaAtual = (Stage) botaoCadastro.getScene().getWindow();
                     janelaAtual.setScene(new Scene(arquivoJanela));
                     janelaAtual.setTitle("Menu");
@@ -77,12 +85,14 @@ public class Interface_cadastroController implements Initializable {
                 }
 
             }else{
-                System.out.println("Usuario ja existe");
+                System.out.println("bnao sei");;
             }
-        }else if(nome.getText().isBlank() || login.getText().isBlank() || senha.getText().isBlank()){
-            System.out.println("preencha todos os campos");
+        }else if(campoNome.getText().isBlank() || campoLogin.getText().isBlank() || campoSenha.getText().isBlank()){
+            lblSenha8.setVisible(false);
+            lblMensagemPreencher.setVisible(true);
         }else{
-            System.out.println("adicione mais caracteres na senha");
+            lblMensagemPreencher.setVisible(false);
+            lblSenha8.setVisible(true);
         }
     }
 }

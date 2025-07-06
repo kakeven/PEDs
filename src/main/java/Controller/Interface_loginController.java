@@ -2,6 +2,8 @@ package Controller;
 
 import Model.Model;
 import Model.Professor;
+import View.Interface_menu;
+import View.Interface_cadastro;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,7 +23,7 @@ public class Interface_loginController implements Initializable {
     }
 
     @FXML
-    private Button botaoLogar;
+    private Button botaoLogin;
 
     @FXML
     private Hyperlink link_Cadastro;
@@ -34,11 +36,13 @@ public class Interface_loginController implements Initializable {
     @FXML
     private PasswordField campoSenha;
 
+    @FXML
+    private Label lblMensagemErro;
 
     @FXML
     private void aoClicarNaoTemCadastro(){//muda de tela
         try {
-            Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_Cadastro.fxml"));
+            Parent arquivoJanela = Interface_cadastro.Interface_cadastroChamada();
             Stage JanelaAtual = (Stage) link_Cadastro.getScene().getWindow();
             JanelaAtual.setScene(new Scene(arquivoJanela));
             JanelaAtual.setTitle("Cadastro");
@@ -54,12 +58,12 @@ public class Interface_loginController implements Initializable {
 
             Professor professor = new Professor(loginParaMandar, senhaParaMandar);
             if(Model.LoginValido(professor)){
-                Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_Menu.fxml"));
-                Stage JanelaAtual = (Stage) botaoLogar.getScene().getWindow();
+                Parent arquivoJanela = Interface_menu.Interface_menuChamada();
+                Stage JanelaAtual = (Stage) botaoLogin.getScene().getWindow();
                 JanelaAtual.setScene(new Scene(arquivoJanela));
                 JanelaAtual.setTitle("Menu");
             }else{
-                System.out.println("Login e/ou senha incorretos");
+                lblMensagemErro.setVisible(true);
             }
         } catch (Exception e) {
             e.printStackTrace();

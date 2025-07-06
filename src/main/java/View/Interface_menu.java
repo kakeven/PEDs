@@ -6,7 +6,8 @@ import javafx.scene.Parent;
 import java.io.IOException;
 
 public class Interface_menu {
-    public Parent Interface_menuChamada() throws IOException {
-        return FXMLLoader.load(getClass().getResource("/View/Interface_Menu.fxml"));
+    public static Parent Interface_menuChamada() throws IOException {
+        return FXMLLoader.load(Interface_menu.class.getResource("/View/Interface_Menu.fxml"));
     }
 }
+//awdawdawdawd

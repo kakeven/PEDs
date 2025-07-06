@@ -15,6 +15,7 @@ public class Model{
             e.printStackTrace();
         }
     }
+    //pra ajeitar
     public static void criarTabela(){
         String sql = """
                 CREATE TABLE IF NOT EXISTS usuarios (
