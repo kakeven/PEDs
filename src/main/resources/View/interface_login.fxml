@@ -63,7 +63,7 @@
                         <Insets left="2.0" right="150.0" />
                      </GridPane.margin>
                   </PasswordField>
-                  <Hyperlink fx:id="link_Cadastro" text="É novo ? Cadastre-se" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Hyperlink fx:id="link_Cadastro" onAction="#aoClicarNaoTemCadastro" text="É novo ? Cadastre-se" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="60.0" />
                      </GridPane.margin></Hyperlink>
