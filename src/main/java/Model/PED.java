@@ -1,5 +1,6 @@
 package Model;
 
+
 import java.util.ArrayList;
 
 public class PED {
@@ -121,4 +122,8 @@ public class PED {
         return aulas;
     }
 
+    @Override
+    public String toString() {
+        return String.format("PED de %s - %s", disciplina, semestre);
+    }
 }

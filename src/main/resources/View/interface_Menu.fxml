@@ -47,7 +47,7 @@
                   <Insets bottom="42.0" left="26.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="botao_Logout" mnemonicParsing="false" text="Logout" GridPane.rowIndex="6">
+            <Button fx:id="botao_Logout" onAction="#aoClicarLogout" mnemonicParsing="false" text="Logout" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets left="15.0" />
                </GridPane.margin>
