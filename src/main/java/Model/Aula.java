@@ -1,5 +1,6 @@
 package Model;
 
+
 public class Aula {
     private String descricao;
     private int cargaHoraria;
