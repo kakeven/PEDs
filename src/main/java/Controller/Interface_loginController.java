@@ -21,7 +21,7 @@ public class Interface_loginController implements Initializable {
     }
 
     @FXML
-    private Button botaoLogar;
+    private Button botaoLogin;
 
     @FXML
     private Hyperlink link_Cadastro;
@@ -34,6 +34,8 @@ public class Interface_loginController implements Initializable {
     @FXML
     private PasswordField campoSenha;
 
+    @FXML
+    private Label lblMensagemErro;
 
     @FXML
     private void aoClicarNaoTemCadastro(){//muda de tela
@@ -55,11 +57,11 @@ public class Interface_loginController implements Initializable {
             Professor professor = new Professor(loginParaMandar, senhaParaMandar);
             if(Model.LoginValido(professor)){
                 Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_Menu.fxml"));
-                Stage JanelaAtual = (Stage) botaoLogar.getScene().getWindow();
+                Stage JanelaAtual = (Stage) botaoLogin.getScene().getWindow();
                 JanelaAtual.setScene(new Scene(arquivoJanela));
                 JanelaAtual.setTitle("Menu");
             }else{
-                System.out.println("Login e/ou senha incorretos");
+                lblMensagemErro.setVisible(true);
             }
         } catch (Exception e) {
             e.printStackTrace();

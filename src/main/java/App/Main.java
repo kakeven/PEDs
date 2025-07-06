@@ -3,12 +3,9 @@ package App;
 import Model.Model;
 import View.Interface_login;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.chart.PieChart;
-import javafx.scene.layout.StackPane;
 
 public class Main extends Application {
 
