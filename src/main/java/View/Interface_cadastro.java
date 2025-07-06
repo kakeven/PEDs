@@ -6,8 +6,8 @@ import javafx.scene.Parent;
 import java.io.IOException;
 
 public class Interface_cadastro {
-    public Interface_cadastro() throws IOException {
-        Parent Cadastro = FXMLLoader.load(getClass().getResource("/View/Interface_cadastro.fxml"));
+    public Parent Interface_cadastro() throws IOException {
+        return FXMLLoader.load(getClass().getResource("/View/Interface_Cadastro.fxml"));
+
     }
 }
-//teste

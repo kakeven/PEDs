@@ -1,8 +1,7 @@
 package Controller;
 
 import Model.Model;
-import Model.Usuario;
-import com.sun.jdi.StringReference;
+import Model.Professor;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -63,14 +62,23 @@ public class Interface_cadastroController implements Initializable {
             senhaParaMandar = senha.getText();
 
             //cria o usuario para adicionar no DB(se ja n existir no banco)
-            Usuario usuarioNovo = new Usuario(nomeParaMandar, loginParaMandar, senhaParaMandar);
-            if(Model.LoginExiste(usuarioNovo) == false){
-                Model.salvarUsuario(usuarioNovo);
-                Model.listarUsuarios();
+            Professor professorNovo = new Professor(nomeParaMandar, loginParaMandar, senhaParaMandar);
+            if(Model.LoginExiste(professorNovo) == false){
+                try{
+                    Model.SalvarUsuario(professorNovo);
+                    Model.ListarUsuarios();
+
+                    Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/interface_Menu.fxml"));
+                    Stage janelaAtual = (Stage) botaoCadastro.getScene().getWindow();
+                    janelaAtual.setScene(new Scene(arquivoJanela));
+                    janelaAtual.setTitle("Menu");
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
             }else{
                 System.out.println("Usuario ja existe");
             }
-
         }else if(nome.getText().isBlank() || login.getText().isBlank() || senha.getText().isBlank()){
             System.out.println("preencha todos os campos");
         }else{

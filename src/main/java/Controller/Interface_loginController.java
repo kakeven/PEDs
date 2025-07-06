@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Model;
+import Model.Professor;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,29 +21,46 @@ public class Interface_loginController implements Initializable {
     }
 
     @FXML
-    private TextField campoUsuario;
+    private Button botaoLogar;
+
+    @FXML
+    private Hyperlink link_Cadastro;
+
+
+    //variaveis de campos
+    @FXML
+    private TextField campoLogin;
 
     @FXML
     private PasswordField campoSenha;
 
-    @FXML
-    private Button botaoLogin;
-
-    @FXML
-    private void aoClicarEntrar() {
-        // deixar vazio
-    }
-
-    @FXML
-    private Hyperlink botaoIrCadastro;
 
     @FXML
     private void aoClicarNaoTemCadastro(){//muda de tela
         try {
-            Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_cadastro.fxml"));
-            Stage JanelaAtual = (Stage) botaoIrCadastro.getScene().getWindow();
+            Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_Cadastro.fxml"));
+            Stage JanelaAtual = (Stage) link_Cadastro.getScene().getWindow();
             JanelaAtual.setScene(new Scene(arquivoJanela));
             JanelaAtual.setTitle("Cadastro");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void aoClicarEntrar() {
+        try{
+            String loginParaMandar = campoLogin.getText();
+            String senhaParaMandar = campoSenha.getText();
+
+            Professor professor = new Professor(loginParaMandar, senhaParaMandar);
+            if(Model.LoginValido(professor)){
+                Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_Menu.fxml"));
+                Stage JanelaAtual = (Stage) botaoLogar.getScene().getWindow();
+                JanelaAtual.setScene(new Scene(arquivoJanela));
+                JanelaAtual.setTitle("Menu");
+            }else{
+                System.out.println("Login e/ou senha incorretos");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
