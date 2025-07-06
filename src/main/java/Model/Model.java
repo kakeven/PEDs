@@ -79,8 +79,9 @@ public class Model{
             ResultSet resultado = preparar.executeQuery();
 
             if(resultado.next()){
-                String senha = resultado.getString("senha"); //pega a senha do BANCO
-                return senha.equals(professor.getSenha()); //compara cm a sneha q digitou
+                String senha = resultado.getString("senha");//pega a senha do BANCO
+                String login = resultado.getString("login");//pega a login do BANCO
+                return senha.equals(professor.getSenha()) && login.equals(professor.getLogin()); //compara cm a sneha e o login q digitou
             }else{
                 return false;
             }
