@@ -13,8 +13,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.layout.Pane?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Interface_loginController">
-   <children>
+    <Pane fx:id="fundoInvisivel" prefWidth="0" prefHeight="0"
+          focusTraversable="true" />
+    <children>
       <VBox layoutX="66.0" layoutY="21.0" prefHeight="331.0" prefWidth="481.0">
          <children>
             <Label alignment="CENTER" prefHeight="28.0" prefWidth="117.0" text="Login">
@@ -61,7 +64,7 @@
                         <Insets left="2.0" right="150.0" />
                      </GridPane.margin>
                   </PasswordField>
-                  <Hyperlink fx:id="link_Cadastro" text="É novo ? Cadastre-se" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <Hyperlink fx:id="link_Cadastro" onAction="#aoClicarNaoTemCadastro"  text="É novo ? Cadastre-se" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="16.0" top="30.0" />
                      </GridPane.margin></Hyperlink>
