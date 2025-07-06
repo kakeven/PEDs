@@ -4,16 +4,27 @@ import java.util.ArrayList;
 
 public class Professor {
     private String nome;
+    private String login;
     private String matricula;
     private String senha;
     private ArrayList<String> disciplinas;
 
-    public Professor(String nome, String matricula, String senha) {
-        this.nome = nome;
-        this.matricula = matricula;
-        this.senha = senha;
-        ArrayList<Disciplina> disciplinas = new ArrayList<>();
-        isCompleto();
+
+    public Professor(String nome, String login, String senha){
+        setNome(nome);
+        setLogin(login);
+        setSenha(senha);
+    }
+    public Professor(String login, String senha){
+        setLogin(login);
+        setSenha(senha);
+    }
+
+    public String getLogin(){
+        return login;
+    }
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getNome() {

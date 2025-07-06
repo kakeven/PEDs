@@ -28,4 +28,8 @@ public class Aula {
     public void setData(String data) {
         this.data = data;
     }
+
+    public String toString(){
+        return String.format("%s %20s %i", data, descricao, cargaHoraria);
+    }
 }

@@ -5,6 +5,7 @@ package Model;
 import java.util.ArrayList;
 
 public class Disciplina {
+    private String nome;
     private String codigo;
     private int cargaTeorica;
     private int cargaPratica;
@@ -21,12 +22,22 @@ public class Disciplina {
 
     public Disciplina(){
         super();
+        ArrayList<String> preRequisito = new ArrayList<>();
+        ArrayList<String> coRequisito = new ArrayList<>();
+        ArrayList<String> equivalencias = new ArrayList<>();
         cargaTeorica = 0;
         cargaPratica = 0;
         cargaEaD = 0;
         cargaExtensao = 0;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     public String getCodigo() {return codigo;}
 
@@ -122,4 +133,8 @@ public class Disciplina {
         return (codigo != null && cargaTotal>0 && estruturaCurricular!= null && regimeDeOferta != null && obrigatoriedade != null);
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s %20s", codigo, nome);
+    }
 }
