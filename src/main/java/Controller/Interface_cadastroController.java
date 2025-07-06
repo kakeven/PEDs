@@ -2,6 +2,8 @@ package Controller;
 
 import Model.Model;
 import Model.Professor;
+import View.Interface_login;
+import View.Interface_menu;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -47,7 +49,7 @@ public class Interface_cadastroController implements Initializable {
     //metodos
     public void aoClicarJaTemLogin(){//muda de tela
         try{
-            Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_login.fxml"));
+            Parent arquivoJanela = Interface_login.Interface_loginChamada();
             Stage janelaAtual = (Stage) link_Login.getScene().getWindow();
             janelaAtual.setScene(new Scene(arquivoJanela));
             janelaAtual.setTitle("Login");
@@ -70,10 +72,9 @@ public class Interface_cadastroController implements Initializable {
             Professor professorNovo = new Professor(nomeParaMandar, loginParaMandar, senhaParaMandar);
             if(Model.LoginExiste(professorNovo) == false){
                 try{
-                    Model.SalvarUsuario(professorNovo);
-                    Model.ListarUsuarios();
+                    Model.SalvarUsuario(professorNovo);//salva o usuario
 
-                    Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/interface_Menu.fxml"));
+                    Parent arquivoJanela = Interface_menu.Interface_menuChamada();
                     Stage janelaAtual = (Stage) botaoCadastro.getScene().getWindow();
                     janelaAtual.setScene(new Scene(arquivoJanela));
                     janelaAtual.setTitle("Menu");

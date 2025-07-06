@@ -4,6 +4,7 @@ import Model.Model;
 import Model.Usuario;
 import com.sun.jdi.StringReference;
 import javafx.fxml.FXML;
+import View.Interface_login;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -27,7 +28,7 @@ public class Interface_menuController implements Initializable {
 
     public void aoClicarLogout(){
         try{
-            Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/Interface_login.fxml"));
+            Parent arquivoJanela = Interface_login.Interface_loginChamada();
             Stage JanelaAtual = (Stage) botao_Logout.getScene().getWindow();
             JanelaAtual.setScene(new Scene(arquivoJanela));
             JanelaAtual.setTitle("Projeto PEDs");
