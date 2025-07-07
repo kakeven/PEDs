@@ -1,7 +1,7 @@
 package App;
 
 import Model.Model;
-import View.Interface_login;
+import View.InterfaceLogin;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,8 +15,8 @@ public class Main extends Application {
         Model.seConectar();
         Model.criarTabela();
 
-        Interface_login login = new Interface_login(); //inicializa o objeto da view, no caso tela de login
-        Parent loginChamada = login.Interface_loginChamada();
+        InterfaceLogin login = new InterfaceLogin(); //inicializa o objeto da view, no caso tela de login
+        Parent loginChamada = login.getRoot();
 
         primaryStage.setTitle("Projeto PEDs");
         primaryStage.setScene(new Scene(loginChamada, 600, 400)); //edita tamanho só

@@ -2,10 +2,9 @@ package Controller;
 
 import Model.Model;
 import Model.Professor;
-import View.Interface_menu;
-import View.Interface_cadastro;
+import View.InterfaceMenu;
+import View.InterfaceCadastro;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,7 +14,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Interface_loginController implements Initializable {
+public class InterfaceLoginController implements Initializable {
     @FXML
     public Pane fundoInvisivel;
     public void initialize(URL location, ResourceBundle resources) {
@@ -42,7 +41,7 @@ public class Interface_loginController implements Initializable {
     @FXML
     private void aoClicarNaoTemCadastro(){//muda de tela
         try {
-            Parent arquivoJanela = Interface_cadastro.Interface_cadastroChamada();
+            Parent arquivoJanela = InterfaceCadastro.InterfaceCadastroChamada();
             Stage JanelaAtual = (Stage) link_Cadastro.getScene().getWindow();
             JanelaAtual.setScene(new Scene(arquivoJanela));
             JanelaAtual.setTitle("Cadastro");
@@ -58,7 +57,7 @@ public class Interface_loginController implements Initializable {
 
             Professor professor = new Professor(loginParaMandar, senhaParaMandar);
             if(Model.LoginValido(professor)){
-                Parent arquivoJanela = Interface_menu.Interface_menuChamada();
+                Parent arquivoJanela = new InterfaceMenu().getRoot();
                 Stage JanelaAtual = (Stage) botaoLogin.getScene().getWindow();
                 JanelaAtual.setScene(new Scene(arquivoJanela));
                 JanelaAtual.setTitle("Menu");
@@ -69,4 +68,11 @@ public class Interface_loginController implements Initializable {
             e.printStackTrace();
         }
     }
+//    public void funcaoBotoes(String nomeBotao){
+//        if(nomeBotao.equals()){
+//            //
+//        }else if(nomeBotao.equals("Nao tem login? cadastre-se")){
+//            //
+//        }
+//    }
 }

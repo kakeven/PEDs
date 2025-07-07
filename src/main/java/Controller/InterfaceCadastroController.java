@@ -2,10 +2,9 @@ package Controller;
 
 import Model.Model;
 import Model.Professor;
-import View.Interface_login;
-import View.Interface_menu;
+import View.InterfaceLogin;
+import View.InterfaceMenu;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,9 +13,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
+import View.InterfaceLogin;
 
-
-public class Interface_cadastroController implements Initializable {
+public class InterfaceCadastroController implements Initializable {
 
     @FXML
     public Pane fundoInvisivel;
@@ -48,13 +47,14 @@ public class Interface_cadastroController implements Initializable {
     private Label lblSenha8;
 
     //metodos
-    public void aoClicarJaTemLogin(){//muda de tela
-        try{
-            Parent arquivoJanela = Interface_login.Interface_loginChamada();
+    public void aoClicarJaTemLogin() {
+        try {
+            InterfaceLogin telaLogin = new InterfaceLogin();
+            Parent arquivoJanela = telaLogin.getRoot();
             Stage janelaAtual = (Stage) link_Login.getScene().getWindow();
             janelaAtual.setScene(new Scene(arquivoJanela));
             janelaAtual.setTitle("Login");
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -75,7 +75,7 @@ public class Interface_cadastroController implements Initializable {
                 try{
                     Model.SalvarUsuario(professorNovo);//salva o usuario
 
-                    Parent arquivoJanela = Interface_menu.Interface_menuChamada();
+                    Parent arquivoJanela = new InterfaceMenu().getRoot();
                     Stage janelaAtual = (Stage) botaoCadastro.getScene().getWindow();
                     janelaAtual.setScene(new Scene(arquivoJanela));
                     janelaAtual.setTitle("Menu");
