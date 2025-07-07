@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="778.0" style="-fx-background-color: #E6F0FA;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Interface_menuDisciplinaController">
+   <children>
+      <VBox layoutX="-8.0" layoutY="-8.0" />
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="778.0">
+         <children>
+            <VBox layoutX="-13.0" />
+            <TextField layoutX="84.0" layoutY="58.0" prefHeight="25.0" prefWidth="221.0" />
+            <TextField layoutX="605.0" layoutY="98.0" prefHeight="25.0" prefWidth="126.0" />
+            <Button layoutX="184.0" layoutY="441.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="Adicionar" />
+            <Button layoutX="329.0" layoutY="441.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="Limpar" />
+            <Button layoutX="474.0" layoutY="441.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="Remover" />
+            <Button layoutX="674.0" fx:id="botaoVoltar" onAction="#aoClicarVoltar" layoutY="461.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="90.0" text="Voltar" />
+            <ChoiceBox layoutX="154.0" layoutY="180.0" prefHeight="25.0" prefWidth="150.0" />
+            <ChoiceBox layoutX="572.0" layoutY="139.0" prefHeight="25.0" prefWidth="160.0" />
+            <Label layoutX="36.0" layoutY="55.0" prefHeight="30.0" prefWidth="47.0" text="Nome:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="43.0" layoutY="95.0" prefHeight="30.0" prefWidth="96.0" text="Carga Teórica:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="46.0" layoutY="136.0" prefHeight="30.0" prefWidth="90.0" text="Carga Prática:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="40.0" layoutY="178.0" prefHeight="30.0" prefWidth="114.0" text="Obrigatoriedade: ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="36.0" layoutY="289.0" prefHeight="30.0" prefWidth="120.0" text="Pré-Requisitos:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="299.0" layoutY="289.0" prefHeight="30.0" prefWidth="120.0" text="Co-Requisitos:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="572.0" layoutY="289.0" prefHeight="30.0" prefWidth="120.0" text="Equivalências:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="445.0" layoutY="54.0" prefHeight="30.0" prefWidth="66.0" text="Professor:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="553.0" layoutY="95.0" prefHeight="30.0" prefWidth="55.0" text="Código:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="455.0" layoutY="135.0" prefHeight="30.0" prefWidth="117.0" text="Regime de Oferta:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="493.0" layoutY="178.0" prefHeight="30.0" prefWidth="79.0" text="Carga Total:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="76.0" layoutY="217.0" prefHeight="30.0" prefWidth="127.0" text="Estrutura Curricular:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ChoiceBox layoutX="204.0" layoutY="219.0" prefHeight="25.0" prefWidth="100.0" />
+            <Label layoutX="32.0" layoutY="254.0" prefHeight="30.0" prefWidth="103.0" text="Carga Extensão:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <HBox alignment="TOP_CENTER" prefHeight="17.0" prefWidth="778.0" style="-fx-background-color: #4a8fff; -fx-padding: 10;">
+               <children>
+                  <Label alignment="TOP_LEFT" prefHeight="30.0" prefWidth="170.0" style="-fx-alignment: CENTER;" text="Cadastro Disciplina">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Spinner fx:id="spinnerCargaExtensao" layoutX="134.0" layoutY="257.0" prefHeight="25.0" prefWidth="170.0" />
+            <Spinner fx:id="spinnerCargaPratica" layoutX="134.0" layoutY="139.0" prefHeight="25.0" prefWidth="170.0" />
+            <Spinner fx:id="spinnerCargaTeorica" layoutX="134.0" layoutY="98.0" prefHeight="25.0" prefWidth="170.0" />
+            <Spinner fx:id="spinnerCargaTotal" layoutX="572.0" layoutY="180.0" prefHeight="25.0" prefWidth="160.0" />
+            <Spinner fx:id="spinnerCargaEaD" layoutX="572.0" layoutY="219.0" prefHeight="25.0" prefWidth="160.0" />
+            <Label layoutX="244.0" fx:id="labelHorasPraticas" layoutY="143.0" prefHeight="17.0" prefWidth="32.0" text="Horas" />
+            <Label layoutX="244.0" fx:id="labelHorasTeoricas" layoutY="102.0" prefHeight="17.0" prefWidth="32.0" text="Horas" />
+            <Label layoutX="244.0" fx:id="labelHorasExtensao" layoutY="261.0" prefHeight="17.0" prefWidth="32.0" text="Horas" />
+            <Label layoutX="668.0" fx:id="labelHorasTotal" layoutY="184.0" prefHeight="17.0" prefWidth="32.0" text="Horas" />
+            <Label layoutX="668.0" fx:id="labelHorasEaD" layoutY="223.0" prefHeight="17.0" prefWidth="32.0" text="Horas" />
+            <TextField disable="true" editable="false" focusTraversable="false" layoutX="510.0" layoutY="58.0" prefHeight="25.0" prefWidth="221.0" />
+            <TextArea layoutX="36.0" layoutY="319.0" prefHeight="102.0" prefWidth="170.0" />
+            <TextArea layoutX="299.0" layoutY="319.0" prefHeight="102.0" prefWidth="170.0" />
+            <TextArea layoutX="572.0" layoutY="319.0" prefHeight="102.0" prefWidth="170.0" />
+            <Label layoutX="499.0" layoutY="217.0" prefHeight="30.0" prefWidth="73.0" text="Carga EaD:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

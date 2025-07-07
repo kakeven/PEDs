@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-//testeee
 
 public class Interface_cadastroController implements Initializable {
 

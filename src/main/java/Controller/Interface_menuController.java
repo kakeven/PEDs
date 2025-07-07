@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Model;
 import Model.Usuario;
+import View.Interface_menuDisciplina;
 import com.sun.jdi.StringReference;
 import javafx.fxml.FXML;
 import View.Interface_login;
@@ -17,15 +18,22 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Interface_menuController implements Initializable {
+
+    //fundos
     @FXML
     public Pane fundoInvisivel;
     public void initialize(URL location, ResourceBundle resources) {
         fundoInvisivel.requestFocus();
     }
 
+
+    //botoes
     @FXML
     private Button botao_Logout;
+    @FXML
+    private Button botao_addDisciplina;
 
+    //metodos
     public void aoClicarLogout(){
         try{
             Parent arquivoJanela = Interface_login.Interface_loginChamada();
@@ -36,5 +44,14 @@ public class Interface_menuController implements Initializable {
             e.printStackTrace();
         }
     }
+    public void aoCliclarAddDisciplina(){
+        try{
+            Parent arquivoJanela = Interface_menuDisciplina.Interface_cadastroDisciplinaChamada();
+            Stage JanelaAtual = (Stage) botao_addDisciplina.getScene().getWindow();
+            JanelaAtual.setScene(new Scene(arquivoJanela));
+            JanelaAtual.setTitle("Cadastro Disciplina");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
-//teste novamente
