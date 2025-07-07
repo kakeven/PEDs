@@ -24,28 +24,16 @@ public class InterfaceMenuDisciplinaController implements Initializable{
     private Spinner<Integer>spinnerCargaExtensao;
 
     @FXML
-    private Spinner<Integer>spinnerCargaTotal;
-
-    @FXML
     private Spinner<Integer>spinnerCargaEaD;
 
     @FXML
     private Button botaoVoltar;
 
     @FXML
-    private Label labelHorasTeoricas;
-
-    @FXML
-    private Label labelHorasPraticas;
-
-    @FXML
-    private Label labelHorasExtensao;
-
-    @FXML
     private Label labelHorasTotal;
 
     @FXML
-    private Label labelHorasEaD;
+    private TextField textoHorasTotais;
 
 
     //metodo initialize
@@ -54,9 +42,13 @@ public class InterfaceMenuDisciplinaController implements Initializable{
         spinnerCargaTeorica.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 128, 0,2));
         spinnerCargaPratica.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 128, 0, 2));
         spinnerCargaExtensao.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 128, 0, 2));
-        spinnerCargaTotal.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 128, 0, 2));
         spinnerCargaEaD.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 128, 0, 2));
+        textoHorasTotais.setText("0");
 
+        spinnerCargaTeorica.valueProperty().addListener((obs, valorAtigo, valorNovo) -> atualizarCargaTotal());
+        spinnerCargaPratica.valueProperty().addListener((obs, valorAntigo, valorNovo) -> atualizarCargaTotal());
+        spinnerCargaExtensao.valueProperty().addListener((obs, valorAntigo, valorNovo) -> atualizarCargaTotal());
+        spinnerCargaEaD.valueProperty().addListener((obs, valorAntigo, valorNovo) -> atualizarCargaTotal());
     }
 
     //metodos gerais
@@ -66,6 +58,16 @@ public class InterfaceMenuDisciplinaController implements Initializable{
         JanelaAtual.setScene(new Scene(ArquivoJavela));
         JanelaAtual.setTitle("Menu");
 
+    }
+    private void atualizarCargaTotal(){
+        int spinnerTeorica = spinnerCargaTeorica.getValue();
+        int spinnerPratica = spinnerCargaPratica.getValue();
+        int spinnerExtensao = spinnerCargaExtensao.getValue();
+        int spinnerEaD = spinnerCargaEaD.getValue();
+
+        int total = spinnerTeorica + spinnerEaD + spinnerExtensao + spinnerPratica;
+
+        textoHorasTotais.setText(String.valueOf(total));
     }
 
 }
