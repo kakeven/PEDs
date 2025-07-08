@@ -56,6 +56,14 @@
                   <Insets left="30.0" />
                </GridPane.margin>
             </Label>
+          <Label fx:id="lblUsuarioJaExiste" text="Login já existente!" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="5" visible="false">
+              <effect>
+                  <Blend />
+              </effect>
+              <GridPane.margin>
+                  <Insets left="30.0" />
+              </GridPane.margin>
+          </Label>
             <columnConstraints>
                <ColumnConstraints />
                <ColumnConstraints maxWidth="270.0" />

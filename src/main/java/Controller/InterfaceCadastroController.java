@@ -47,6 +47,9 @@ public class InterfaceCadastroController implements Initializable {
     @FXML
     private Label lblSenha8;
 
+    @FXML
+    private Label lblUsuarioJaExiste;
+
 
     //metodos
     public void aoClicarJaTemLogin() {
@@ -86,7 +89,8 @@ public class InterfaceCadastroController implements Initializable {
                     e.printStackTrace();
                 }
             }else{
-                System.out.println("bnao sei");;
+                lblUsuarioJaExiste.setVisible(true);
+                lblSenha8.setVisible(false);
             }
         }else if(campoNome.getText().isBlank() || campoLogin.getText().isBlank() || campoSenha.getText().isBlank()){
             lblSenha8.setVisible(false);
