@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import static Controller.InterfaceLoginController.professorAtual;
 
 public class InterfaceMenuDisciplinaController implements Initializable{
 
@@ -35,6 +36,11 @@ public class InterfaceMenuDisciplinaController implements Initializable{
     @FXML
     private TextField textoHorasTotais;
 
+    @FXML
+    private TextField nomeProfessorAtual;
+
+    //variaveis
+
 
     //metodo initialize
     @FXML
@@ -44,6 +50,7 @@ public class InterfaceMenuDisciplinaController implements Initializable{
         spinnerCargaExtensao.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 128, 0, 2));
         spinnerCargaEaD.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 128, 0, 2));
         textoHorasTotais.setText("0");
+        nomeProfessorAtual.setText(professorAtual);
 
         spinnerCargaTeorica.valueProperty().addListener((obs, valorAtigo, valorNovo) -> atualizarCargaTotal());
         spinnerCargaPratica.valueProperty().addListener((obs, valorAntigo, valorNovo) -> atualizarCargaTotal());

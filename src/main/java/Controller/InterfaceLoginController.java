@@ -27,7 +27,6 @@ public class InterfaceLoginController implements Initializable {
     @FXML
     private Hyperlink link_Cadastro;
 
-
     //variaveis de campos
     @FXML
     private TextField campoLogin;
@@ -38,6 +37,10 @@ public class InterfaceLoginController implements Initializable {
     @FXML
     private Label lblMensagemErro;
 
+    //variaveis
+    public static String professorAtual;
+
+    //metodos
     @FXML
     private void aoClicarNaoTemCadastro(){//muda de tela
         try {
@@ -68,11 +71,4 @@ public class InterfaceLoginController implements Initializable {
             e.printStackTrace();
         }
     }
-//    public void funcaoBotoes(String nomeBotao){
-//        if(nomeBotao.equals()){
-//            //
-//        }else if(nomeBotao.equals("Nao tem login? cadastre-se")){
-//            //
-//        }
-//    } ola neto
 }

@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 import View.InterfaceLogin;
+import static Controller.InterfaceLoginController.professorAtual;
+
 
 public class InterfaceCadastroController implements Initializable {
 
@@ -28,7 +30,6 @@ public class InterfaceCadastroController implements Initializable {
 
     @FXML
     private Hyperlink link_Login;
-
 
     //variaveis dos campos
     @FXML
@@ -45,6 +46,7 @@ public class InterfaceCadastroController implements Initializable {
 
     @FXML
     private Label lblSenha8;
+
 
     //metodos
     public void aoClicarJaTemLogin() {
@@ -63,7 +65,6 @@ public class InterfaceCadastroController implements Initializable {
         String loginParaMandar = "";
         String senhaParaMandar = "";
 
-
         if(campoSenha.getText().length() >= 8 && (!campoNome.getText().isBlank() && !campoLogin.getText().isBlank() && !campoSenha.getText().isBlank())){
             nomeParaMandar = campoNome.getText();
             loginParaMandar = campoLogin.getText();
@@ -71,7 +72,9 @@ public class InterfaceCadastroController implements Initializable {
 
             //cria o usuario para adicionar no DB(se ja n existir no banco)
             Professor professorNovo = new Professor(nomeParaMandar, loginParaMandar, senhaParaMandar);
+
             if(Model.LoginExiste(professorNovo) == false){
+                professorAtual = professorNovo.getNome();
                 try{
                     Model.SalvarUsuario(professorNovo);//salva o usuario
 
@@ -82,7 +85,6 @@ public class InterfaceCadastroController implements Initializable {
                 }catch(Exception e){
                     e.printStackTrace();
                 }
-
             }else{
                 System.out.println("bnao sei");;
             }
