@@ -71,8 +71,8 @@ public class Model{
         }
         return false;
     }
-    public static boolean LoginValido(Professor professor){
-        String busca = "SELECT login, senha FROM usuarios WHERE login = ?";
+    public static Professor LoginValido(Professor professor){
+        String busca = "SELECT nome, login, senha FROM usuarios WHERE login = ?";
 
         try{
             PreparedStatement preparar = conectar.prepareStatement(busca);
@@ -81,13 +81,17 @@ public class Model{
 
             if(resultado.next()){
                 String senha = resultado.getString("senha");//pega a senha do BANCO
-                return senha.equals(professor.getSenha()); //compara cm a sneha q digitou
+                String nomeProfessor = resultado.getString("nome");
+
+                if(senha.equals(professor.getSenha())){
+                    return new Professor(nomeProfessor, professor.getLogin(), senha);
+                }
             }else{
-                return false;
+                return null;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
 }
