@@ -67,7 +67,7 @@ public class InterfaceLoginController implements Initializable {
                 Stage JanelaAtual = (Stage) botaoLogin.getScene().getWindow();
                 JanelaAtual.setScene(new Scene(arquivoJanela));
                 JanelaAtual.setTitle("Menu");
-            }else{
+            }else if(Model.LoginValido(professor).getLogin() == null || Model.LoginValido(professor).getSenha() == null){
                 lblMensagemErro.setVisible(true);
             }
         } catch (Exception e) {
