@@ -1,7 +1,8 @@
 package Model;
 
 import java.sql.*;
-//Gathored
+import Model.Disciplina;
+
 public class Model{
     private static Connection conectar;
 
@@ -61,11 +62,7 @@ public class Model{
             preparar.setString(1, professor.getLogin());
             ResultSet resultado = preparar.executeQuery();
 
-            if(resultado.next()){
-                return true;
-            }else{
-                return false;
-            }
+            return resultado.next();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -93,5 +90,10 @@ public class Model{
             e.printStackTrace();
         }
         return null;
+    }
+    public static int atualizarCargaTotal(){
+        Disciplina disciplina = new Disciplina();
+
+        return disciplina.getCargaTotal();
     }
 }

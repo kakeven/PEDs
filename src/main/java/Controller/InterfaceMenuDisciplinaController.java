@@ -70,10 +70,10 @@ public class InterfaceMenuDisciplinaController implements Initializable{
         labelMensagemErroCampos.setVisible(false); //defien que a mensagem de erro vai começar nao visivel, so se ocorrer erro(mais pra frente)
 
         //listeners para ficar pegando mudancas nos spinners
-        spinnerCargaTeorica.valueProperty().addListener((obs, valorAtigo, valorNovo) -> atualizarCargaTotal());
-        spinnerCargaPratica.valueProperty().addListener((obs, valorAntigo, valorNovo) -> atualizarCargaTotal());
-        spinnerCargaExtensao.valueProperty().addListener((obs, valorAntigo, valorNovo) -> atualizarCargaTotal());
-        spinnerCargaEaD.valueProperty().addListener((obs, valorAntigo, valorNovo) -> atualizarCargaTotal());
+        spinnerCargaTeorica.valueProperty().addListener((obs, valorAtigo, valorNovo) -> Model.atualizarCargaTotal());
+        spinnerCargaPratica.valueProperty().addListener((obs, valorAntigo, valorNovo) -> Model.atualizarCargaTotal());
+        spinnerCargaExtensao.valueProperty().addListener((obs, valorAntigo, valorNovo) -> Model.atualizarCargaTotal());
+        spinnerCargaEaD.valueProperty().addListener((obs, valorAntigo, valorNovo) -> Model.atualizarCargaTotal());
 
 
         //choices
@@ -83,7 +83,7 @@ public class InterfaceMenuDisciplinaController implements Initializable{
         regimeDeOferta.setValue("Semestral");
         estruturaCurricular.setValue("2018");
 
-        atualizarCargaTotal();
+        //atualizarCargaTotal();
     }
 
     //metodos gerais
@@ -92,22 +92,7 @@ public class InterfaceMenuDisciplinaController implements Initializable{
         Stage JanelaAtual = (Stage) botaoVoltar.getScene().getWindow();
         JanelaAtual.setScene(new Scene(ArquivoJavela));
         JanelaAtual.setTitle("Menu");
-
     }
-    private void atualizarCargaTotal(){
-        int spinnerTeorica = spinnerCargaTeorica.getValue();
-        int spinnerPratica = spinnerCargaPratica.getValue();
-        int spinnerExtensao = spinnerCargaExtensao.getValue();
-        int spinnerEaD = spinnerCargaEaD.getValue();
 
-        disciplina.setCargaTeorica(spinnerTeorica);
-        disciplina.setCargaPratica(spinnerPratica);
-        disciplina.setCargaExtensao(spinnerExtensao);
-        disciplina.setCargaEaD(spinnerEaD);
-
-        int total = disciplina.getCargaTotal();
-
-        textoHorasTotais.setText(String.valueOf(total));
-    }
 
 }
