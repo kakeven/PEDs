@@ -11,9 +11,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //inicializa o banco de dados
-        Model.seConectar();
-        Model.criarTabela();
         Model model = new Model();
         InterfaceLogin login = new InterfaceLogin(model); //inicializa o objeto da view, no caso tela de login
         Parent loginChamada = login.getRoot();

@@ -4,10 +4,17 @@ import java.sql.*;
 import Model.Disciplina;
 
 public class Model{
-    private static Connection conectar;
+    private  Connection conectar;
+    private Disciplina disciplina;
+    public Model(){
+        seConectar();
+        criarTabela();
+        Disciplina disciplina= new Disciplina();
+    }
+
 
     //metodos DB
-    public static void seConectar(){
+    public  void seConectar(){
         try{
             if(conectar == null || conectar.isClosed()){
                 conectar = DriverManager.getConnection("jdbc:sqlite:bancoUsuarios.db");
@@ -17,7 +24,7 @@ public class Model{
         }
     }
     //pra ajeitar
-    public static void criarTabela(){
+    public void criarTabela(){
         String sql = """
                 CREATE TABLE IF NOT EXISTS usuarios (
                     id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -32,7 +39,7 @@ public class Model{
             e.printStackTrace();
         }
     }
-    public static void SalvarUsuario(Professor professor){
+    public void SalvarUsuario(Professor professor){
         String inserir = "INSERT INTO usuarios(nome, login, senha) VALUES (?, ?, ?)";
         try(PreparedStatement ps = conectar.prepareStatement(inserir)) {
             ps.setString(1, professor.getNome());
@@ -43,7 +50,7 @@ public class Model{
             e.printStackTrace();
         }
     }
-    public static void ListarUsuarios(){
+    public void ListarUsuarios(){
         String sql = "SELECT * FROM usuarios";
 
         try (Statement state = conectar.createStatement(); ResultSet resultado = state.executeQuery(sql)){
@@ -54,7 +61,7 @@ public class Model{
             e.printStackTrace();
         }
     }
-    public static boolean LoginExiste(Professor professor){
+    public boolean LoginExiste(Professor professor){
         String busca = "SELECT login, senha FROM usuarios WHERE login = ?";
 
         try{
@@ -68,7 +75,7 @@ public class Model{
         }
         return false;
     }
-    public static Professor LoginValido(Professor professor){
+    public Professor LoginValido(Professor professor){
         String busca = "SELECT nome, login, senha FROM usuarios WHERE login = ?";
 
         try{
