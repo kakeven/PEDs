@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Disciplina;
 import View.InterfaceMenu;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -7,10 +8,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
-import static Controller.InterfaceLoginController.professorAtual;
 
 public class InterfaceMenuDisciplinaController implements Initializable{
 
@@ -34,28 +34,52 @@ public class InterfaceMenuDisciplinaController implements Initializable{
     private Label labelHorasTotal;
 
     @FXML
-    private TextField textoHorasTotais;
+    private Label labelMensagemErroCampos;
 
     @FXML
-    private TextField nomeProfessorAtual;
+    private TextField textoHorasTotais;
+
+    //choices
+    @FXML
+    private ChoiceBox estruturaCurricular;
+
+    @FXML
+    private ChoiceBox regimeDeOferta;
 
     //variaveis
+    Disciplina disciplina;
 
 
     //metodo initialize
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
+        disciplina = new Disciplina();
+
+        //spinners
         spinnerCargaTeorica.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 128, 0,2));
         spinnerCargaPratica.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 128, 0, 2));
         spinnerCargaExtensao.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 128, 0, 2));
         spinnerCargaEaD.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 128, 0, 2));
         textoHorasTotais.setText("0");
-        nomeProfessorAtual.setText(professorAtual);
 
+        //labels(usar a mensagem erro posteriormente)
+        labelMensagemErroCampos.setVisible(false); //defien que a mensagem de erro vai começar nao visivel, so se ocorrer erro(mais pra frente)
+
+        //listeners para ficar pegando mudancas nos spinners
         spinnerCargaTeorica.valueProperty().addListener((obs, valorAtigo, valorNovo) -> atualizarCargaTotal());
         spinnerCargaPratica.valueProperty().addListener((obs, valorAntigo, valorNovo) -> atualizarCargaTotal());
         spinnerCargaExtensao.valueProperty().addListener((obs, valorAntigo, valorNovo) -> atualizarCargaTotal());
         spinnerCargaEaD.valueProperty().addListener((obs, valorAntigo, valorNovo) -> atualizarCargaTotal());
+
+
+        //choices
+        regimeDeOferta.getItems().addAll("Semestral", "Anual", "Modular");
+        estruturaCurricular.getItems().addAll("2014", "2018");
+
+        regimeDeOferta.setValue("Semestral");
+        estruturaCurricular.setValue("2018");
+
+        atualizarCargaTotal();
     }
 
     //metodos gerais
@@ -72,7 +96,12 @@ public class InterfaceMenuDisciplinaController implements Initializable{
         int spinnerExtensao = spinnerCargaExtensao.getValue();
         int spinnerEaD = spinnerCargaEaD.getValue();
 
-        int total = spinnerTeorica + spinnerEaD + spinnerExtensao + spinnerPratica;
+        disciplina.setCargaTeorica(spinnerTeorica);
+        disciplina.setCargaPratica(spinnerPratica);
+        disciplina.setCargaExtensao(spinnerExtensao);
+        disciplina.setCargaEaD(spinnerEaD);
+
+        int total = disciplina.getCargaTotal();
 
         textoHorasTotais.setText(String.valueOf(total));
     }

@@ -105,7 +105,7 @@ public class Disciplina {
     public void setProfessor(Professor professor) {this.professor = professor;}
 
     public int getCargaTotal(){
-        return cargaTotal;
+        return cargaEaD + cargaTeorica + cargaPratica + cargaExtensao;
     }
 
     public void addPreRequisito(String preRequisito){this.preRequisito.add(preRequisito);}

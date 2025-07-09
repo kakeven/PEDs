@@ -15,7 +15,7 @@ public class InterfaceMenuDisciplina {
             root = loader.load();
             controller = loader.getController(); // pega o que o FXML criou
         } catch (IOException e) {
-            System.err.println("Erro ao carregar InterfaceLogin.fxml: " + e.getMessage());
+            System.err.println("Erro ao carregar InterfaceMenuDisciplina.fxml: " + e.getMessage());
         }
     }
 

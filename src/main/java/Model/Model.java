@@ -84,7 +84,7 @@ public class Model{
                 String nomeProfessor = resultado.getString("nome");
 
                 if(senha.equals(professor.getSenha())){
-                    return new Professor(nomeProfessor, professor.getLogin(), senha);
+                    return new Professor(nomeProfessor, professor.getLogin(), senha); //retorna um profesor com Nome para exibir mais tarde em alguma view o professor logado atualmente
                 }
             }else{
                 return null;

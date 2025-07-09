@@ -59,15 +59,15 @@ public class InterfaceLoginController implements Initializable {
             String senhaParaMandar = campoSenha.getText();
 
             Professor professor = new Professor(loginParaMandar, senhaParaMandar);
-            String nomeProfessorAtual = Model.LoginValido(professor).getNome(); //talvez dê um nullpointer, n sei ainda
+            Professor professorValidado = Model.LoginValido(professor); //talvez dê um nullpointer, n sei ainda
 
-            if(Model.LoginValido(professor) != null){
-                professorAtual = nomeProfessorAtual;
+            if(professorValidado != null){
+                professorAtual = professorValidado.getNome();
                 Parent arquivoJanela = new InterfaceMenu().getRoot();
                 Stage JanelaAtual = (Stage) botaoLogin.getScene().getWindow();
                 JanelaAtual.setScene(new Scene(arquivoJanela));
                 JanelaAtual.setTitle("Menu");
-            }else if(Model.LoginValido(professor).getLogin() == null || Model.LoginValido(professor).getSenha() == null){
+            }else{
                 lblMensagemErro.setVisible(true);
             }
         } catch (Exception e) {
