@@ -1,7 +1,7 @@
 package Model;
 
 import java.sql.*;
-
+//Gathored
 public class Model{
     private static Connection conectar;
 
