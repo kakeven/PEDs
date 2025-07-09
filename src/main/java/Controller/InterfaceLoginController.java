@@ -64,7 +64,7 @@ public class InterfaceLoginController implements Initializable {
             String senhaParaMandar = campoSenha.getText();
 
             Professor professor = new Professor(loginParaMandar, senhaParaMandar);
-            Professor professorValidado = Model.LoginValido(professor); //talvez dê um nullpointer, n sei ainda
+            Professor professorValidado = model.LoginValido(professor); //talvez dê um nullpointer, n sei ainda
 
             if(professorValidado != null){
                 professorAtual = professorValidado.getNome();
