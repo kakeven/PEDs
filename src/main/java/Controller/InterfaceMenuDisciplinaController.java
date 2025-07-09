@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Disciplina;
+import Model.Model;
 import View.InterfaceMenu;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,7 +49,10 @@ public class InterfaceMenuDisciplinaController implements Initializable{
 
     //variaveis
     Disciplina disciplina;
-
+    private Model model;
+    public void setModel(Model model){
+        this.model=model;
+    }
 
     //metodo initialize
     @FXML
@@ -84,7 +88,7 @@ public class InterfaceMenuDisciplinaController implements Initializable{
 
     //metodos gerais
     public void aoClicarVoltar(){
-        Parent ArquivoJavela = new InterfaceMenu().getRoot();
+        Parent ArquivoJavela = new InterfaceMenu(model).getRoot();
         Stage JanelaAtual = (Stage) botaoVoltar.getScene().getWindow();
         JanelaAtual.setScene(new Scene(ArquivoJavela));
         JanelaAtual.setTitle("Menu");

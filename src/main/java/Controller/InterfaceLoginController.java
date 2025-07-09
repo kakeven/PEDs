@@ -40,11 +40,16 @@ public class InterfaceLoginController implements Initializable {
     //variaveis
     public static String professorAtual;
 
+    private Model model;
+    public void setModel(Model model){
+        this.model=model;
+    }
+
     //metodos
     @FXML
     private void aoClicarNaoTemCadastro(){//muda de tela
         try {
-            Parent arquivoJanela = InterfaceCadastro.InterfaceCadastroChamada();
+            Parent arquivoJanela = new InterfaceCadastro(model).getRoot();
             Stage JanelaAtual = (Stage) link_Cadastro.getScene().getWindow();
             JanelaAtual.setScene(new Scene(arquivoJanela));
             JanelaAtual.setTitle("Cadastro");
@@ -63,7 +68,7 @@ public class InterfaceLoginController implements Initializable {
 
             if(professorValidado != null){
                 professorAtual = professorValidado.getNome();
-                Parent arquivoJanela = new InterfaceMenu().getRoot();
+                Parent arquivoJanela = new InterfaceMenu(model).getRoot();
                 Stage JanelaAtual = (Stage) botaoLogin.getScene().getWindow();
                 JanelaAtual.setScene(new Scene(arquivoJanela));
                 JanelaAtual.setTitle("Menu");

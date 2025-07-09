@@ -13,12 +13,13 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
-import View.InterfaceLogin;
+
 import static Controller.InterfaceLoginController.professorAtual;
 
 
 public class InterfaceCadastroController implements Initializable {
 
+    private Model model;
     @FXML
     public Pane fundoInvisivel;
     public void initialize(URL location, ResourceBundle resources) {
@@ -50,11 +51,14 @@ public class InterfaceCadastroController implements Initializable {
     @FXML
     private Label lblUsuarioJaExiste;
 
+    public void setModel(Model model) {
+        this.model = model;
+    }
 
     //metodos
     public void aoClicarJaTemLogin() {
         try {
-            InterfaceLogin telaLogin = new InterfaceLogin();
+            InterfaceLogin telaLogin = new InterfaceLogin(model);
             Parent arquivoJanela = telaLogin.getRoot();
             Stage janelaAtual = (Stage) link_Login.getScene().getWindow();
             janelaAtual.setScene(new Scene(arquivoJanela));
@@ -81,7 +85,7 @@ public class InterfaceCadastroController implements Initializable {
                 try{
                     Model.SalvarUsuario(professorNovo);//salva o usuario
 
-                    Parent arquivoJanela = new InterfaceMenu().getRoot();
+                    Parent arquivoJanela = new InterfaceMenu(model).getRoot();
                     Stage janelaAtual = (Stage) botaoCadastro.getScene().getWindow();
                     janelaAtual.setScene(new Scene(arquivoJanela));
                     janelaAtual.setTitle("Menu");

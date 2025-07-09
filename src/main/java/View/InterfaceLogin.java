@@ -9,15 +9,14 @@ import java.io.IOException;
 public class InterfaceLogin {
     private Parent root;
     private InterfaceLoginController controller;
-    private Model model;
 
-    public InterfaceLogin() {
+
+    public InterfaceLogin(Model model) {
         try {
-            controller = new InterfaceLoginController();
-            model = new Model();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/interfaceLogin.fxml"));
             root = loader.load();
             controller = loader.getController(); // pega o que o FXML criou
+            controller.setModel(model);
         } catch (IOException e) {
             System.err.println("Erro ao carregar InterfaceLogin.fxml: " + e.getMessage());
         }
