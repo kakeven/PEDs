@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.Disciplina;
+import Model.Model;
 import View.InterfaceMenu;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -46,13 +46,15 @@ public class InterfaceMenuDisciplinaController implements Initializable{
     private ChoiceBox regimeDeOferta;
 
     //variaveis
-    Disciplina disciplina;
+    private Model model;
 
+    public void setModel(Model model){
+        this.model=model;
+    }
 
     //metodo initialize
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        disciplina = new Disciplina();
 
         //spinners
         spinnerCargaTeorica.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 128, 0,2));
@@ -65,10 +67,22 @@ public class InterfaceMenuDisciplinaController implements Initializable{
         labelMensagemErroCampos.setVisible(false); //defien que a mensagem de erro vai começar nao visivel, so se ocorrer erro(mais pra frente)
 
         //listeners para ficar pegando mudancas nos spinners
-        spinnerCargaTeorica.valueProperty().addListener((obs, valorAtigo, valorNovo) -> atualizarCargaTotal());
-        spinnerCargaPratica.valueProperty().addListener((obs, valorAntigo, valorNovo) -> atualizarCargaTotal());
-        spinnerCargaExtensao.valueProperty().addListener((obs, valorAntigo, valorNovo) -> atualizarCargaTotal());
-        spinnerCargaEaD.valueProperty().addListener((obs, valorAntigo, valorNovo) -> atualizarCargaTotal());
+        spinnerCargaTeorica.valueProperty().addListener((obs, valorAtigo, valorNovo) ->{
+            model.setCargaTeorica(valorNovo);
+            atualizarCargaTotal();
+        });
+        spinnerCargaPratica.valueProperty().addListener((obs, valorAntigo, valorNovo) -> {
+            model.setCargaPratica(valorNovo);
+            atualizarCargaTotal();
+        });
+        spinnerCargaExtensao.valueProperty().addListener((obs, valorAntigo, valorNovo) -> {
+            model.setCargaExtensao(valorNovo);
+            atualizarCargaTotal();
+        });
+        spinnerCargaEaD.valueProperty().addListener((obs, valorAntigo, valorNovo) -> {
+            model.setCargaEaD(valorNovo);
+            atualizarCargaTotal();
+        });
 
 
         //choices
@@ -78,31 +92,17 @@ public class InterfaceMenuDisciplinaController implements Initializable{
         regimeDeOferta.setValue("Semestral");
         estruturaCurricular.setValue("2018");
 
-        atualizarCargaTotal();
+        //atualizarCargaTotal();
     }
 
     //metodos gerais
     public void aoClicarVoltar(){
-        Parent ArquivoJavela = new InterfaceMenu().getRoot();
+        Parent ArquivoJavela = new InterfaceMenu(model).getRoot();
         Stage JanelaAtual = (Stage) botaoVoltar.getScene().getWindow();
         JanelaAtual.setScene(new Scene(ArquivoJavela));
         JanelaAtual.setTitle("Menu");
-
     }
     private void atualizarCargaTotal(){
-        int spinnerTeorica = spinnerCargaTeorica.getValue();
-        int spinnerPratica = spinnerCargaPratica.getValue();
-        int spinnerExtensao = spinnerCargaExtensao.getValue();
-        int spinnerEaD = spinnerCargaEaD.getValue();
-
-        disciplina.setCargaTeorica(spinnerTeorica);
-        disciplina.setCargaPratica(spinnerPratica);
-        disciplina.setCargaExtensao(spinnerExtensao);
-        disciplina.setCargaEaD(spinnerEaD);
-
-        int total = disciplina.getCargaTotal()//tentar tirar
-
-        textoHorasTotais.setText(String.valueOf(total));
+        textoHorasTotais.setText(String.valueOf(model.getCargaTotal()));
     }
-
 }
