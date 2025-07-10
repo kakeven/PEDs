@@ -4,6 +4,7 @@ import Model.Model;
 import View.InterfaceMenuDisciplina;
 import javafx.fxml.FXML;
 import View.InterfaceLogin;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -44,9 +45,14 @@ public class InterfaceMenuController implements Initializable {
         JanelaAtual.setTitle("Projeto PEDs");
     }
     public void aoCliclarAddDisciplina(){
-        Parent arquivoJanela = new InterfaceMenuDisciplina(model).getRoot();
-        Stage JanelaAtual = (Stage) botao_addDisciplina.getScene().getWindow();
-        JanelaAtual.setScene(new Scene(arquivoJanela));
-        JanelaAtual.setTitle("Cadastro Disciplina");
+        try{
+            Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/interfaceMenuPED.fxml"));//new InterfaceMenuDisciplina(model).getRoot()
+            Stage JanelaAtual = (Stage) botao_addDisciplina.getScene().getWindow();
+            JanelaAtual.setScene(new Scene(arquivoJanela));
+            JanelaAtual.setTitle("Cadastro Disciplina");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
 }
