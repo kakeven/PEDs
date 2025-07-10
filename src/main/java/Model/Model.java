@@ -101,4 +101,9 @@ public class Model{
         }
         return null;
     }
+
+
+    public int CalcularEstatistica(){
+    return 0;
+    }
 }

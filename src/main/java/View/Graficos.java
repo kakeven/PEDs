@@ -6,6 +6,9 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import Model.Model;
+
+
 
 public class Graficos {
     public class Grafico extends Application {
