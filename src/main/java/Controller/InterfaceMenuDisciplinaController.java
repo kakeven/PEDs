@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -101,7 +100,7 @@ public class InterfaceMenuDisciplinaController implements Initializable{
         disciplina.setCargaExtensao(spinnerExtensao);
         disciplina.setCargaEaD(spinnerEaD);
 
-        int total = disciplina.getCargaTotal();
+        int total = disciplina.getCargaTotal()//tentar tirar
 
         textoHorasTotais.setText(String.valueOf(total));
     }

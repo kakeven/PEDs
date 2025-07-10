@@ -11,10 +11,10 @@ public class InterfaceLogin {
     private InterfaceLoginController controller;
     private Model model;
 
-    public InterfaceLogin() {
+    public InterfaceLogin(Model model) {
         try {
-            controller = new InterfaceLoginController();
-            model = new Model();
+            controller = new InterfaceLoginController(model);
+            //passar model como paremetro
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/interfaceLogin.fxml"));
             root = loader.load();
             controller = loader.getController(); // pega o que o FXML criou

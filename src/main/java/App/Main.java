@@ -12,10 +12,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         //inicializa o banco de dados
+        Model model = new Model();
         Model.seConectar();
         Model.criarTabela();
 
-        InterfaceLogin login = new InterfaceLogin(); //inicializa o objeto da view, no caso tela de login
+        InterfaceLogin login = new InterfaceLogin(model); //inicializa o objeto da view, no caso tela de login
         Parent loginChamada = login.getRoot();
 
         primaryStage.setTitle("Projeto PEDs");

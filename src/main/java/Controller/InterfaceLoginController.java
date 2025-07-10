@@ -4,6 +4,7 @@ import Model.Model;
 import Model.Professor;
 import View.InterfaceMenu;
 import View.InterfaceCadastro;
+import View.InterfaceLogin;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -11,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import javax.swing.text.View;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -36,6 +39,9 @@ public class InterfaceLoginController implements Initializable {
 
     @FXML
     private Label lblMensagemErro;
+
+    private InterfaceLogin viewLogin;
+    private Model modelLogin;
 
     //variaveis
     public static String professorAtual;
