@@ -6,10 +6,32 @@ import Model.Disciplina;
 public class Model{
     private  Connection conectar;
     private Disciplina disciplina;
+
     public Model(){
         seConectar();
         criarTabela();
-        Disciplina disciplina= new Disciplina();
+        this.disciplina = new Disciplina();
+    }
+
+    //metodos disciplina
+    public void setCargaTeorica(int valor) {
+        disciplina.setCargaTeorica(valor);
+    }
+
+    public void setCargaPratica(int valor) {
+        disciplina.setCargaPratica(valor);
+    }
+
+    public void setCargaExtensao(int valor) {
+        disciplina.setCargaExtensao(valor);
+    }
+
+    public void setCargaEaD(int valor) {
+        disciplina.setCargaEaD(valor);
+    }
+
+    public int getCargaTotal() {
+        return disciplina.getCargaTotal();
     }
 
 
