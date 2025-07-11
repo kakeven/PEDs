@@ -9,7 +9,7 @@ public class Model{
     //construtor
     public Model(){
         seConectar();
-        criarTabela();
+        criarTabelaUsuario();
         this.disciplina = new Disciplina();
     }
 
@@ -55,8 +55,8 @@ public class Model{
             e.printStackTrace();
         }
     }
-    //pra ajeitar
-    public void criarTabela(){
+
+    public void criarTabelaUsuario(){
         String sql = """
                 CREATE TABLE IF NOT EXISTS usuarios (
                     id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -134,7 +134,6 @@ public class Model{
         }
         return null;
     }
-
 
     public int CalcularEstatistica(){
         return 0;
