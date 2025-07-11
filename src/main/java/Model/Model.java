@@ -5,12 +5,45 @@ import java.sql.*;
 public class Model{
     private  Connection conectar;
     private Disciplina disciplina;
+
+    //construtor
     public Model(){
         seConectar();
         criarTabela();
-        Disciplina disciplina= new Disciplina();
+        this.disciplina = new Disciplina();
     }
 
+    //sets CargaHoraria Disciplina
+    public void setCargaTeorica(int valor) {
+        if (disciplina != null) {
+            disciplina.setCargaTeorica(valor);
+        }
+    }
+
+    public void setCargaPratica(int valor) {
+        if (disciplina != null) {
+            disciplina.setCargaPratica(valor);
+        }
+    }
+
+    public void setCargaExtensao(int valor) {
+        if (disciplina != null) {
+            disciplina.setCargaExtensao(valor);
+        }
+    }
+
+    public void setCargaEaD(int valor) {
+        if (disciplina != null) {
+            disciplina.setCargaEaD(valor);
+        }
+    }
+
+    public int getCargaTotal() {
+        if (disciplina != null) {
+            return disciplina.getCargaTotal();
+        }
+        return 0;
+    }
 
     //metodos DB
     public  void seConectar(){
@@ -104,6 +137,6 @@ public class Model{
 
 
     public int CalcularEstatistica(){
-    return 0;
+        return 0;
     }
 }
