@@ -46,7 +46,7 @@ public class InterfaceMenuController implements Initializable {
     }
     public void aoCliclarAddDisciplina(){
         try{
-            Parent arquivoJanela = new InterfaceMenuDisciplina(model).getRoot();
+            Parent arquivoJanela = FXMLLoader.load(getClass().getResource("/View/interfaceMenuPED.fxml"));//new InterfaceMenuDisciplina(model).getRoot()
             Stage JanelaAtual = (Stage) botao_addDisciplina.getScene().getWindow();
             JanelaAtual.setScene(new Scene(arquivoJanela));
             JanelaAtual.setTitle("Cadastro Disciplina");

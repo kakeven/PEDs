@@ -3,7 +3,7 @@ package Model;
 import java.sql.*;
 //Gathored
 public class Model{
-    private  Connection conectar;
+    private Connection conectar;
     private Disciplina disciplina;
 
     //construtor
@@ -134,7 +134,6 @@ public class Model{
         }
         return null;
     }
-
     public int CalcularEstatistica(){
         return 0;
     }

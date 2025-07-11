@@ -49,7 +49,7 @@ public class InterfaceMenuPEDController implements Initializable {
         //tira alguns botoes da toolbar(q permitira "executar" comandos e outras paradinha)(deixa mais rapido, eu acho)
         Platform.runLater(() -> {
             //setar fontes(isso aq NAO TA FUNCIONANDO AINDA, VOU ARRUMAR)
-            String fonteInicial = "<!DOCTYPE html><html><head>" + "<style>" + "body { font-family: 'Times New Roman', serif; font-size: 14px; }" + "p { font-family: 'Times New Roman', serif; font-size: 14px; }" + "li { font-family: 'Times New Roman', serif; font-size: 14px; }" + "</style>" + "</head><body><p></p></body></html>";
+            String fonteInicial = "<!DOCTYPE html><html><head>" + "<style>" + "body { font-family: 'Comic Sans', serif; font-size: 14px; }" + "p { font-family: 'Times New Roman', serif; font-size: 14px; }" + "li { font-family: 'Times New Roman', serif; font-size: 14px; }" + "</style>" + "</head><body><p></p></body></html>";
 
             justificativaEditor.setHtmlText(fonteInicial);
             objetivosEditor.setHtmlText(fonteInicial);

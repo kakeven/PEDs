@@ -30,10 +30,16 @@ public class InterfaceMenuDisciplinaController implements Initializable{
     private Button botaoVoltar;
 
     @FXML
+    private Button botaoAdicionar;
+
+    @FXML
     private Label labelHorasTotal;
 
     @FXML
     private Label labelMensagemErroCampos;
+
+    @FXML
+    private Label labelMensagemAddComSucesso;
 
     @FXML
     private TextField textoHorasTotais;
@@ -65,6 +71,7 @@ public class InterfaceMenuDisciplinaController implements Initializable{
 
         //labels(usar a mensagem erro posteriormente)
         labelMensagemErroCampos.setVisible(false); //defien que a mensagem de erro vai começar nao visivel, so se ocorrer erro(mais pra frente)
+        labelMensagemAddComSucesso.setVisible(false);
 
         //listeners para ficar pegando mudancas nos spinners
         spinnerCargaTeorica.valueProperty().addListener((obs, valorAtigo, valorNovo) ->{
@@ -105,4 +112,8 @@ public class InterfaceMenuDisciplinaController implements Initializable{
     private void atualizarCargaTotal(){
         textoHorasTotais.setText(String.valueOf(model.getCargaTotal()));
     }
+    public void aoClicarAdicionar(){
+        ;
+    }
+
 }
