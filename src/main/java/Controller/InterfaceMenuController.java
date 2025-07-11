@@ -21,18 +21,19 @@ public class InterfaceMenuController implements Initializable {
     //fundos
     @FXML
     public Pane fundoInvisivel;
-    public void initialize(URL location, ResourceBundle resources) {
-        fundoInvisivel.requestFocus();
-    }
 
-
-    //botoes
     @FXML
     private Button botao_Logout;
+
     @FXML
     private Button botao_addDisciplina;
 
     private Model model;
+
+    public void initialize(URL location, ResourceBundle resources) {
+        fundoInvisivel.requestFocus();
+    }
+
     public void setModel(Model model) {
         this.model=model;
     }

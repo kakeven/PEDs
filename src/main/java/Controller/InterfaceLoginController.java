@@ -41,6 +41,7 @@ public class InterfaceLoginController implements Initializable {
     private Label lblMensagemErro;
 
     private InterfaceLogin viewLogin;
+
     private Model modelLogin;
 
     //variaveis
