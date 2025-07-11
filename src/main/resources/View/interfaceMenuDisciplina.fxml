@@ -22,8 +22,7 @@
             <Button layoutX="327.0" layoutY="436.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="Limpar" />
             <Button layoutX="469.0" layoutY="436.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="Remover" />
             <Button fx:id="botaoVoltar" layoutX="674.0" layoutY="458.0" mnemonicParsing="false" onAction="#aoClicarVoltar" prefHeight="17.0" prefWidth="90.0" text="Voltar" />
-            <ChoiceBox fx:id="regimeDeOferta" layoutX="571.0" layoutY="103.0" prefHeight="25.0" prefWidth="160.0" />
-            <ChoiceBox fx:id="estruturaCurricular" layoutX="204.0" layoutY="185.0" prefHeight="25.0" prefWidth="100.0" />
+            <ChoiceBox layoutX="571.0" layoutY="103.0" prefHeight="25.0" prefWidth="160.0" />
             <Label layoutX="40.0" layoutY="61.0" prefHeight="25.0" prefWidth="47.0" text="Nome:">
                <font>
                   <Font size="14.0" />
@@ -74,6 +73,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
+            <ChoiceBox layoutX="204.0" layoutY="185.0" prefHeight="25.0" prefWidth="100.0" />
             <Label layoutX="33.0" layoutY="223.0" prefHeight="25.0" prefWidth="103.0" text="Carga Extensão:">
                <font>
                   <Font size="14.0" />
@@ -106,7 +106,12 @@
             </Label>
             <TextField fx:id="textoHorasTotais" editable="false" focusTraversable="false" layoutX="571.0" layoutY="144.0" prefHeight="25.0" prefWidth="160.0" />
             <Label fx:id="labelHorasTotal" layoutX="693.0" layoutY="149.0" prefHeight="17.0" prefWidth="32.0" text="Horas" />
-            <Label fx:id="labelMensagemErroCampos" focusTraversable="false" layoutX="262.0" layoutY="410.0" text="Preencha todos os campos obrigatórios!" textFill="RED">
+            <Label focusTraversable="false" layoutX="264.0" layoutY="411.0" text="Preencha todos os campos obrigatórios!" textFill="RED">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label focusTraversable="false" layoutX="264.0" layoutY="411.0" text="Disciplina adicionada com Sucesso! " textFill="#00ff0a">
                <font>
                   <Font size="14.0" />
                </font>
