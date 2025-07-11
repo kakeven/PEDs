@@ -17,14 +17,14 @@
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="778.0">
          <children>
-            <VBox layoutX="-13.0"/>
+            <VBox layoutX="-13.0" />
             <TextField layoutX="84.0" layoutY="63.0" prefHeight="25.0" prefWidth="221.0" />
             <TextField layoutX="605.0" layoutY="63.0" prefHeight="25.0" prefWidth="126.0" />
             <Button fx:id="botaoAdicionar" layoutX="185.0" layoutY="436.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="Adicionar" />
             <Button layoutX="327.0" layoutY="436.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="Limpar" />
             <Button layoutX="469.0" layoutY="436.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="Remover" />
-            <Button fx:id="botaoVoltar" onAction="#aoClicarVoltar" layoutX="674.0" layoutY="458.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="90.0" text="Voltar" />
-            <ChoiceBox layoutX="571.0" layoutY="103.0" prefHeight="25.0" prefWidth="160.0" />
+            <Button fx:id="botaoVoltar" layoutX="674.0" layoutY="458.0" mnemonicParsing="false" onAction="#aoClicarVoltar" prefHeight="17.0" prefWidth="90.0" text="Voltar" />
+            <ChoiceBox fx:id="regimeDeOferta" layoutX="571.0" layoutY="103.0" prefHeight="25.0" prefWidth="160.0" />
             <Label layoutX="40.0" layoutY="61.0" prefHeight="25.0" prefWidth="47.0" text="Nome:">
                <font>
                   <Font size="14.0" />
@@ -75,7 +75,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ChoiceBox layoutX="204.0" layoutY="185.0" prefHeight="25.0" prefWidth="100.0" />
+            <ChoiceBox fx:id="estruturaCurricular" layoutX="204.0" layoutY="185.0" prefHeight="25.0" prefWidth="100.0" />
             <Label layoutX="33.0" layoutY="223.0" prefHeight="25.0" prefWidth="103.0" text="Carga Extensão:">
                <font>
                   <Font size="14.0" />
