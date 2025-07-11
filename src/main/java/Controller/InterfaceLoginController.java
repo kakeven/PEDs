@@ -40,10 +40,6 @@ public class InterfaceLoginController implements Initializable {
     @FXML
     private Label lblMensagemErro;
 
-    private InterfaceLogin viewLogin;
-
-    private Model modelLogin;
-
     //variaveis
     public static String professorAtual;
 
