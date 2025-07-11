@@ -1,8 +1,6 @@
 
 package Model;
 
-import java.util.ArrayList;
-
 public class Disciplina {
     private String nome;
     private String codigo;
@@ -108,11 +106,11 @@ public class Disciplina {
         return cargaEaD + cargaTeorica + cargaPratica + cargaExtensao;
     }
 
-    public void setPreRequisito(String preRequisito){this.preRequisito = preRequisito;}
+    public void setPreRequisitos(String preRequisito){this.preRequisito = preRequisito;}
 
     public String getPreRequisito(){return preRequisito;}
 
-    public void seCoRequisito(String coRequisito){
+    public void setCoRequisito(String coRequisito){
         this.coRequisito= coRequisito;
     }
 

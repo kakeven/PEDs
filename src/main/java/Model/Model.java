@@ -143,8 +143,57 @@ public class Model{
         return 0;
     }
 
+
+    //Verificacao Disciplina
+    public boolean verificarDisciplina(
+            String nome,
+            String codigo,
+            int cargaTeorica,
+            int cargaPratica,
+            int cargaEaD,
+            int cargaExtensao,
+            Professor professor,
+            String estruturaCurricular,
+            String obrigatoriedade,
+            String preRequisitos,
+            String coRequisito,
+            String regimeDeOferta,
+            String equivalencias
+            ){
+        if(
+            !nome.isBlank()
+            && !codigo.isBlank()
+            && cargaTeorica != 0
+            && cargaPratica !=0
+            && cargaEaD != 0
+            && cargaExtensao !=0
+            && !estruturaCurricular.isBlank()
+            && !obrigatoriedade.isBlank()
+            && !preRequisitos.isBlank()
+            && !coRequisito.isBlank()
+            && !regimeDeOferta.isBlank()
+            && !equivalencias.isBlank()
+        ){
+            Disciplina disciplina = new Disciplina();
+             disciplina.setCodigo(codigo);
+             disciplina.setCargaTeorica(cargaTeorica);
+             disciplina.setCargaPratica(cargaPratica);
+             disciplina.setCargaEaD(cargaEaD);
+             disciplina.setCargaExtensao(cargaExtensao);
+             disciplina.setEstruturaCurricular(estruturaCurricular);
+             disciplina.setObrigatoriedade(obrigatoriedade);
+             disciplina.setPreRequisitos(preRequisitos);
+             disciplina.setCoRequisito(coRequisito);
+             disciplina.setRegimeDeOferta(regimeDeOferta);
+             disciplina.setEquivalencias(equivalencias);
+             disciplina.setProfessor(professor);
+             return true;
+        } else {
+            return false;
+        }
+    }
     //DB Disciplina
-    public  void seConectarDisciplina(){
+    public void seConectarDisciplina(){
         try{
             if(conectar == null || conectar.isClosed()){
                 conectar = DriverManager.getConnection("jdbc:sqlite:bancoDisciplina.db");
