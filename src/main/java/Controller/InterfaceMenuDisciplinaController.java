@@ -113,7 +113,7 @@ public class InterfaceMenuDisciplinaController implements Initializable{
         textoHorasTotais.setText(String.valueOf(model.getCargaTotal()));
     }
     public void aoClicarAdicionar(){
-        ;
+        //model.verificarDisciplina();
     }
 
 }
