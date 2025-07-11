@@ -1,8 +1,6 @@
 
 package Model;
 
-import java.util.ArrayList;
-
 public class Disciplina {
     private String nome;
     private String codigo;
@@ -14,16 +12,14 @@ public class Disciplina {
     private Professor professor;
     private String estruturaCurricular;
     private String obrigatoriedade;
-    private ArrayList<String> preRequisito;
-    private ArrayList<String> coRequisito;
+    private String preRequisito;
+    private String coRequisito;
     private String regimeDeOferta;
-    private ArrayList<String> equivalencias;
+    private String equivalencias;
 
     public Disciplina(){
         super();
-        ArrayList<String> preRequisito = new ArrayList<>();
-        ArrayList<String> coRequisito = new ArrayList<>();
-        ArrayList<String> equivalencias = new ArrayList<>();
+
         cargaTeorica = 0;
         cargaPratica = 0;
         cargaEaD = 0;
@@ -44,9 +40,9 @@ public class Disciplina {
 
     public String getCargaTeorica() {
         if(cargaTeorica == 0){
-            return "-";
+            return "---";
         } else {
-            return String.format("%d",cargaTeorica);
+            return String.format("%dh",cargaTeorica);
         }
     }
 
@@ -54,7 +50,13 @@ public class Disciplina {
         this.cargaTeorica = cargaTeorica;
     }
 
-    public int getCargaPratica() {return cargaPratica;}
+    public String getCargaPratica() {
+        if(cargaPratica == 0){
+            return "---";
+        } else {
+            return String.format("%dh",cargaPratica);
+        }
+    }
 
     public void setCargaPratica(int cargaPratica) {
         this.cargaPratica = cargaPratica;
@@ -62,9 +64,9 @@ public class Disciplina {
 
     public String getCargaEaD() {
         if(cargaEaD == 0){
-            return "-";
+            return "---";
         } else {
-            return String.format("%d",cargaEaD);
+            return String.format("%dh",cargaEaD);
         }
     }
 
@@ -74,7 +76,7 @@ public class Disciplina {
 
     public String getCargaExtensao() {
         if(cargaExtensao == 0){
-            return "-";
+            return "---";
         } else {
             return String.format("%d",cargaExtensao);
         }
@@ -104,23 +106,23 @@ public class Disciplina {
         return cargaEaD + cargaTeorica + cargaPratica + cargaExtensao;
     }
 
-    public void addPreRequisito(String preRequisito){this.preRequisito.add(preRequisito);}
+    public void setPreRequisitos(String preRequisito){this.preRequisito = preRequisito;}
 
-    public ArrayList<String> getPreRequisito(){return preRequisito;}
+    public String getPreRequisito(){return preRequisito;}
 
-    public void addCoRequisito(String coRequisito){
-        this.coRequisito.add(coRequisito);
+    public void setCoRequisito(String coRequisito){
+        this.coRequisito= coRequisito;
     }
 
-    public ArrayList<String> getCoRequisito(){
+    public String getCoRequisito(){
         return coRequisito;
     }
 
-    public void addEquivalencias(String equivalencias){
-        this.equivalencias.add(equivalencias);
+    public void setEquivalencias(String equivalencias){
+        this.equivalencias= equivalencias;
     }
 
-    public ArrayList<String> getEquivalencias(){
+    public String getEquivalencias(){
         return equivalencias;
     }
 
