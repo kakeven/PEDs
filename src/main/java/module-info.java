@@ -8,6 +8,7 @@ module peds_tentativa_2 {
     requires jdk.jdi;
     requires java.sql;
     requires java.compiler;
+    requires java.desktop;
 
 
     exports App;

@@ -28,18 +28,18 @@
                </font>
             </Label>
             <ChoiceBox layoutX="129.0" layoutY="199.0" prefHeight="25.0" prefWidth="240.0" />
-            <Label layoutX="103.0" layoutY="243.0" prefHeight="25.0" text="Semestre:">
+            <Label layoutX="101.0" layoutY="243.0" prefHeight="25.0" text="Semestre:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Spinner layoutX="176.0" layoutY="243.0" prefHeight="25.0" prefWidth="193.0" />
-            <Label layoutX="293.0" layoutY="246.0" text="Semestre" />
-            <HTMLEditor htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="24.0" layoutY="410.0" prefHeight="240.0" prefWidth="506.0" />
-            <HTMLEditor htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="24.0" layoutY="680.0" prefHeight="240.0" prefWidth="506.0" />
-            <HTMLEditor htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="1120.0" layoutY="410.0" prefHeight="240.0" prefWidth="506.0" />
-            <HTMLEditor htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="572.0" layoutY="680.0" prefHeight="240.0" prefWidth="506.0" />
-            <HTMLEditor htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="572.0" layoutY="410.0" prefHeight="240.0" prefWidth="506.0" />
+            <HTMLEditor fx:id="justificativaEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="24.0" layoutY="410.0" prefHeight="240.0" prefWidth="506.0" />
+            <HTMLEditor fx:id="ementaEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="24.0" layoutY="680.0" prefHeight="240.0" prefWidth="506.0" />
+            <HTMLEditor fx:id="sistemaDeAvaliacaoEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="1120.0" layoutY="410.0" prefHeight="240.0" prefWidth="506.0" />
+            <HTMLEditor fx:id="metodologiaEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="572.0" layoutY="680.0" prefHeight="240.0" prefWidth="506.0" />
+            <HTMLEditor fx:id="objetivosEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="572.0" layoutY="410.0" prefHeight="240.0" prefWidth="506.0" />
+            <HTMLEditor fx:id="atividadesDoDiscenteEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="1120.0" layoutY="680.0" prefHeight="240.0" prefWidth="506.0" />
+            <HTMLEditor fx:id="bibliografiaEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="1120.0" layoutY="134.0" prefHeight="240.0" prefWidth="506.0" />
             <Button layoutX="572.0" layoutY="938.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" text="Remover">
                <font>
                   <Font size="14.0" />
@@ -66,15 +66,13 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <HTMLEditor htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="1120.0" layoutY="680.0" prefHeight="240.0" prefWidth="506.0" />
-            <HTMLEditor htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="1120.0" layoutY="134.0" prefHeight="240.0" prefWidth="506.0" />
-            <ListView fixedCellSize="0.0" layoutX="430.0" layoutY="136.0" prefHeight="240.0" prefWidth="669.0" />
-            <Button layoutX="990.0" layoutY="89.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="109.0" text="Adicionar Aula">
+            <ListView fixedCellSize="0.0" layoutX="409.0" layoutY="136.0" prefHeight="240.0" prefWidth="669.0" />
+            <Button layoutX="969.0" layoutY="89.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="109.0" text="Adicionar Aula">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <TextField layoutX="530.0" layoutY="89.0" prefHeight="40.0" prefWidth="361.0" />
+            <TextField layoutX="509.0" layoutY="89.0" prefHeight="40.0" prefWidth="361.0" />
             <Label layoutX="24.0" layoutY="375.0" prefHeight="35.0" prefWidth="81.0" text="Justificativa:" textAlignment="CENTER">
                <font>
                   <Font size="15.0" />
@@ -119,23 +117,30 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label layoutX="433.0" layoutY="60.0" prefHeight="35.0" prefWidth="36.0" text="Data:" textAlignment="CENTER">
+            <Label layoutX="412.0" layoutY="60.0" prefHeight="35.0" prefWidth="36.0" text="Data:" textAlignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Spinner layoutX="891.0" layoutY="89.0" prefHeight="40.0" prefWidth="99.0" />
-            <Label layoutX="891.0" layoutY="60.0" prefHeight="35.0" prefWidth="99.0" text="Carga Horária:" textAlignment="CENTER">
+            <Spinner layoutX="870.0" layoutY="89.0" prefHeight="40.0" prefWidth="99.0" />
+            <Label layoutX="870.0" layoutY="60.0" prefHeight="35.0" prefWidth="99.0" text="Carga Horária:" textAlignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <DatePicker layoutX="430.0" layoutY="89.0" prefHeight="40.0" prefWidth="100.0" />
-            <Label layoutX="532.0" layoutY="60.0" prefHeight="35.0" prefWidth="36.0" text="Aula:" textAlignment="CENTER">
+            <DatePicker layoutX="409.0" layoutY="89.0" prefHeight="40.0" prefWidth="100.0" />
+            <Label layoutX="511.0" layoutY="60.0" prefHeight="35.0" prefWidth="36.0" text="Aula:" textAlignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
+            <TextField layoutX="173.0" layoutY="243.0" prefHeight="25.0" prefWidth="196.0" />
+            <Label layoutX="107.0" layoutY="290.0" prefHeight="25.0" text="Unidade:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField layoutX="174.0" layoutY="290.0" prefHeight="25.0" prefWidth="196.0" />
          </children>
       </AnchorPane>
    </children>

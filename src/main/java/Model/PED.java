@@ -4,6 +4,7 @@ package Model;
 import java.util.ArrayList;
 
 public class PED {
+    private String unidade;
     private Professor professor;
     private Disciplina disciplina;
     private String curso;
@@ -20,6 +21,14 @@ public class PED {
 
     public PED(){
         ArrayList<Aula> aulas = new ArrayList<>();
+    }
+
+    public String getUnidade() {
+        return unidade;
+    }
+
+    public void setUnidade(String unidade) {
+        this.unidade = unidade;
     }
 
     public String getCurso() {

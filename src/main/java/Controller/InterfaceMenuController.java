@@ -53,6 +53,5 @@ public class InterfaceMenuController implements Initializable {
         }catch(Exception e){
             e.printStackTrace();
         }
-
     }
 }
