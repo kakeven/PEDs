@@ -13,15 +13,14 @@
 
 <?import javafx.scene.layout.Pane?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="778.0" style="-fx-background-color: #E6F0FA;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceMenuDisciplinaController">
-   <Pane fx:id="fundoInvisivel" prefWidth="0" prefHeight="0"
-         focusTraversable="true" />
+
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="778.0">
          <children>
             <VBox layoutX="-13.0" />
             <TextField layoutX="84.0" layoutY="63.0" prefHeight="25.0" prefWidth="221.0" />
             <TextField layoutX="605.0" layoutY="63.0" prefHeight="25.0" prefWidth="126.0" />
-            <Button layoutX="185.0" layoutY="436.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="Adicionar" />
+            <Button fx:id="botaoAdicionar" layoutX="185.0" layoutY="436.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="Adicionar" />
             <Button layoutX="327.0" layoutY="436.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="Limpar" />
             <Button layoutX="469.0" layoutY="436.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="Remover" />
             <Button fx:id="botaoVoltar" layoutX="674.0" layoutY="458.0" mnemonicParsing="false" onAction="#aoClicarVoltar" prefHeight="17.0" prefWidth="90.0" text="Voltar" />
@@ -109,12 +108,12 @@
             </Label>
             <TextField fx:id="textoHorasTotais" editable="false" focusTraversable="false" layoutX="571.0" layoutY="144.0" prefHeight="25.0" prefWidth="160.0" />
             <Label fx:id="labelHorasTotal" layoutX="693.0" layoutY="149.0" prefHeight="17.0" prefWidth="32.0" text="Horas" />
-            <Label focusTraversable="false" layoutX="264.0" layoutY="411.0" text="Preencha todos os campos obrigatórios!" textFill="RED">
+            <Label fx:id="labelMensagemErroCampos" focusTraversable="false" layoutX="264.0" layoutY="411.0" text="Preencha todos os campos obrigatórios!" textFill="RED">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label focusTraversable="false" layoutX="264.0" layoutY="411.0" text="Disciplina adicionada com Sucesso! " textFill="#00ff0a">
+            <Label fx:id="labelMensagemAddComSucesso" focusTraversable="false" layoutX="264.0" layoutY="411.0" text="Disciplina adicionada com Sucesso! " textFill="#00ff0a">
                <font>
                   <Font size="14.0" />
                </font>
