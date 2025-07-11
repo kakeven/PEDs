@@ -1,39 +1,49 @@
 package Model;
 
 import java.sql.*;
-import Model.Disciplina;
-
+//Gathored
 public class Model{
     private  Connection conectar;
     private Disciplina disciplina;
 
+    //construtor
     public Model(){
         seConectar();
         criarTabela();
         this.disciplina = new Disciplina();
     }
 
-    //metodos disciplina
+    //sets CargaHoraria Disciplina
     public void setCargaTeorica(int valor) {
-        disciplina.setCargaTeorica(valor);
+        if (disciplina != null) {
+            disciplina.setCargaTeorica(valor);
+        }
     }
 
     public void setCargaPratica(int valor) {
-        disciplina.setCargaPratica(valor);
+        if (disciplina != null) {
+            disciplina.setCargaPratica(valor);
+        }
     }
 
     public void setCargaExtensao(int valor) {
-        disciplina.setCargaExtensao(valor);
+        if (disciplina != null) {
+            disciplina.setCargaExtensao(valor);
+        }
     }
 
     public void setCargaEaD(int valor) {
-        disciplina.setCargaEaD(valor);
+        if (disciplina != null) {
+            disciplina.setCargaEaD(valor);
+        }
     }
 
     public int getCargaTotal() {
-        return disciplina.getCargaTotal();
+        if (disciplina != null) {
+            return disciplina.getCargaTotal();
+        }
+        return 0;
     }
-
 
     //metodos DB
     public  void seConectar(){
@@ -91,7 +101,11 @@ public class Model{
             preparar.setString(1, professor.getLogin());
             ResultSet resultado = preparar.executeQuery();
 
-            return resultado.next();
+            if(resultado.next()){
+                return true;
+            }else{
+                return false;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -120,9 +134,9 @@ public class Model{
         }
         return null;
     }
-    public static int atualizarCargaTotal(){
-        Disciplina disciplina = new Disciplina();
 
-        return disciplina.getCargaTotal();
+
+    public int CalcularEstatistica(){
+        return 0;
     }
 }

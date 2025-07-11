@@ -51,14 +51,12 @@ public class Disciplina {
     }
 
     public void setCargaTeorica(int cargaTeorica) {
-        cargaTotal+=cargaTeorica;
         this.cargaTeorica = cargaTeorica;
     }
 
     public int getCargaPratica() {return cargaPratica;}
 
     public void setCargaPratica(int cargaPratica) {
-        cargaTotal+=cargaPratica;
         this.cargaPratica = cargaPratica;
     }
 
@@ -71,7 +69,6 @@ public class Disciplina {
     }
 
     public void setCargaEaD(int cargaEaD) {
-        cargaTotal+=cargaEaD;
         this.cargaEaD = cargaEaD;
     }
 
@@ -84,7 +81,6 @@ public class Disciplina {
     }
 
     public void setCargaExtensao(int cargaExtensao) {
-        cargaTotal+=cargaExtensao;
         this.cargaExtensao = cargaExtensao;
     }
 

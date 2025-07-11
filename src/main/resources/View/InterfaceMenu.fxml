@@ -29,7 +29,7 @@
             <RowConstraints maxHeight="123.0" minHeight="10.0" prefHeight="123.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="botao_exibirPEDs" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" text="Exibir PEDs" GridPane.rowIndex="2">
+            <Button fx:id="botao_exibirPEDs" mnemonicParsing="false" prefHeight="25.0" prefWidth="128.0" text="Exibir PEDs" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="26.0" top="10.0" />
                </GridPane.margin>
@@ -42,24 +42,19 @@
                   <Insets left="250.0" />
                </GridPane.margin>
             </Label>
-            <Button fx:id="botao_addDisciplina" onAction="#aoCliclarAddDisciplina" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" text="Adicionar Disciplina" GridPane.rowIndex="3">
+            <Button fx:id="botao_addDisciplina" onAction="#aoCliclarAddDisciplina" mnemonicParsing="false" prefHeight="25.0" prefWidth="128.0" text="Adicionar Disciplina" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets bottom="42.0" left="26.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="botao_Logout" onAction="#aoClicarLogout" mnemonicParsing="false" text="Logout" GridPane.rowIndex="6">
+            <Button fx:id="botao_Logout" mnemonicParsing="false" text="Logout" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets left="15.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="botao_EditarPEDs" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" text="Editar PEDs" GridPane.rowIndex="4">
+            <Button fx:id="botao_Portar_PDF" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" text="Portar para PDF" GridPane.rowIndex="3">
                <GridPane.margin>
-                  <Insets bottom="90.0" left="26.0" />
-               </GridPane.margin>
-            </Button>
-            <Button fx:id="botao_Portar_PDF" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" text="Portar para PDF" GridPane.rowIndex="4">
-               <GridPane.margin>
-                  <Insets bottom="22.0" left="26.0" />
+                  <Insets bottom="-25.0" left="26.0" />
                </GridPane.margin>
             </Button>
          </children>
