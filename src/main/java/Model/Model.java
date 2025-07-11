@@ -8,8 +8,10 @@ public class Model{
 
     //construtor
     public Model(){
-        seConectar();
+        seConectarUsuario();
+        seConectarDisciplina();
         criarTabelaUsuario();
+        criarTabelaDisciplina();
         this.disciplina = new Disciplina();
     }
 
@@ -46,7 +48,10 @@ public class Model{
     }
 
     //metodos DB
-    public  void seConectar(){
+
+
+    //DB Usuário
+    public  void seConectarUsuario(){
         try{
             if(conectar == null || conectar.isClosed()){
                 conectar = DriverManager.getConnection("jdbc:sqlite:bancoUsuarios.db");
@@ -55,7 +60,6 @@ public class Model{
             e.printStackTrace();
         }
     }
-
     public void criarTabelaUsuario(){
         String sql = """
                 CREATE TABLE IF NOT EXISTS usuarios (
@@ -138,4 +142,99 @@ public class Model{
     public int CalcularEstatistica(){
         return 0;
     }
+
+    //DB Disciplina
+    public  void seConectarDisciplina(){
+        try{
+            if(conectar == null || conectar.isClosed()){
+                conectar = DriverManager.getConnection("jdbc:sqlite:bancoDisciplina.db");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void criarTabelaDisciplina(){
+        String sql = """
+                CREATE TABLE IF NOT EXISTS disciplina (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                    nome TEXT NOT NULL,
+                    codigo TEXT NOT NULL,
+                    cargaTeorica TEXT NOT NULL,
+                    cargaPratica TEXT NOT NULL,
+                    cargaEaD TEXT NOT NULL,
+                    cargaExtensao TEXT NOT NULL,
+                    cargaTotal INTEGER,
+                    professor TEXT NOT NULL,
+                    estruturaCurricular TEXT NOT NULL,
+                    obrigatoriedade TEXT NOT NULL,
+                    preRequisito TEXT NOT NULL,
+                    coRequisito TEXT NOT NULL,
+                    regimeDeOferta TEXT NOT NULL,
+                    equivalencias TEXT NOT NULL
+                )
+                """;
+        try (Statement state = conectar.createStatement()){
+            state.execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void SalvarDisciplina(Disciplina disciplina){
+        String inserir = """
+                INSERT INTO disciplina(
+                nome,
+                codigo,
+                cargaTeorica,
+                cargaPratica,
+                cargaEaD,
+                cargaExtensao,
+                cargaTotal,
+                professor,
+                estruturaCurricular,
+                obrigatoriedade,
+                preRequisito,
+                coRequisito,
+                regimeDeOferta,
+                equivalencias
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
+        try(PreparedStatement ps = conectar.prepareStatement(inserir)) {
+            ps.setString(1, disciplina.getNome());
+            ps.setString(2, disciplina.getCodigo());
+            ps.setString(3, disciplina.getCargaTeorica());
+            ps.setString(4, disciplina.getCargaPratica());
+            ps.setString(5, disciplina.getCargaEaD());
+            ps.setString(6, disciplina.getCargaExtensao());
+            ps.setInt(7, disciplina.getCargaTotal());
+            ps.setString(8, disciplina.getProfessor().getLogin());
+            ps.setString(9, disciplina.getCodigo());
+            ps.setString(10, disciplina.getEstruturaCurricular());
+            ps.setString(11, disciplina.getObrigatoriedade());
+            ps.setString(12, disciplina.getPreRequisito());
+            ps.setString(13, disciplina.getCoRequisito());
+            ps.setString(14, disciplina.getRegimeDeOferta());
+            ps.setString(15, disciplina.getEquivalencias());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public boolean DisciplinaExiste(Disciplina disciplina){
+        String busca = "SELECT codigo FROM disciplina WHERE codigo = ?";
+
+        try{
+            PreparedStatement preparar = conectar.prepareStatement(busca);
+            preparar.setString(1, disciplina.getCodigo());
+            ResultSet resultado = preparar.executeQuery();
+
+            if(resultado.next()){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
+
