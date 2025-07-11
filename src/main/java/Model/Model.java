@@ -187,6 +187,7 @@ public class Model{
              disciplina.setRegimeDeOferta(regimeDeOferta);
              disciplina.setEquivalencias(equivalencias);
              disciplina.setProfessor(professor);
+             SalvarDisciplina(disciplina);
              return true;
         } else {
             return false;
