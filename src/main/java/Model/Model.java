@@ -452,4 +452,14 @@ public class Model{
         }
         return false;
     }
+
+    public boolean addAula(ArrayList<Aula> aulas){
+        Aula aulaAdicionar = aulas.get(aulas.size()-1);
+        for(Aula aula : aulas){
+            if(aula.getData().equals(aulaAdicionar.getData())){
+                return false;
+            }
+        }
+        return true;
+    }
 }
