@@ -26,7 +26,7 @@ public class InterfaceMenuController implements Initializable {
     private Button botao_Logout;
 
     @FXML
-    private Button botao_addDisciplina;
+    private Button botaoAddDisciplina;
 
     private Model model;
 
@@ -48,7 +48,7 @@ public class InterfaceMenuController implements Initializable {
     public void aoCliclarAddDisciplina(){
         try{
             Parent arquivoJanela = new InterfaceMenuDisciplina(model).getRoot();
-            Stage JanelaAtual = (Stage) botao_addDisciplina.getScene().getWindow();
+            Stage JanelaAtual = (Stage) botaoAddDisciplina.getScene().getWindow();
             JanelaAtual.setScene(new Scene(arquivoJanela));
             JanelaAtual.setTitle("Cadastro Disciplina");
         }catch(Exception e){

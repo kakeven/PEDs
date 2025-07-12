@@ -19,6 +19,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(loginChamada, 600, 400)); //edita tamanho só
         primaryStage.show();
         primaryStage.setResizable(false);
+
     }
 
     public static void main(String[] args) {

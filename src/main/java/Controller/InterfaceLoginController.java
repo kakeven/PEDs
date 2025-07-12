@@ -21,6 +21,7 @@ public class InterfaceLoginController implements Initializable {
     @FXML
     public Pane fundoInvisivel;
     public void initialize(URL location, ResourceBundle resources) {
+        lblMensagemErro.setVisible(false);
         fundoInvisivel.requestFocus();
     }
 
@@ -28,7 +29,7 @@ public class InterfaceLoginController implements Initializable {
     private Button botaoLogin;
 
     @FXML
-    private Hyperlink link_Cadastro;
+    private Hyperlink linkCadastro;
 
     //variaveis de campos
     @FXML
@@ -53,7 +54,7 @@ public class InterfaceLoginController implements Initializable {
     private void aoClicarNaoTemCadastro(){//muda de tela
         try {
             Parent arquivoJanela = new InterfaceCadastro(model).getRoot();
-            Stage JanelaAtual = (Stage) link_Cadastro.getScene().getWindow();
+            Stage JanelaAtual = (Stage) linkCadastro.getScene().getWindow();
             JanelaAtual.setScene(new Scene(arquivoJanela));
             JanelaAtual.setTitle("Cadastro");
         } catch (Exception e) {
