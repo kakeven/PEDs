@@ -126,6 +126,12 @@ public class InterfaceMenuDisciplinaController implements Initializable{
         textoHorasTotais.setText(String.valueOf(model.getCargaTotal()));
     }
     public void aoClicarAdicionar(){
-        model.verificarDisciplina(nomeDisciplina.getText(), codigoDisciplina.getText(), spinnerCargaTeorica.getValue(), spinnerCargaPratica.getValue(), spinnerCargaEaD.getValue(), spinnerCargaExtensao.getValue(), estruturaCurricular.getText(), preRequisitos.getText(), coRequisitos.getText(), regimeDeOferta.getValue(), equivalencias.getText());
+        if(model.verificarDisciplina(nomeDisciplina.getText(), codigoDisciplina.getText(), spinnerCargaTeorica.getValue(), spinnerCargaPratica.getValue(), spinnerCargaEaD.getValue(), spinnerCargaExtensao.getValue(), estruturaCurricular.getText(), preRequisitos.getText(), coRequisitos.getText(), regimeDeOferta.getValue(), equivalencias.getText())){
+            labelMensagemAddComSucesso.setVisible(true);
+            labelMensagemErroCampos.setVisible(false);
+        }else{
+            labelMensagemErroCampos.setVisible(true);
+            labelMensagemAddComSucesso.setVisible(false);
+        }
     }
 }
