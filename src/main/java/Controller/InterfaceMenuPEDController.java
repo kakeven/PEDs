@@ -141,9 +141,8 @@ public class InterfaceMenuPEDController implements Initializable {
             });
         });
 
-        //choiceDisciplina.getItems().addAll(model.arrayDisciplinas());
+        System.out.println(model.arrayDisciplinas());
 
-        //choiceDisciplina.setValue("teste");
     }
 
 

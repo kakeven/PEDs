@@ -482,7 +482,7 @@ public class Model{
                 disciplina.setCargaEaD(rs.getInt("cargaEaD"));
                 disciplina.setCargaExtensao(rs.getInt("cargaExtensao"));
                 disciplina.setEstruturaCurricular(rs.getString("estruturaCurricular"));
-                disciplina.setPreRequisitos(rs.getString("preRequisitos"));
+                disciplina.setPreRequisitos(rs.getString("preRequisito"));
                 disciplina.setRegimeDeOferta(rs.getString("regimeDeOferta"));
                 disciplina.setEquivalencias(rs.getString("equivalencias"));
 
