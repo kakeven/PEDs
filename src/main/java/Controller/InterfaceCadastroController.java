@@ -23,6 +23,9 @@ public class InterfaceCadastroController implements Initializable {
     @FXML
     public Pane fundoInvisivel;
     public void initialize(URL location, ResourceBundle resources) {
+        lblMensagemPreencher.setVisible(false);
+        lblUsuarioJaExiste.setVisible(false);
+        lblSenha8.setVisible(false);
         fundoInvisivel.requestFocus();
     }
 
@@ -30,7 +33,7 @@ public class InterfaceCadastroController implements Initializable {
     private Button botaoCadastro;
 
     @FXML
-    private Hyperlink link_Login;
+    private Hyperlink linkLogin;
 
     //variaveis dos campos
     @FXML
@@ -60,7 +63,7 @@ public class InterfaceCadastroController implements Initializable {
         try {
             InterfaceLogin telaLogin = new InterfaceLogin(model);
             Parent arquivoJanela = telaLogin.getRoot();
-            Stage janelaAtual = (Stage) link_Login.getScene().getWindow();
+            Stage janelaAtual = (Stage) linkLogin.getScene().getWindow();
             janelaAtual.setScene(new Scene(arquivoJanela));
             janelaAtual.setTitle("Login");
         } catch (Exception e) {

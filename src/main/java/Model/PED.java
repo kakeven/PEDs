@@ -32,6 +32,14 @@ public class PED {
         this.unidade = unidade;
     }
 
+    public ArrayList<Aula> getAulas() {
+        return aulas;
+    }
+
+    public void setAulas(ArrayList<Aula> aulas) {
+        this.aulas = aulas;
+    }
+
     public String getObrigatoriedade() {
         return obrigatoriedade;
     }
