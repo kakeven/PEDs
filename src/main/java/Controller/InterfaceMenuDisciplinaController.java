@@ -33,7 +33,7 @@ public class InterfaceMenuDisciplinaController implements Initializable{
     private TextField estruturaCurricular;
 
     @FXML
-    private ChoiceBox regimeDeOferta;
+    private ChoiceBox<String> regimeDeOferta;
 
     @FXML
     private TextField codigoDisciplina;
