@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Model;
 import View.InterfaceMenuDisciplina;
+import View.InterfaceMenuPED;
 import javafx.fxml.FXML;
 import View.InterfaceLogin;
 import javafx.fxml.FXMLLoader;
@@ -58,7 +59,7 @@ public class InterfaceMenuController implements Initializable {
     public void aoClicarAddPED(){
         try{
             Parent arquivoJanela = new InterfaceMenuPED(model).getRoot();
-            Stage JanelaAtual = (Stage) botao_addDisciplina.getScene().getWindow();
+            Stage JanelaAtual = (Stage) botaoAddDisciplina.getScene().getWindow();
             JanelaAtual.setScene(new Scene(arquivoJanela));
             JanelaAtual.setTitle("Cadastro PED");
         }catch(Exception e){
