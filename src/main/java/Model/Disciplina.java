@@ -10,7 +10,6 @@ public class Disciplina {
     private int cargaExtensao;
     private int cargaTotal;
     private String estruturaCurricular;
-    private String obrigatoriedade;
     private String preRequisito;
     private String coRequisito;
     private String regimeDeOferta;
@@ -89,10 +88,6 @@ public class Disciplina {
 
     public void setEstruturaCurricular(String estruturaCurricular) {this.estruturaCurricular = estruturaCurricular;}
 
-    public String getObrigatoriedade() {return obrigatoriedade;}
-
-    public void setObrigatoriedade(String obrigatoriedade) {this.obrigatoriedade = obrigatoriedade;}
-
     public String getRegimeDeOferta() {return regimeDeOferta;}
 
     public void setRegimeDeOferta(String regimeDeOferta) {this.regimeDeOferta = regimeDeOferta;}
@@ -122,7 +117,7 @@ public class Disciplina {
     }
 
     public boolean isCompleto(){
-        return (codigo != null && cargaTotal>0 && estruturaCurricular!= null && regimeDeOferta != null && obrigatoriedade != null);
+        return (codigo != null && cargaTotal>0 && estruturaCurricular!= null && regimeDeOferta != null);
     }
 
     @Override

@@ -348,7 +348,8 @@ public class Model{
                     metodologia TEXT NOT NULL,
                     atividadesDiscentes TEXT NOT NULL,
                     sistemaDeAvaliacao TEXT NOT NULL,
-                    bibliografia TEXT NOT NULL
+                    bibliografia TEXT NOT NULL,
+                    obrigatoriedade TEXT NOT NULL
                 )
                 """;
         try (Statement state = conectarPED.createStatement()){
@@ -373,7 +374,8 @@ public class Model{
                 atividadesDiscentes,
                 sistemaDeAvaliacao,
                 bibliografia
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
+                obrigatoriedade
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
         try(PreparedStatement ps = conectarPED.prepareStatement(inserir)) {
             ps.setString(1, ped.getUnidade());
             ps.setString(2, ped.getProfessor().getLogin());
@@ -388,6 +390,7 @@ public class Model{
             ps.setString(11,ped.getAtividadesDiscentes());
             ps.setString(12,ped.getSistemaDeAvaliacao());
             ps.setString(13,ped.getBibliografia());
+            ps.setString(14, ped.getObrigatoriedade());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
