@@ -347,6 +347,7 @@ public class Model{
             ped.setBibliografia(bibliografia);
             ped.setProfessor(professor);
             ped.setObrigatoriedade(obrigatoriedade);
+            ped.setAulas(aulas);
             SalvarPED(ped);
             return true;
         } else {
@@ -403,8 +404,8 @@ public class Model{
                 metodologia,
                 atividadesDiscentes,
                 sistemaDeAvaliacao,
-                bibliografia
-                obrigatoriedade
+                bibliografia,
+                obrigatoriedade,
                 aulas
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
         try(PreparedStatement ps = conectarPED.prepareStatement(inserir)) {
@@ -453,13 +454,21 @@ public class Model{
         return false;
     }
 
-    public boolean addAula(ArrayList<Aula> aulas){
+    public boolean addAula(ArrayList<Aula> aulas, int cargaHoraria){
         Aula aulaAdicionar = aulas.get(aulas.size()-1);
         for(Aula aula : aulas){
-            if(aula.getData().equals(aulaAdicionar.getData())){
+            cargaHoraria-=aula.getCargaHoraria();
+            if(aula.getData().equals(aulaAdicionar.getData()) || cargaHoraria >= 0){
                 return false;
             }
         }
         return true;
+    }
+
+    public boolean cargaHorariaCompleta(ArrayList<Aula> aulas, int cargaHoraria){
+        for(Aula aula : aulas){
+            cargaHoraria-=aula.getCargaHoraria();
+        }
+        return(!(cargaHoraria>0));
     }
 }
