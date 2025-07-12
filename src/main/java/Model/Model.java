@@ -344,7 +344,6 @@ public class Model{
                     justificativa TEXT NOT NULL,
                     ementa TEXT NOT NULL,
                     objetivos TEXT NOT NULL,
-                    ArrayList<Aula> aulas;
                     metodologia TEXT NOT NULL,
                     atividadesDiscentes TEXT NOT NULL,
                     sistemaDeAvaliacao TEXT NOT NULL,
@@ -369,13 +368,12 @@ public class Model{
                 justificativa,
                 ementa,
                 objetivos,
-                ArrayList<Aula> aulas;
                 metodologia,
                 atividadesDiscentes,
                 sistemaDeAvaliacao,
                 bibliografia
                 obrigatoriedade
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
         try(PreparedStatement ps = conectarPED.prepareStatement(inserir)) {
             ps.setString(1, ped.getUnidade());
             ps.setString(2, ped.getProfessor().getLogin());
@@ -385,12 +383,11 @@ public class Model{
             ps.setString(6, ped.getJustificativa());
             ps.setString(7, ped.getEmenta());
             ps.setString(8, ped.getObjetivos());
-            ps.setString(9, ped.getAula().toString());
-            ps.setString(10,ped.getMetodologia());
-            ps.setString(11,ped.getAtividadesDiscentes());
-            ps.setString(12,ped.getSistemaDeAvaliacao());
-            ps.setString(13,ped.getBibliografia());
-            ps.setString(14, ped.getObrigatoriedade());
+            ps.setString(11,ped.getMetodologia());
+            ps.setString(12,ped.getAtividadesDiscentes());
+            ps.setString(13,ped.getSistemaDeAvaliacao());
+            ps.setString(14,ped.getBibliografia());
+            ps.setString(15, ped.getObrigatoriedade());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
