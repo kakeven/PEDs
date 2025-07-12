@@ -236,7 +236,7 @@ public class Model{
                 coRequisito,
                 regimeDeOferta,
                 equivalencias
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"""; 
         try(PreparedStatement ps = conectarDisciplina.prepareStatement(inserir)) {
             ps.setString(1, disciplina.getNome());
             ps.setString(2, disciplina.getCodigo());
