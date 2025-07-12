@@ -159,7 +159,6 @@ public class Model{
             int cargaEaD,
             int cargaExtensao,
             String estruturaCurricular,
-            String obrigatoriedade,
             String preRequisitos,
             String coRequisito,
             String regimeDeOferta,
@@ -169,7 +168,6 @@ public class Model{
                 !nome.isBlank()
                         && !codigo.isBlank()
                         && !estruturaCurricular.isBlank()
-                        && !obrigatoriedade.isBlank()
                         && !regimeDeOferta.isBlank()
         ){
             Disciplina disciplina = new Disciplina();
@@ -179,7 +177,6 @@ public class Model{
             disciplina.setCargaEaD(cargaEaD);
             disciplina.setCargaExtensao(cargaExtensao);
             disciplina.setEstruturaCurricular(estruturaCurricular);
-            disciplina.setObrigatoriedade(obrigatoriedade);
             disciplina.setPreRequisitos(preRequisitos);
             disciplina.setCoRequisito(coRequisito);
             disciplina.setRegimeDeOferta(regimeDeOferta);
@@ -212,7 +209,6 @@ public class Model{
                     cargaExtensao TEXT NOT NULL,
                     cargaTotal INTEGER,
                     estruturaCurricular TEXT NOT NULL,
-                    obrigatoriedade TEXT NOT NULL,
                     preRequisito TEXT NOT NULL,
                     coRequisito TEXT NOT NULL,
                     regimeDeOferta TEXT NOT NULL,
@@ -236,7 +232,6 @@ public class Model{
                 cargaExtensao,
                 cargaTotal,
                 estruturaCurricular,
-                obrigatoriedade,
                 preRequisito,
                 coRequisito,
                 regimeDeOferta,
@@ -251,11 +246,10 @@ public class Model{
             ps.setString(6, disciplina.getCargaExtensao());
             ps.setInt(7, disciplina.getCargaTotal());
             ps.setString(8, disciplina.getEstruturaCurricular());
-            ps.setString(9, disciplina.getObrigatoriedade());
-            ps.setString(10, disciplina.getPreRequisito());
-            ps.setString(11, disciplina.getCoRequisito());
-            ps.setString(12, disciplina.getRegimeDeOferta());
-            ps.setString(13, disciplina.getEquivalencias());
+            ps.setString(9, disciplina.getPreRequisito());
+            ps.setString(10, disciplina.getCoRequisito());
+            ps.setString(11, disciplina.getRegimeDeOferta());
+            ps.setString(12, disciplina.getEquivalencias());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
