@@ -182,6 +182,11 @@ public class Model{
             disciplina.setCoRequisito(coRequisito);
             disciplina.setRegimeDeOferta(regimeDeOferta);
             disciplina.setEquivalencias(equivalencias);
+            if(DisciplinaExiste(disciplina) || disciplina.getCargaTotal()==0){
+                disciplina = null;
+                System.gc();
+                return false;
+            }
             SalvarDisciplina(disciplina);
             return true;
         } else {
