@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -59,12 +61,18 @@ public class InterfaceMenuDisciplinaController implements Initializable{
     @FXML
     private Label labelMensagemAddComSucesso;
 
+    @FXML
+    private Label labelMensagemDisciplinaJaExiste;
+
     //botoes
     @FXML
     private Button botaoVoltar;
 
     @FXML
     private Button botaoAdicionar;
+
+    @FXML
+    private Button botaoLimpar;
 
     //variaveis gerais
     private Model model;
@@ -87,6 +95,7 @@ public class InterfaceMenuDisciplinaController implements Initializable{
         //labels(usar a mensagem erro posteriormente)
         labelMensagemErroCampos.setVisible(false); //defien que a mensagem de erro vai começar nao visivel, so se ocorrer erro(mais pra frente)
         labelMensagemAddComSucesso.setVisible(false);
+        labelMensagemDisciplinaJaExiste.setVisible(false);
 
         //listeners para ficar pegando mudancas nos spinners
         spinnerCargaTeorica.valueProperty().addListener((obs, valorAtigo, valorNovo) ->{
@@ -126,6 +135,42 @@ public class InterfaceMenuDisciplinaController implements Initializable{
         textoHorasTotais.setText(String.valueOf(model.getCargaTotal()));
     }
     public void aoClicarAdicionar(){
-        model.verificarDisciplina(nomeDisciplina.getText(), codigoDisciplina.getText(), spinnerCargaTeorica.getValue(), spinnerCargaPratica.getValue(), spinnerCargaEaD.getValue(), spinnerCargaExtensao.getValue(), estruturaCurricular.getText(), preRequisitos.getText(), coRequisitos.getText(), regimeDeOferta.getValue(), equivalencias.getText());
+        if(model.verificarDisciplina(nomeDisciplina.getText(), codigoDisciplina.getText(), spinnerCargaTeorica.getValue(), spinnerCargaPratica.getValue(), spinnerCargaEaD.getValue(), spinnerCargaExtensao.getValue(), estruturaCurricular.getText(), preRequisitos.getText(), coRequisitos.getText(), regimeDeOferta.getValue(), equivalencias.getText())){
+            labelMensagemAddComSucesso.setVisible(true);
+            labelMensagemErroCampos.setVisible(false);
+            labelMensagemDisciplinaJaExiste.setVisible(false);
+
+            PauseTransition timer = new PauseTransition(Duration.seconds(2));
+            timer.setOnFinished(e -> {
+                Parent ArquivoJavela = new InterfaceMenu(model).getRoot();
+                Stage JanelaAtual = (Stage) botaoAdicionar.getScene().getWindow();
+                JanelaAtual.setScene(new Scene(ArquivoJavela));
+                JanelaAtual.setTitle("Menu");
+            });
+            timer.play();
+        }else{
+            if(model.pesquisaPorCodigo(codigoDisciplina.getText())){
+                labelMensagemDisciplinaJaExiste.setVisible(true);
+                labelMensagemAddComSucesso.setVisible(false);
+                labelMensagemErroCampos.setVisible(false);
+            }else{
+                labelMensagemErroCampos.setVisible(true);
+                labelMensagemAddComSucesso.setVisible(false);
+                labelMensagemDisciplinaJaExiste.setVisible(false);
+            }
+        }
+    }
+    public void aoClicarLimpar(){
+        nomeDisciplina.setText("");
+        codigoDisciplina.setText("");
+        spinnerCargaExtensao.getValueFactory().setValue(0);
+        spinnerCargaTeorica.getValueFactory().setValue(0);
+        spinnerCargaPratica.getValueFactory().setValue(0);
+        spinnerCargaEaD.getValueFactory().setValue(0);
+        estruturaCurricular.setText("");
+        preRequisitos.setText("");
+        coRequisitos.setText("");
+        equivalencias.setText("");
+        regimeDeOferta.setValue("Semestral");
     }
 }

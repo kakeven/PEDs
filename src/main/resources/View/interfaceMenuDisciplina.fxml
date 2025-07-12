@@ -19,9 +19,8 @@
             <VBox layoutX="-13.0" />
             <TextField fx:id="nomeDisciplina" layoutX="84.0" layoutY="63.0" prefHeight="25.0" prefWidth="221.0" />
             <TextField fx:id="codigoDisciplina" layoutX="605.0" layoutY="63.0" prefHeight="25.0" prefWidth="126.0" />
-            <Button fx:id="botaoAdicionar" onAction="#aoClicarAdicionar" layoutX="185.0" layoutY="436.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="Adicionar" />
-            <Button layoutX="327.0" layoutY="436.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="Limpar" />
-            <Button layoutX="469.0" layoutY="436.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="Remover" />
+            <Button fx:id="botaoAdicionar" layoutX="239.0" layoutY="436.0" mnemonicParsing="false" onAction="#aoClicarAdicionar" prefHeight="45.0" prefWidth="120.0" text="Adicionar" />
+            <Button fx:id="botaoLimpar" onAction="#aoClicarLimpar" layoutX="409.0" layoutY="436.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="Limpar" />
             <Button fx:id="botaoVoltar" layoutX="674.0" layoutY="458.0" mnemonicParsing="false" onAction="#aoClicarVoltar" prefHeight="17.0" prefWidth="90.0" text="Voltar" />
             <ChoiceBox fx:id="regimeDeOferta" layoutX="571.0" layoutY="103.0" prefHeight="25.0" prefWidth="160.0" />
             <Label layoutX="40.0" layoutY="61.0" prefHeight="25.0" prefWidth="47.0" text="Nome:">
@@ -39,17 +38,17 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="36.0" layoutY="273.0" prefHeight="30.0" prefWidth="120.0" text="Pré-Requisitos:">
+            <Label layoutX="36.0" layoutY="273.0" prefHeight="30.0" prefWidth="154.0" text="Pré-Requisitos(opcional):">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="299.0" layoutY="273.0" prefHeight="30.0" prefWidth="120.0" text="Co-Requisitos:">
+            <Label layoutX="299.0" layoutY="273.0" prefHeight="30.0" prefWidth="154.0" text="Co-Requisitos(opcional):">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="572.0" layoutY="273.0" prefHeight="30.0" prefWidth="120.0" text="Equivalências:">
+            <Label layoutX="572.0" layoutY="273.0" prefHeight="30.0" prefWidth="147.0" text="Equivalências(opcional):">
                <font>
                   <Font size="14.0" />
                </font>
@@ -106,17 +105,22 @@
             </Label>
             <TextField fx:id="textoHorasTotais" editable="false" focusTraversable="false" layoutX="571.0" layoutY="144.0" prefHeight="25.0" prefWidth="160.0" />
             <Label fx:id="labelHorasTotal" layoutX="693.0" layoutY="149.0" prefHeight="17.0" prefWidth="32.0" text="Horas" />
-            <Label fx:id="labelMensagemErroCampos" focusTraversable="false" layoutX="264.0" layoutY="411.0" text="Preencha todos os campos obrigatórios!" textFill="RED">
+            <Label fx:id="labelMensagemErroCampos" focusTraversable="false" layoutX="257.0" layoutY="411.0" text="Preencha todos os campos obrigatórios!" textFill="RED">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="labelMensagemAddComSucesso" focusTraversable="false" layoutX="264.0" layoutY="411.0" text="Disciplina adicionada com Sucesso! " textFill="#00ff0a">
+            <Label fx:id="labelMensagemAddComSucesso" focusTraversable="false" layoutX="271.0" layoutY="411.0" text="Disciplina adicionada com Sucesso! " textFill="#00b206">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
             <TextField fx:id="estruturaCurricular" layoutX="204.0" layoutY="185.0" prefHeight="25.0" prefWidth="100.0" />
+            <Label fx:id="labelMensagemDisciplinaJaExiste" focusTraversable="false" layoutX="306.0" layoutY="411.0" text="Esta Disciplina já existe!" textFill="#ff7500">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

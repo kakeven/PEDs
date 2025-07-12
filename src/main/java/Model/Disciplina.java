@@ -96,12 +96,21 @@ public class Disciplina {
         return cargaEaD + cargaTeorica + cargaPratica + cargaExtensao;
     }
 
-    public void setPreRequisitos(String preRequisito){this.preRequisito = preRequisito;}
+    public void setPreRequisitos(String preRequisito){
+        this.preRequisito = preRequisito;
+        if(preRequisito.isBlank()){
+            this.preRequisito = "---";
+        }
+    }
 
     public String getPreRequisito(){return preRequisito;}
 
     public void setCoRequisito(String coRequisito){
+
         this.coRequisito= coRequisito;
+        if(coRequisito.isBlank()){
+            this.coRequisito = "---";
+        }
     }
 
     public String getCoRequisito(){
@@ -110,6 +119,9 @@ public class Disciplina {
 
     public void setEquivalencias(String equivalencias){
         this.equivalencias= equivalencias;
+        if(equivalencias.isBlank()){
+            this.equivalencias = "---";
+        }
     }
 
     public String getEquivalencias(){

@@ -1,5 +1,6 @@
 package Model;
-
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -10,9 +11,11 @@ public class Model{
     private Connection conectarPED;
     private Connection conectarDisciplina;
     private Disciplina disciplina;
+    private Gson gson;
 
     //construtor
     public Model(){
+        this.gson = new Gson();
         seConectarUsuario();
         seConectarDisciplina();
         seConectarPED();
@@ -182,6 +185,11 @@ public class Model{
             disciplina.setCoRequisito(coRequisito);
             disciplina.setRegimeDeOferta(regimeDeOferta);
             disciplina.setEquivalencias(equivalencias);
+            if(DisciplinaExiste(disciplina) || disciplina.getCargaTotal()==0){
+                disciplina = null;
+                System.gc();
+                return false;
+            }
             SalvarDisciplina(disciplina);
             return true;
         } else {
@@ -275,6 +283,25 @@ public class Model{
         return false;
     }
 
+    public boolean pesquisaPorCodigo(String codigo){
+        String busca = "SELECT codigo FROM disciplina WHERE codigo = ?";
+
+        try{
+            PreparedStatement preparar = conectarDisciplina.prepareStatement(busca);
+            preparar.setString(1, codigo);
+            ResultSet resultado = preparar.executeQuery();
+
+            if(resultado.next()){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     //Verificacao PED
     public boolean verificarPed(
@@ -290,7 +317,8 @@ public class Model{
             String metodologia,
             String atividadesDiscentes,
             String sistemaDeAvaliacao,
-            String bibliografia
+            String bibliografia,
+            String obrigatoriedade
     ){
         if(
                 !unidade.isBlank()
@@ -303,6 +331,7 @@ public class Model{
                         && !atividadesDiscentes.isBlank()
                         && !sistemaDeAvaliacao.isBlank()
                         && !bibliografia.isBlank()
+                        && !obrigatoriedade.isBlank()
         ){
             PED ped = new PED();
             ped.setUnidade(unidade);
@@ -317,6 +346,7 @@ public class Model{
             ped.setSistemaDeAvaliacao(sistemaDeAvaliacao);
             ped.setBibliografia(bibliografia);
             ped.setProfessor(professor);
+            ped.setObrigatoriedade(obrigatoriedade);
             SalvarPED(ped);
             return true;
         } else {
@@ -349,7 +379,8 @@ public class Model{
                     atividadesDiscentes TEXT NOT NULL,
                     sistemaDeAvaliacao TEXT NOT NULL,
                     bibliografia TEXT NOT NULL,
-                    obrigatoriedade TEXT NOT NULL
+                    obrigatoriedade TEXT NOT NULL,
+                    aulas TEXT NOT NULL
                 )
                 """;
         try (Statement state = conectarPED.createStatement()){
@@ -374,8 +405,15 @@ public class Model{
                 sistemaDeAvaliacao,
                 bibliografia
                 obrigatoriedade
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
+                aulas
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
         try(PreparedStatement ps = conectarPED.prepareStatement(inserir)) {
+
+            String aulasJson = null;
+            if (ped.getAulas() != null && !ped.getAulas().isEmpty()) {
+                aulasJson = gson.toJson(ped.getAulas());
+            }
+
             ps.setString(1, ped.getUnidade());
             ps.setString(2, ped.getProfessor().getLogin());
             ps.setString(3, ped.getDisciplina().getCodigo());
@@ -389,6 +427,7 @@ public class Model{
             ps.setString(13,ped.getSistemaDeAvaliacao());
             ps.setString(14,ped.getBibliografia());
             ps.setString(15, ped.getObrigatoriedade());
+            ps.setString(16, aulasJson);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -412,5 +451,15 @@ public class Model{
             e.printStackTrace();
         }
         return false;
+    }
+
+    public boolean addAula(ArrayList<Aula> aulas){
+        Aula aulaAdicionar = aulas.get(aulas.size()-1);
+        for(Aula aula : aulas){
+            if(aula.getData().equals(aulaAdicionar.getData())){
+                return false;
+            }
+        }
+        return true;
     }
 }
