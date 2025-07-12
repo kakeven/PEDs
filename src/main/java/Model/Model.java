@@ -15,8 +15,10 @@ public class Model{
     public Model(){
         seConectarUsuario();
         seConectarDisciplina();
+        seConectarPED();
         criarTabelaUsuario();
         criarTabelaDisciplina();
+        criarTabelaPED();
         this.disciplina = new Disciplina();
     }
 
@@ -156,14 +158,13 @@ public class Model{
             int cargaPratica,
             int cargaEaD,
             int cargaExtensao,
-            Professor professor,
             String estruturaCurricular,
             String obrigatoriedade,
             String preRequisitos,
             String coRequisito,
             String regimeDeOferta,
             String equivalencias
-    ){
+        ){
         if(
                 !nome.isBlank()
                         && !codigo.isBlank()
@@ -183,7 +184,6 @@ public class Model{
             disciplina.setCoRequisito(coRequisito);
             disciplina.setRegimeDeOferta(regimeDeOferta);
             disciplina.setEquivalencias(equivalencias);
-            disciplina.setProfessor(professor);
             SalvarDisciplina(disciplina);
             return true;
         } else {
@@ -211,7 +211,6 @@ public class Model{
                     cargaEaD TEXT NOT NULL,
                     cargaExtensao TEXT NOT NULL,
                     cargaTotal INTEGER,
-                    professor TEXT NOT NULL,
                     estruturaCurricular TEXT NOT NULL,
                     obrigatoriedade TEXT NOT NULL,
                     preRequisito TEXT NOT NULL,
@@ -236,14 +235,13 @@ public class Model{
                 cargaEaD,
                 cargaExtensao,
                 cargaTotal,
-                professor,
                 estruturaCurricular,
                 obrigatoriedade,
                 preRequisito,
                 coRequisito,
                 regimeDeOferta,
                 equivalencias
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
         try(PreparedStatement ps = conectarDisciplina.prepareStatement(inserir)) {
             ps.setString(1, disciplina.getNome());
             ps.setString(2, disciplina.getCodigo());
@@ -252,13 +250,12 @@ public class Model{
             ps.setString(5, disciplina.getCargaEaD());
             ps.setString(6, disciplina.getCargaExtensao());
             ps.setInt(7, disciplina.getCargaTotal());
-            ps.setString(8, disciplina.getProfessor().getLogin());
-            ps.setString(9, disciplina.getEstruturaCurricular());
-            ps.setString(10, disciplina.getObrigatoriedade());
-            ps.setString(11, disciplina.getPreRequisito());
-            ps.setString(12, disciplina.getCoRequisito());
-            ps.setString(13, disciplina.getRegimeDeOferta());
-            ps.setString(14, disciplina.getEquivalencias());
+            ps.setString(8, disciplina.getEstruturaCurricular());
+            ps.setString(9, disciplina.getObrigatoriedade());
+            ps.setString(10, disciplina.getPreRequisito());
+            ps.setString(11, disciplina.getCoRequisito());
+            ps.setString(12, disciplina.getRegimeDeOferta());
+            ps.setString(13, disciplina.getEquivalencias());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

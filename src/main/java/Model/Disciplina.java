@@ -9,7 +9,6 @@ public class Disciplina {
     private int cargaEaD;
     private int cargaExtensao;
     private int cargaTotal;
-    private Professor professor;
     private String estruturaCurricular;
     private String obrigatoriedade;
     private String preRequisito;
@@ -97,10 +96,6 @@ public class Disciplina {
     public String getRegimeDeOferta() {return regimeDeOferta;}
 
     public void setRegimeDeOferta(String regimeDeOferta) {this.regimeDeOferta = regimeDeOferta;}
-
-    public Professor getProfessor() {return professor;}
-
-    public void setProfessor(Professor professor) {this.professor = professor;}
 
     public int getCargaTotal(){
         return cargaEaD + cargaTeorica + cargaPratica + cargaExtensao;
