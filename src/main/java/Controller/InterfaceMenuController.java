@@ -2,16 +2,15 @@ package Controller;
 
 import Model.Model;
 import View.InterfaceMenuDisciplina;
+import View.InterfaceMenuPED;
 import javafx.fxml.FXML;
 import View.InterfaceLogin;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,12 +22,17 @@ public class InterfaceMenuController implements Initializable {
     public Pane fundoInvisivel;
 
     @FXML
-    private Button botao_Logout;
+    private Button botaoLogout;
 
     @FXML
     private Button botaoAddDisciplina;
 
     private Model model;
+
+    @FXML
+    private Button botaoAddPED;
+
+    //testeeeeeeeeeeeeeeeeee
 
     public void initialize(URL location, ResourceBundle resources) {
         fundoInvisivel.requestFocus();
@@ -41,7 +45,7 @@ public class InterfaceMenuController implements Initializable {
     //metodos
     public void aoClicarLogout(){
         Parent arquivoJanela = new InterfaceLogin(model).getRoot();
-        Stage JanelaAtual = (Stage) botao_Logout.getScene().getWindow();
+        Stage JanelaAtual = (Stage) botaoLogout.getScene().getWindow();
         JanelaAtual.setScene(new Scene(arquivoJanela));
         JanelaAtual.setTitle("Projeto PEDs");
     }
@@ -58,7 +62,7 @@ public class InterfaceMenuController implements Initializable {
     public void aoClicarAddPED(){
         try{
             Parent arquivoJanela = new InterfaceMenuPED(model).getRoot();
-            Stage JanelaAtual = (Stage) botao_addDisciplina.getScene().getWindow();
+            Stage JanelaAtual = (Stage) botaoAddDisciplina.getScene().getWindow();
             JanelaAtual.setScene(new Scene(arquivoJanela));
             JanelaAtual.setTitle("Cadastro PED");
         }catch(Exception e){

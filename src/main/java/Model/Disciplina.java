@@ -17,7 +17,6 @@ public class Disciplina {
 
     public Disciplina(){
         super();
-
         cargaTeorica = 0;
         cargaPratica = 0;
         cargaEaD = 0;
