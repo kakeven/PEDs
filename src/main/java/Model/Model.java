@@ -347,6 +347,12 @@ public class Model{
             ped.setBibliografia(bibliografia);
             ped.setProfessor(professor);
             ped.setObrigatoriedade(obrigatoriedade);
+            ped.setAulas(aulas);
+            if(PEDExiste(ped)){
+                ped = null;
+                System.gc();
+                return false;
+            }
             SalvarPED(ped);
             return true;
         } else {
@@ -403,8 +409,8 @@ public class Model{
                 metodologia,
                 atividadesDiscentes,
                 sistemaDeAvaliacao,
-                bibliografia
-                obrigatoriedade
+                bibliografia,
+                obrigatoriedade,
                 aulas
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
         try(PreparedStatement ps = conectarPED.prepareStatement(inserir)) {
@@ -453,13 +459,56 @@ public class Model{
         return false;
     }
 
-    public boolean addAula(ArrayList<Aula> aulas){
+    public ArrayList<Disciplina> arrayDisciplinas(){
+        ArrayList<Disciplina> disciplinas = new ArrayList<>();
+
+        String selectSql = "SELECT " +
+                "nome, codigo, cargaTeorica, cargaPratica, cargaEaD, " +
+                "cargaExtensao, cargaTotal, estruturaCurricular, preRequisito, coRequisito, " +
+                "regimeDeOferta, equivalencias " +
+                "FROM disciplina";
+
+        try (PreparedStatement ps = conectarDisciplina.prepareStatement(selectSql);
+             ResultSet rs = ps.executeQuery()) { // Executa a consulta e obtém o resultado
+
+            while (rs.next()) {
+
+                Disciplina disciplina = new Disciplina();
+
+                disciplina.setNome(rs.getString("nome"));
+                disciplina.setCodigo(rs.getString("codigo"));
+                disciplina.setCargaTeorica(rs.getInt("cargaTeorica"));
+                disciplina.setCargaPratica(rs.getInt("cargaPratica"));
+                disciplina.setCargaEaD(rs.getInt("cargaEaD"));
+                disciplina.setCargaExtensao(rs.getInt("cargaExtensao"));
+                disciplina.setEstruturaCurricular(rs.getString("estruturaCurricular"));
+                disciplina.setPreRequisitos(rs.getString("preRequisitos"));
+                disciplina.setRegimeDeOferta(rs.getString("regimeDeOferta"));
+                disciplina.setEquivalencias(rs.getString("equivalencias"));
+
+                disciplinas.add(disciplina);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return disciplinas;
+    }
+
+    public boolean addAula(ArrayList<Aula> aulas, int cargaHoraria){
         Aula aulaAdicionar = aulas.get(aulas.size()-1);
         for(Aula aula : aulas){
-            if(aula.getData().equals(aulaAdicionar.getData())){
+            cargaHoraria-=aula.getCargaHoraria();
+            if(aula.getData().equals(aulaAdicionar.getData()) || cargaHoraria >= 0){
                 return false;
             }
         }
         return true;
+    }
+
+    public boolean cargaHorariaCompleta(ArrayList<Aula> aulas, int cargaHoraria){
+        for(Aula aula : aulas){
+            cargaHoraria-=aula.getCargaHoraria();
+        }
+        return(!(cargaHoraria>0));
     }
 }
