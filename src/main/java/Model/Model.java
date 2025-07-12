@@ -464,7 +464,7 @@ public class Model{
 
         String selectSql = "SELECT " +
                 "nome, codigo, cargaTeorica, cargaPratica, cargaEaD, " +
-                "cargaExtensao, cargaTotal, estruturaCurricular, preRequisito, coRequisito, " +
+                "cargaExtensao, estruturaCurricular, preRequisito, coRequisito, " +
                 "regimeDeOferta, equivalencias " +
                 "FROM disciplina";
 
@@ -483,6 +483,7 @@ public class Model{
                 disciplina.setCargaExtensao(rs.getInt("cargaExtensao"));
                 disciplina.setEstruturaCurricular(rs.getString("estruturaCurricular"));
                 disciplina.setPreRequisitos(rs.getString("preRequisito"));
+                disciplina.setCoRequisito(rs.getString("coRequisito"));
                 disciplina.setRegimeDeOferta(rs.getString("regimeDeOferta"));
                 disciplina.setEquivalencias(rs.getString("equivalencias"));
 
