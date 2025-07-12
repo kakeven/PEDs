@@ -348,6 +348,11 @@ public class Model{
             ped.setProfessor(professor);
             ped.setObrigatoriedade(obrigatoriedade);
             ped.setAulas(aulas);
+            if(PEDExiste(ped)){
+                ped = null;
+                System.gc();
+                return false;
+            }
             SalvarPED(ped);
             return true;
         } else {
@@ -452,6 +457,41 @@ public class Model{
             e.printStackTrace();
         }
         return false;
+    }
+
+    public ArrayList<Disciplina> arrayDisciplinas(){
+        ArrayList<Disciplina> disciplinas = new ArrayList<>();
+
+        String selectSql = "SELECT " +
+                "nome, codigo, cargaTeorica, cargaPratica, cargaEaD, " +
+                "cargaExtensao, cargaTotal, estruturaCurricular, preRequisito, coRequisito, " +
+                "regimeDeOferta, equivalencias " +
+                "FROM disciplina";
+
+        try (PreparedStatement ps = conectarDisciplina.prepareStatement(selectSql);
+             ResultSet rs = ps.executeQuery()) { // Executa a consulta e obtém o resultado
+
+            while (rs.next()) {
+
+                Disciplina disciplina = new Disciplina();
+
+                disciplina.setNome(rs.getString("nome"));
+                disciplina.setCodigo(rs.getString("codigo"));
+                disciplina.setCargaTeorica(rs.getInt("cargaTeorica"));
+                disciplina.setCargaPratica(rs.getInt("cargaPratica"));
+                disciplina.setCargaEaD(rs.getInt("cargaEaD"));
+                disciplina.setCargaExtensao(rs.getInt("cargaExtensao"));
+                disciplina.setEstruturaCurricular(rs.getString("estruturaCurricular"));
+                disciplina.setPreRequisitos(rs.getString("preRequisitos"));
+                disciplina.setRegimeDeOferta(rs.getString("regimeDeOferta"));
+                disciplina.setEquivalencias(rs.getString("equivalencias"));
+
+                disciplinas.add(disciplina);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return disciplinas;
     }
 
     public boolean addAula(ArrayList<Aula> aulas, int cargaHoraria){
