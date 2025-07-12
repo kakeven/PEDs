@@ -1,17 +1,24 @@
 package Model;
 
 import java.sql.*;
+import java.util.ArrayList;
+
 //Gathored
 public class Model{
     private Connection conectar;
+    private Connection conectarUsuario;
+    private Connection conectarPED;
+    private Connection conectarDisciplina;
     private Disciplina disciplina;
 
     //construtor
     public Model(){
         seConectarUsuario();
         seConectarDisciplina();
+        seConectarPED();
         criarTabelaUsuario();
         criarTabelaDisciplina();
+        criarTabelaPED();
         this.disciplina = new Disciplina();
     }
 
@@ -53,8 +60,8 @@ public class Model{
     //DB Usuário
     public  void seConectarUsuario(){
         try{
-            if(conectar == null || conectar.isClosed()){
-                conectar = DriverManager.getConnection("jdbc:sqlite:bancoUsuarios.db");
+            if(conectarUsuario == null || conectarUsuario.isClosed()){
+                conectarUsuario = DriverManager.getConnection("jdbc:sqlite:bancoUsuarios.db");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -69,7 +76,7 @@ public class Model{
                     senha TEXT NOT NULL
                 )
                 """;
-        try (Statement state = conectar.createStatement()){
+        try (Statement state = conectarUsuario.createStatement()){
             state.execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -77,7 +84,7 @@ public class Model{
     }
     public void SalvarUsuario(Professor professor){
         String inserir = "INSERT INTO usuarios(nome, login, senha) VALUES (?, ?, ?)";
-        try(PreparedStatement ps = conectar.prepareStatement(inserir)) {
+        try(PreparedStatement ps = conectarUsuario.prepareStatement(inserir)) {
             ps.setString(1, professor.getNome());
             ps.setString(2, professor.getLogin());
             ps.setString(3, professor.getSenha());
@@ -89,7 +96,7 @@ public class Model{
     public void ListarUsuarios(){
         String sql = "SELECT * FROM usuarios";
 
-        try (Statement state = conectar.createStatement(); ResultSet resultado = state.executeQuery(sql)){
+        try (Statement state = conectarUsuario.createStatement(); ResultSet resultado = state.executeQuery(sql)){
             while(resultado.next()){
                 System.out.println("ID: " + resultado.getInt("id") + ", Nome: " + resultado.getString("nome") + ", login: " + resultado.getString("login") + ", senha: " + resultado.getString("senha"));
             }
@@ -101,7 +108,7 @@ public class Model{
         String busca = "SELECT login, senha FROM usuarios WHERE login = ?";
 
         try{
-            PreparedStatement preparar = conectar.prepareStatement(busca);
+            PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
             preparar.setString(1, professor.getLogin());
             ResultSet resultado = preparar.executeQuery();
 
@@ -119,7 +126,7 @@ public class Model{
         String busca = "SELECT nome, login, senha FROM usuarios WHERE login = ?";
 
         try{
-            PreparedStatement preparar = conectar.prepareStatement(busca);
+            PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
             preparar.setString(1, professor.getLogin());
             ResultSet resultado = preparar.executeQuery();
 
@@ -151,43 +158,31 @@ public class Model{
             int cargaPratica,
             int cargaEaD,
             int cargaExtensao,
-            Professor professor,
             String estruturaCurricular,
-            String obrigatoriedade,
             String preRequisitos,
             String coRequisito,
             String regimeDeOferta,
             String equivalencias
-            ){
+        ){
         if(
-            !nome.isBlank()
-            && !codigo.isBlank()
-            && cargaTeorica != 0
-            && cargaPratica !=0
-            && cargaEaD != 0
-            && cargaExtensao !=0
-            && !estruturaCurricular.isBlank()
-            && !obrigatoriedade.isBlank()
-            && !preRequisitos.isBlank()
-            && !coRequisito.isBlank()
-            && !regimeDeOferta.isBlank()
-            && !equivalencias.isBlank()
+                !nome.isBlank()
+                        && !codigo.isBlank()
+                        && !estruturaCurricular.isBlank()
+                        && !regimeDeOferta.isBlank()
         ){
             Disciplina disciplina = new Disciplina();
-             disciplina.setCodigo(codigo);
-             disciplina.setCargaTeorica(cargaTeorica);
-             disciplina.setCargaPratica(cargaPratica);
-             disciplina.setCargaEaD(cargaEaD);
-             disciplina.setCargaExtensao(cargaExtensao);
-             disciplina.setEstruturaCurricular(estruturaCurricular);
-             disciplina.setObrigatoriedade(obrigatoriedade);
-             disciplina.setPreRequisitos(preRequisitos);
-             disciplina.setCoRequisito(coRequisito);
-             disciplina.setRegimeDeOferta(regimeDeOferta);
-             disciplina.setEquivalencias(equivalencias);
-             disciplina.setProfessor(professor);
-             SalvarDisciplina(disciplina);
-             return true;
+            disciplina.setCodigo(codigo);
+            disciplina.setCargaTeorica(cargaTeorica);
+            disciplina.setCargaPratica(cargaPratica);
+            disciplina.setCargaEaD(cargaEaD);
+            disciplina.setCargaExtensao(cargaExtensao);
+            disciplina.setEstruturaCurricular(estruturaCurricular);
+            disciplina.setPreRequisitos(preRequisitos);
+            disciplina.setCoRequisito(coRequisito);
+            disciplina.setRegimeDeOferta(regimeDeOferta);
+            disciplina.setEquivalencias(equivalencias);
+            SalvarDisciplina(disciplina);
+            return true;
         } else {
             return false;
         }
@@ -195,8 +190,8 @@ public class Model{
     //DB Disciplina
     public void seConectarDisciplina(){
         try{
-            if(conectar == null || conectar.isClosed()){
-                conectar = DriverManager.getConnection("jdbc:sqlite:bancoDisciplina.db");
+            if(conectarDisciplina == null || conectarDisciplina.isClosed()){
+                conectarDisciplina = DriverManager.getConnection("jdbc:sqlite:bancoDisciplina.db");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -213,16 +208,14 @@ public class Model{
                     cargaEaD TEXT NOT NULL,
                     cargaExtensao TEXT NOT NULL,
                     cargaTotal INTEGER,
-                    professor TEXT NOT NULL,
                     estruturaCurricular TEXT NOT NULL,
-                    obrigatoriedade TEXT NOT NULL,
                     preRequisito TEXT NOT NULL,
                     coRequisito TEXT NOT NULL,
                     regimeDeOferta TEXT NOT NULL,
                     equivalencias TEXT NOT NULL
                 )
                 """;
-        try (Statement state = conectar.createStatement()){
+        try (Statement state = conectarDisciplina.createStatement()){
             state.execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -238,15 +231,13 @@ public class Model{
                 cargaEaD,
                 cargaExtensao,
                 cargaTotal,
-                professor,
                 estruturaCurricular,
-                obrigatoriedade,
                 preRequisito,
                 coRequisito,
                 regimeDeOferta,
                 equivalencias
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
-        try(PreparedStatement ps = conectar.prepareStatement(inserir)) {
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
+        try(PreparedStatement ps = conectarDisciplina.prepareStatement(inserir)) {
             ps.setString(1, disciplina.getNome());
             ps.setString(2, disciplina.getCodigo());
             ps.setString(3, disciplina.getCargaTeorica());
@@ -254,13 +245,11 @@ public class Model{
             ps.setString(5, disciplina.getCargaEaD());
             ps.setString(6, disciplina.getCargaExtensao());
             ps.setInt(7, disciplina.getCargaTotal());
-            ps.setString(8, disciplina.getProfessor().getLogin());
-            ps.setString(9, disciplina.getEstruturaCurricular());
-            ps.setString(10, disciplina.getObrigatoriedade());
-            ps.setString(11, disciplina.getPreRequisito());
-            ps.setString(12, disciplina.getCoRequisito());
-            ps.setString(13, disciplina.getRegimeDeOferta());
-            ps.setString(14, disciplina.getEquivalencias());
+            ps.setString(8, disciplina.getEstruturaCurricular());
+            ps.setString(9, disciplina.getPreRequisito());
+            ps.setString(10, disciplina.getCoRequisito());
+            ps.setString(11, disciplina.getRegimeDeOferta());
+            ps.setString(12, disciplina.getEquivalencias());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -270,8 +259,150 @@ public class Model{
         String busca = "SELECT codigo FROM disciplina WHERE codigo = ?";
 
         try{
-            PreparedStatement preparar = conectar.prepareStatement(busca);
+            PreparedStatement preparar = conectarDisciplina.prepareStatement(busca);
             preparar.setString(1, disciplina.getCodigo());
+            ResultSet resultado = preparar.executeQuery();
+
+            if(resultado.next()){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    //Verificacao PED
+    public boolean verificarPed(
+            String unidade,
+            Professor professor,
+            Disciplina disciplina,
+            String curso,
+            String semestre,
+            String justificativa,
+            String ementa,
+            String objetivos,
+            ArrayList<Aula> aulas,
+            String metodologia,
+            String atividadesDiscentes,
+            String sistemaDeAvaliacao,
+            String bibliografia
+    ){
+        if(
+                !unidade.isBlank()
+                        && !curso.isBlank()
+                        && !semestre.isBlank()
+                        && !justificativa.isBlank()
+                        && !ementa.isBlank()
+                        && !objetivos.isBlank()
+                        && !metodologia.isBlank()
+                        && !atividadesDiscentes.isBlank()
+                        && !sistemaDeAvaliacao.isBlank()
+                        && !bibliografia.isBlank()
+        ){
+            PED ped = new PED();
+            ped.setUnidade(unidade);
+            ped.setDisciplina(disciplina);
+            ped.setCurso(curso);
+            ped.setSemestre(semestre);
+            ped.setJustificativa(justificativa);
+            ped.setEmenta(ementa);
+            ped.setObjetivos(objetivos);
+            ped.setMetodologia(metodologia);
+            ped.setAtividadesDiscentes(atividadesDiscentes);
+            ped.setSistemaDeAvaliacao(sistemaDeAvaliacao);
+            ped.setBibliografia(bibliografia);
+            ped.setProfessor(professor);
+            SalvarPED(ped);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    //DB PED
+    public void seConectarPED(){
+        try{
+            if(conectarPED == null || conectarPED.isClosed()){
+                conectarPED = DriverManager.getConnection("jdbc:sqlite:bancoPED.db");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void criarTabelaPED(){
+        String sql = """
+                CREATE TABLE IF NOT EXISTS PED (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                    unidade TEXT NOT NULL,
+                    professor TEXT NOT NULL,
+                    disciplina TEXT NOT NULL,
+                    curso TEXT NOT NULL,
+                    semestre TEXT NOT NULL,
+                    justificativa TEXT NOT NULL,
+                    ementa TEXT NOT NULL,
+                    objetivos TEXT NOT NULL,
+                    ArrayList<Aula> aulas;
+                    metodologia TEXT NOT NULL,
+                    atividadesDiscentes TEXT NOT NULL,
+                    sistemaDeAvaliacao TEXT NOT NULL,
+                    bibliografia TEXT NOT NULL,
+                    obrigatoriedade TEXT NOT NULL
+                )
+                """;
+        try (Statement state = conectarPED.createStatement()){
+            state.execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void SalvarPED(PED ped){
+        String inserir = """
+                INSERT INTO PED(
+                unidade,
+                professor,
+                disciplina,
+                curso,
+                semestre,
+                justificativa,
+                ementa,
+                objetivos,
+                ArrayList<Aula> aulas;
+                metodologia,
+                atividadesDiscentes,
+                sistemaDeAvaliacao,
+                bibliografia
+                obrigatoriedade
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
+        try(PreparedStatement ps = conectarPED.prepareStatement(inserir)) {
+            ps.setString(1, ped.getUnidade());
+            ps.setString(2, ped.getProfessor().getLogin());
+            ps.setString(3, ped.getDisciplina().getCodigo());
+            ps.setString(4, ped.getCurso());
+            ps.setString(5, ped.getSemestre());
+            ps.setString(6, ped.getJustificativa());
+            ps.setString(7, ped.getEmenta());
+            ps.setString(8, ped.getObjetivos());
+            ps.setString(9, ped.getAula().toString());
+            ps.setString(10,ped.getMetodologia());
+            ps.setString(11,ped.getAtividadesDiscentes());
+            ps.setString(12,ped.getSistemaDeAvaliacao());
+            ps.setString(13,ped.getBibliografia());
+            ps.setString(14, ped.getObrigatoriedade());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public boolean PEDExiste(PED ped){
+        String busca = "SELECT codigo, semestre FROM PED WHERE codigo = ? AND semestre = ?";
+
+        try{
+            PreparedStatement preparar = conectarPED.prepareStatement(busca);
+            preparar.setString(3, ped.getDisciplina().getCodigo());
+            preparar.setString(5, ped.getSemestre());
             ResultSet resultado = preparar.executeQuery();
 
             if(resultado.next()){

@@ -18,6 +18,7 @@ public class PED {
     private String atividadesDiscentes;
     private String sistemaDeAvaliacao;
     private String bibliografia;
+    private String obrigatoriedade;
 
     public PED(){
         ArrayList<Aula> aulas = new ArrayList<>();
@@ -29,6 +30,14 @@ public class PED {
 
     public void setUnidade(String unidade) {
         this.unidade = unidade;
+    }
+
+    public String getObrigatoriedade() {
+        return obrigatoriedade;
+    }
+
+    public void setObrigatoriedade(String obrigatoriedade) {
+        this.obrigatoriedade = obrigatoriedade;
     }
 
     public String getCurso() {
