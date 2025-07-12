@@ -280,6 +280,25 @@ public class Model{
         return false;
     }
 
+    public boolean pesquisaPorCodigo(String codigo){
+        String busca = "SELECT codigo FROM disciplina WHERE codigo = ?";
+
+        try{
+            PreparedStatement preparar = conectarDisciplina.prepareStatement(busca);
+            preparar.setString(1, codigo);
+            ResultSet resultado = preparar.executeQuery();
+
+            if(resultado.next()){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     //Verificacao PED
     public boolean verificarPed(
