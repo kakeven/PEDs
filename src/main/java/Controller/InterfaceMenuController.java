@@ -5,14 +5,12 @@ import View.InterfaceMenuDisciplina;
 import View.InterfaceMenuPED;
 import javafx.fxml.FXML;
 import View.InterfaceLogin;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,6 +28,11 @@ public class InterfaceMenuController implements Initializable {
     private Button botaoAddDisciplina;
 
     private Model model;
+
+    @FXML
+    private Button botaoAddPED;
+
+    //testeeeeeeeeeeeeeeeeee
 
     public void initialize(URL location, ResourceBundle resources) {
         fundoInvisivel.requestFocus();

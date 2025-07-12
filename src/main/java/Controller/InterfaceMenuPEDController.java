@@ -42,6 +42,10 @@ public class InterfaceMenuPEDController implements Initializable {
     @FXML
     private HTMLEditor atividadesDoDiscenteEditor = new HTMLEditor();
 
+    //choices
+    @FXML
+    private ChoiceBox choiceDisciplina;
+
     private Model model;
     public void setModel(Model model) {
         this.model=model;
@@ -52,18 +56,6 @@ public class InterfaceMenuPEDController implements Initializable {
 
         //tira alguns botoes da toolbar(q permitira "executar" comandos e outras paradinha)(deixa mais rapido, eu acho)
         Platform.runLater(() -> {
-            //setar fontes(isso aq NAO TA FUNCIONANDO AINDA, VOU ARRUMAR)
-            String fonteInicial = "<!DOCTYPE html><html><head>" + "<style>" + "body { font-family: 'Comic Sans', serif; font-size: 14px; }" + "p { font-family: 'Times New Roman', serif; font-size: 14px; }" + "li { font-family: 'Times New Roman', serif; font-size: 14px; }" + "</style>" + "</head><body><p></p></body></html>";
-
-            justificativaEditor.setHtmlText(fonteInicial);
-            objetivosEditor.setHtmlText(fonteInicial);
-            sistemaDeAvaliacaoEditor.setHtmlText(fonteInicial);
-            bibliografiaEditor.setHtmlText(fonteInicial);
-            ementaEditor.setHtmlText(fonteInicial);
-            metodologiaEditor.setHtmlText(fonteInicial);
-            atividadesDoDiscenteEditor.setHtmlText(fonteInicial);
-
-
             //tirar copiar
             justificativaEditor.lookupAll(".html-editor-copy").forEach(n -> {
                 n.setVisible(false);
@@ -148,6 +140,10 @@ public class InterfaceMenuPEDController implements Initializable {
                 n.setManaged(false);
             });
         });
+
+        //choiceDisciplina.getItems().addAll(model.arrayDisciplinas());
+
+        //choiceDisciplina.setValue("teste");
     }
 
 
