@@ -40,7 +40,7 @@
                   <Insets bottom="30.0" left="240.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="botaoLogout" mnemonicParsing="false" text="Logout" GridPane.rowIndex="6">
+            <Button fx:id="botaoLogout" onAction="#aoClicarLogout" mnemonicParsing="false" text="Logout" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets left="15.0" />
                </GridPane.margin>
