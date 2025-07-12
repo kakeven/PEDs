@@ -42,6 +42,10 @@ public class InterfaceMenuPEDController implements Initializable {
     @FXML
     private HTMLEditor atividadesDoDiscenteEditor = new HTMLEditor();
 
+    private Model model;
+    public void setModel(Model model) {
+        this.model=model;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -145,4 +149,6 @@ public class InterfaceMenuPEDController implements Initializable {
             });
         });
     }
+
+
 }
