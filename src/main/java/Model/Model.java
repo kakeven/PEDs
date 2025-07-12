@@ -459,8 +459,8 @@ public class Model{
         return false;
     }
 
-    public ArrayList<Disciplina> arrayDisciplinas(){
-        ArrayList<Disciplina> disciplinas = new ArrayList<>();
+    public ArrayList<String> arrayDisciplinas(){
+        ArrayList<String> disciplinas = new ArrayList<>();
 
         String selectSql = "SELECT " +
                 "nome, codigo, cargaTeorica, cargaPratica, cargaEaD, " +
@@ -472,22 +472,7 @@ public class Model{
              ResultSet rs = ps.executeQuery()) { // Executa a consulta e obtém o resultado
 
             while (rs.next()) {
-
-                Disciplina disciplina = new Disciplina();
-
-                disciplina.setNome(rs.getString("nome"));
-                disciplina.setCodigo(rs.getString("codigo"));
-                disciplina.setCargaTeorica(rs.getInt("cargaTeorica"));
-                disciplina.setCargaPratica(rs.getInt("cargaPratica"));
-                disciplina.setCargaEaD(rs.getInt("cargaEaD"));
-                disciplina.setCargaExtensao(rs.getInt("cargaExtensao"));
-                disciplina.setEstruturaCurricular(rs.getString("estruturaCurricular"));
-                disciplina.setPreRequisitos(rs.getString("preRequisito"));
-                disciplina.setCoRequisito(rs.getString("coRequisito"));
-                disciplina.setRegimeDeOferta(rs.getString("regimeDeOferta"));
-                disciplina.setEquivalencias(rs.getString("equivalencias"));
-
-                disciplinas.add(disciplina);
+                disciplinas.add(rs.getString("nome"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
