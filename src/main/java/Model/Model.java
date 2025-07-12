@@ -471,7 +471,7 @@ public class Model{
         try (PreparedStatement ps = conectarDisciplina.prepareStatement(selectSql);
              ResultSet rs = ps.executeQuery()) { // Executa a consulta e obtém o resultado
 
-            while (rs.next()) {
+            while (rs.next()){
                 disciplinas.add(rs.getString("nome"));
             }
         } catch (SQLException e) {

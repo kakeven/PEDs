@@ -33,13 +33,12 @@ public class InterfaceMenuController implements Initializable {
     private Button botaoAddPED;
 
 
+    public void setModel(Model model) {
+        this.model=model;
+    }
 
     public void initialize(URL location, ResourceBundle resources) {
         fundoInvisivel.requestFocus();
-    }
-
-    public void setModel(Model model) {
-        this.model=model;
     }
 
     //metodos

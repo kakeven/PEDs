@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Model;
+import Model.Disciplina;
 import View.InterfaceMenu;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.Stage;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.application.*;
@@ -46,14 +48,18 @@ public class InterfaceMenuPEDController implements Initializable {
     @FXML
     private ChoiceBox choiceDisciplina;
 
+    @FXML
+    private Button botaoAddAula;
+
     private Model model;
+
+
     public void setModel(Model model) {
         this.model=model;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         //tira alguns botoes da toolbar(q permitira "executar" comandos e outras paradinha)(deixa mais rapido, eu acho)
         Platform.runLater(() -> {
             //tirar copiar
@@ -141,9 +147,10 @@ public class InterfaceMenuPEDController implements Initializable {
             });
         });
 
-        System.out.println(model.arrayDisciplinas());
-
+       choiceDisciplina.getItems().addAll(model.arrayDisciplinas());
     }
 
+    public void aoClicarAula(){
 
+    }
 }
