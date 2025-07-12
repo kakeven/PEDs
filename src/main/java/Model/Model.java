@@ -459,7 +459,7 @@ public class Model{
         return false;
     }
 
-    public ArrayList<String> arrayDisciplinas(){
+    public String[] arrayDisciplinas(){
         ArrayList<String> disciplinas = new ArrayList<>();
 
         String selectSql = "SELECT " +
@@ -477,7 +477,8 @@ public class Model{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return disciplinas;
+        String[] discArray = disciplinas.toArray(new String[disciplinas.size()]);
+        return discArray;
     }
 
     public boolean addAula(ArrayList<Aula> aulas, int cargaHoraria){
