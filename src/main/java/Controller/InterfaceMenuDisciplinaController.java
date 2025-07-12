@@ -120,8 +120,6 @@ public class InterfaceMenuDisciplinaController implements Initializable{
         regimeDeOferta.getItems().addAll("Semestral", "Anual", "Modular");
 
         regimeDeOferta.setValue("Semestral");
-
-        //atualizarCargaTotal();
     }
 
     //metodos gerais
