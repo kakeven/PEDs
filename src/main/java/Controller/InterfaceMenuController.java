@@ -55,4 +55,14 @@ public class InterfaceMenuController implements Initializable {
             e.printStackTrace();
         }
     }
+    public void aoClicarAddPED(){
+        try{
+            Parent arquivoJanela = new InterfaceMenuPED(model).getRoot();
+            Stage JanelaAtual = (Stage) botao_addDisciplina.getScene().getWindow();
+            JanelaAtual.setScene(new Scene(arquivoJanela));
+            JanelaAtual.setTitle("Cadastro PED");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }
