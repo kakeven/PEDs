@@ -255,13 +255,12 @@ public class Model{
             ps.setString(6, disciplina.getCargaExtensao());
             ps.setInt(7, disciplina.getCargaTotal());
             ps.setString(8, disciplina.getProfessor().getLogin());
-            ps.setString(9, disciplina.getCodigo());
-            ps.setString(10, disciplina.getEstruturaCurricular());
-            ps.setString(11, disciplina.getObrigatoriedade());
-            ps.setString(12, disciplina.getPreRequisito());
-            ps.setString(13, disciplina.getCoRequisito());
-            ps.setString(14, disciplina.getRegimeDeOferta());
-            ps.setString(15, disciplina.getEquivalencias());
+            ps.setString(9, disciplina.getEstruturaCurricular());
+            ps.setString(10, disciplina.getObrigatoriedade());
+            ps.setString(11, disciplina.getPreRequisito());
+            ps.setString(12, disciplina.getCoRequisito());
+            ps.setString(13, disciplina.getRegimeDeOferta());
+            ps.setString(14, disciplina.getEquivalencias());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

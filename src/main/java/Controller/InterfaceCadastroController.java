@@ -83,7 +83,7 @@ public class InterfaceCadastroController implements Initializable {
             if(!model.LoginExiste(professorNovo)){
                 professorAtual = professorNovo.getNome();
                 try{
-                    model.SalvarUsuario(professorNovo);//salva o usuario
+                    model.SalvarUsuario(professorNovo); //salva o usuario
 
                     Parent arquivoJanela = new InterfaceMenu(model).getRoot();
                     Stage janelaAtual = (Stage) botaoCadastro.getScene().getWindow();

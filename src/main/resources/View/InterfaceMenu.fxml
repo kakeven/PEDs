@@ -42,12 +42,12 @@
                   <Insets left="250.0" />
                </GridPane.margin>
             </Label>
-            <Button fx:id="botao_AddDisc" mnemonicParsing="false" prefHeight="25.0" prefWidth="128.0" text="Adicionar Disciplina" GridPane.rowIndex="3">
+            <Button fx:id="botao_addDisciplina" onAction="#aoCliclarAddDisciplina" mnemonicParsing="false" prefHeight="25.0" prefWidth="128.0" text="Adicionar Disciplina" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets bottom="42.0" left="26.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="botao_Logout" mnemonicParsing="false" text="Logout" GridPane.rowIndex="6">
+            <Button fx:id="botao_Logout" onAction="#aoClicarLogout" mnemonicParsing="false" text="Logout" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets left="15.0" />
                </GridPane.margin>
