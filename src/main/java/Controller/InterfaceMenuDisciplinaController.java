@@ -27,10 +27,28 @@ public class InterfaceMenuDisciplinaController implements Initializable{
     private Spinner<Integer>spinnerCargaEaD;
 
     @FXML
-    private Button botaoVoltar;
+    private TextField textoHorasTotais;
 
     @FXML
-    private Button botaoAdicionar;
+    private TextField estruturaCurricular;
+
+    @FXML
+    private ChoiceBox regimeDeOferta;
+
+    @FXML
+    private TextField codigoDisciplina;
+
+    @FXML
+    private TextArea preRequisitos;
+
+    @FXML
+    private TextArea coRequisitos;
+
+    @FXML
+    private TextArea equivalencias;
+
+    @FXML
+    private TextField nomeDisciplina;
 
     @FXML
     private Label labelHorasTotal;
@@ -41,17 +59,14 @@ public class InterfaceMenuDisciplinaController implements Initializable{
     @FXML
     private Label labelMensagemAddComSucesso;
 
+    //botoes
     @FXML
-    private TextField textoHorasTotais;
-
-    //choices
-    @FXML
-    private ChoiceBox estruturaCurricular;
+    private Button botaoVoltar;
 
     @FXML
-    private ChoiceBox regimeDeOferta;
+    private Button botaoAdicionar;
 
-    //variaveis
+    //variaveis gerais
     private Model model;
 
     public void setModel(Model model){
@@ -94,10 +109,8 @@ public class InterfaceMenuDisciplinaController implements Initializable{
 
         //choices
         regimeDeOferta.getItems().addAll("Semestral", "Anual", "Modular");
-        estruturaCurricular.getItems().addAll("2014", "2018");
 
         regimeDeOferta.setValue("Semestral");
-        estruturaCurricular.setValue("2018");
 
         //atualizarCargaTotal();
     }
@@ -113,7 +126,6 @@ public class InterfaceMenuDisciplinaController implements Initializable{
         textoHorasTotais.setText(String.valueOf(model.getCargaTotal()));
     }
     public void aoClicarAdicionar(){
-        //model.verificarDisciplina();
+        model.verificarDisciplina(nomeDisciplina.getText(), codigoDisciplina.getText(), spinnerCargaTeorica.getValue(), spinnerCargaPratica.getValue(), spinnerCargaEaD.getValue(), spinnerCargaExtensao.getValue(), estruturaCurricular.getText(), preRequisitos.getText(), coRequisitos.getText(), regimeDeOferta.getValue(), equivalencias.getText());
     }
-
 }
