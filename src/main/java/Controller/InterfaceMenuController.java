@@ -23,7 +23,7 @@ public class InterfaceMenuController implements Initializable {
     public Pane fundoInvisivel;
 
     @FXML
-    private Button botao_Logout;
+    private Button botaoLogout;
 
     @FXML
     private Button botaoAddDisciplina;
@@ -41,7 +41,7 @@ public class InterfaceMenuController implements Initializable {
     //metodos
     public void aoClicarLogout(){
         Parent arquivoJanela = new InterfaceLogin(model).getRoot();
-        Stage JanelaAtual = (Stage) botao_Logout.getScene().getWindow();
+        Stage JanelaAtual = (Stage) botaoLogout.getScene().getWindow();
         JanelaAtual.setScene(new Scene(arquivoJanela));
         JanelaAtual.setTitle("Projeto PEDs");
     }
