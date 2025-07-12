@@ -290,7 +290,8 @@ public class Model{
             String metodologia,
             String atividadesDiscentes,
             String sistemaDeAvaliacao,
-            String bibliografia
+            String bibliografia,
+            String obrigatoriedade
     ){
         if(
                 !unidade.isBlank()
@@ -303,6 +304,7 @@ public class Model{
                         && !atividadesDiscentes.isBlank()
                         && !sistemaDeAvaliacao.isBlank()
                         && !bibliografia.isBlank()
+                        && !obrigatoriedade.isBlank()
         ){
             PED ped = new PED();
             ped.setUnidade(unidade);
@@ -317,6 +319,7 @@ public class Model{
             ped.setSistemaDeAvaliacao(sistemaDeAvaliacao);
             ped.setBibliografia(bibliografia);
             ped.setProfessor(professor);
+            ped.setObrigatoriedade(obrigatoriedade);
             SalvarPED(ped);
             return true;
         } else {
