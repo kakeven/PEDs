@@ -165,12 +165,13 @@ public class Model{
             String equivalencias
         ){
         if(
-                !nome.isBlank()
-                        && !codigo.isBlank()
-                        && !estruturaCurricular.isBlank()
-                        && !regimeDeOferta.isBlank()
+                !nome.isBlank()  && nome != null
+                        && !codigo.isBlank() && codigo != null
+                        && !estruturaCurricular.isBlank() && estruturaCurricular != null
+                        && !regimeDeOferta.isBlank() && regimeDeOferta != null
         ){
             Disciplina disciplina = new Disciplina();
+            disciplina.setNome(nome);
             disciplina.setCodigo(codigo);
             disciplina.setCargaTeorica(cargaTeorica);
             disciplina.setCargaPratica(cargaPratica);
