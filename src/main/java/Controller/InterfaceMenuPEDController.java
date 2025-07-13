@@ -177,12 +177,23 @@ public class InterfaceMenuPEDController implements Initializable {
             }
         });//futuramente se der certo add persistencia
 
+
     }
 
     public void aoClicarAddAula(){
         String data = seletorDatas.getValue().toString();
         String nomeAula = textoAulas.getText();
         int horaAula = spinnerHoraAula.getValue();
+        int cargaHorariaDisciplina = model.getCargaTotal(choiceDisciplina.getValue());
+
+        Boolean aulaCriada = model.addAula(model.criarAula(data, nomeAula, horaAula, cargaHorariaDisciplina), cargaHorariaDisciplina);
+
+        if(aulaCriada){
+            System.out.println("deu certo doidin");
+        }else{
+            System.out.println("nao deu certo");
+        }
+
     }
 
     public void aoClicarVoltar(){

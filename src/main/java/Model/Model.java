@@ -5,6 +5,7 @@ import java.lang.reflect.Type;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class Model{
@@ -58,6 +59,13 @@ public class Model{
     public int getCargaTotal() {
         if (disciplina != null) {
             return disciplina.getCargaTotal();
+        }
+        return 0;
+    }
+
+    public int getCargaTotal(Object disciplina) {
+        if (disciplina != null && disciplina instanceof Disciplina disciplina1) {
+            return disciplina1.getCargaTotal();
         }
         return 0;
     }
