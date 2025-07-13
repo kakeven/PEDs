@@ -620,6 +620,10 @@ public class Model{
         return true;
     }
 
+    public ArrayList<Aula> getAulasTemp(){
+        return aulasTemp;
+    }
+
     public boolean cargaHorariaCompleta(ArrayList<Aula> aulas, int cargaHoraria){
         for(Aula aula : aulas){
             cargaHoraria -= aula.getCargaHoraria();
