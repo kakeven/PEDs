@@ -310,6 +310,23 @@ public class Model{
         return false;
     }
 
+    public int idDisciplina(Disciplina disciplina){
+        String busca = "SELECT codigo FROM disciplina WHERE codigo = ?";
+
+        try{
+            PreparedStatement preparar = conectarDisciplina.prepareStatement(busca);
+            preparar.setString(1, disciplina.getCodigo());
+            ResultSet resultado = preparar.executeQuery();
+
+            if(resultado.next()){
+                return resultado.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
     public boolean pesquisaDisciplinaPorCodigo(String codigo){
         String busca = "SELECT codigo FROM disciplina WHERE codigo = ?";
 
@@ -520,6 +537,23 @@ public class Model{
             e.printStackTrace();
         }
         return false;
+    }
+    public int idPED(PED ped){
+        String busca = "SELECT codigo, semestre FROM PED WHERE codigo = ? AND semestre = ?";
+
+        try{
+            PreparedStatement preparar = conectarPED.prepareStatement(busca);
+            preparar.setString(3, ped.getDisciplina().getCodigo());
+            preparar.setString(5, ped.getSemestre());
+            ResultSet resultado = preparar.executeQuery();
+
+            if(resultado.next()){
+                return resultado.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 
     public ArrayList<Disciplina> arrayDisciplinas(){
