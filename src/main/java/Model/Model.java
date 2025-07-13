@@ -414,6 +414,7 @@ public class Model{
                         && !sistemaDeAvaliacao.isBlank()
                         && !bibliografia.isBlank()
                         && !obrigatoriedade.isBlank()
+                        && (cargaHorariaCompleta(aulasTemp, disciplina.getCargaTotal()))
         ){
             PED ped = new PED();
             ped.setUnidade(unidade);
@@ -430,6 +431,7 @@ public class Model{
             ped.setProfessor(professor);
             ped.setObrigatoriedade(obrigatoriedade);
             ped.setAulas(aulas);
+            aulasTemp.clear();
             if(PEDExiste(ped)){
                 ped = null;
                 System.gc();
@@ -601,7 +603,7 @@ public class Model{
         return disciplinas;
     }
 
-    public ArrayList<Aula> criarAula(String data, String descricao, int carga, int cargaTotal){
+    public boolean criarAula(String data, String descricao, int carga, int cargaTotal){
         Aula aula = new Aula();
         aula.setData(data);
         aula.setDescricao(descricao);
@@ -609,12 +611,10 @@ public class Model{
         aulasTemp.add(aula);
         if(!addAula(aulasTemp, cargaTotal)){
             aulasTemp.remove(aula);
+            return false;
+        } else{
+            return true;
         }
-        ArrayList<Aula> aulasRetorno =  aulasTemp;
-        if(cargaHorariaCompleta(aulasRetorno, cargaTotal)){
-            aulasTemp.clear();
-        }
-        return aulasRetorno;
     }
 
     public boolean addAula(ArrayList<Aula> aulas, int cargaHoraria){
