@@ -13,9 +13,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.HTMLEditor?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1108.0" style="-fx-background-color: #E6F0FA;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceMenuPEDController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1108.0" style="-fx-background-color: #E6F0FA;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceMenuPEDController">
    <children>
-      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="900.0" prefWidth="1108.0">
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="680.0" prefWidth="1108.0">
          <content>
             <AnchorPane prefHeight="1552.0" prefWidth="1108.0">
                <children>
