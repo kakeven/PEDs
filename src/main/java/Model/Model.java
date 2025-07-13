@@ -621,9 +621,11 @@ public class Model{
         Aula aulaAdicionar = aulas.get(aulas.size()-1);
         for(Aula aula : aulas){
             cargaHoraria-=aula.getCargaHoraria();
-            if(aula.getData().equals(aulaAdicionar.getData()) || cargaHoraria >= 0){
+            System.out.println("Carga horaria restante "+cargaHoraria);
+            if(aulaAdicionar!= aula && (aula.getData().equals(aulaAdicionar.getData())) || cargaHoraria <= 0){
                 return false;
             }
+            System.out.println("Carga horaria restante "+cargaHoraria);
         }
         return true;
     }
