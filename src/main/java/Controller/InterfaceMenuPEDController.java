@@ -186,7 +186,7 @@ public class InterfaceMenuPEDController implements Initializable {
         int horaAula = spinnerHoraAula.getValue();
         int cargaHorariaDisciplina = model.getCargaTotal(choiceDisciplina.getValue());
 
-        Boolean aulaCriada = model.addAula(model.criarAula(data, nomeAula, horaAula, cargaHorariaDisciplina), cargaHorariaDisciplina);
+        Boolean aulaCriada = model.criarAula(data, nomeAula, horaAula, cargaHorariaDisciplina);
 
         if(aulaCriada){
             System.out.println("deu certo doidin");

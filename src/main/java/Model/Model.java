@@ -28,7 +28,7 @@ public class Model{
         criarTabelaDisciplina();
         criarTabelaPED();
         this.disciplina = new Disciplina();
-        ArrayList<Aula> aulasTemp = new ArrayList<>();
+        this.aulasTemp = new ArrayList<>();
     }
 
     //sets CargaHoraria Disciplina
