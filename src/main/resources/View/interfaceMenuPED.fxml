@@ -21,13 +21,13 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="choiceDisciplina" layoutX="129.0" layoutY="153.0" prefHeight="25.0" prefWidth="240.0" />
+            <ChoiceBox layoutX="129.0" layoutY="153.0" prefHeight="25.0" prefWidth="240.0" />
             <Label layoutX="54.0" layoutY="199.0" prefHeight="25.0" text="Disciplina:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <ChoiceBox layoutX="129.0" layoutY="199.0" prefHeight="25.0" prefWidth="240.0" />
+            <ChoiceBox fx:id="choiceDisciplina" layoutX="129.0" layoutY="199.0" prefHeight="25.0" prefWidth="240.0" />
             <Label layoutX="101.0" layoutY="243.0" prefHeight="25.0" text="Semestre:">
                <font>
                   <Font size="16.0" />
@@ -55,12 +55,12 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button layoutX="1536.0" layoutY="946.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Voltar">
+            <Button fx:id="botaoVoltar" onAction="#aoClicarVoltar" layoutX="1536.0" layoutY="946.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Voltar">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <TextField editable="false" layoutX="103.0" layoutY="107.0" prefHeight="25.0" prefWidth="266.0" />
+            <TextField fx:id="nomeProfessor" editable="false" layoutX="103.0" layoutY="107.0" prefHeight="25.0" prefWidth="266.0" />
             <Label layoutX="29.0" layoutY="107.0" prefHeight="25.0" text="Professor:">
                <font>
                   <Font size="16.0" />

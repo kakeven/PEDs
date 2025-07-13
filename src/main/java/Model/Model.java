@@ -4,7 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import java.sql.*;
 import java.util.ArrayList;
 
-//Gathored
+
 public class Model{
     private Connection conectar;
     private Connection conectarUsuario;
@@ -12,6 +12,7 @@ public class Model{
     private Connection conectarDisciplina;
     private Disciplina disciplina;
     private Gson gson;
+    private Professor professorAtual;
 
     //construtor
     public Model(){
@@ -58,8 +59,6 @@ public class Model{
     }
 
     //metodos DB
-
-
     //DB Usuário
     public  void seConectarUsuario(){
         try{
@@ -107,8 +106,8 @@ public class Model{
             e.printStackTrace();
         }
     }
-    public boolean LoginExiste(Professor professor){
-        String busca = "SELECT login, senha FROM usuarios WHERE login = ?";
+    public boolean LoginExiste(Professor professor){//serve para nao cadastrar dois usuarios com mesmo login
+        String busca = "SELECT login FROM usuarios WHERE login = ?";
 
         try{
             PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
@@ -138,7 +137,7 @@ public class Model{
                 String nomeProfessor = resultado.getString("nome");
 
                 if(senha.equals(professor.getSenha())){
-                    return new Professor(nomeProfessor, professor.getLogin(), senha); //retorna um profesor com Nome para exibir mais tarde em alguma view o professor logado atualmente
+                    return professorAtual = new Professor(nomeProfessor, professor.getLogin(), senha); //retorna um profesor com Nome para exibir mais tarde em alguma view o professor logado atualmente
                 }
             }else{
                 return null;
@@ -148,10 +147,16 @@ public class Model{
         }
         return null;
     }
+
     public int CalcularEstatistica(){
         return 0;
     }
-
+    public void setProfessorAtual(Professor professor){
+        this.professorAtual = professor;
+    }
+    public Professor getProfessorAtual() {
+        return professorAtual;
+    }
 
     //Verificacao Disciplina
     public boolean verificarDisciplina(
@@ -469,23 +474,13 @@ public class Model{
                 "FROM disciplina";
 
         try (PreparedStatement ps = conectarDisciplina.prepareStatement(selectSql);
-             ResultSet rs = ps.executeQuery()) { // Executa a consulta e obtém o resultado
+             ResultSet rs = ps.executeQuery()) { //Executa a consulta e obtém o resultado
 
             while (rs.next()) {
-
                 Disciplina disciplina = new Disciplina();
 
                 disciplina.setNome(rs.getString("nome"));
                 disciplina.setCodigo(rs.getString("codigo"));
-                disciplina.setCargaTeorica(rs.getInt("cargaTeorica"));
-                disciplina.setCargaPratica(rs.getInt("cargaPratica"));
-                disciplina.setCargaEaD(rs.getInt("cargaEaD"));
-                disciplina.setCargaExtensao(rs.getInt("cargaExtensao"));
-                disciplina.setEstruturaCurricular(rs.getString("estruturaCurricular"));
-                disciplina.setPreRequisitos(rs.getString("preRequisito"));
-                disciplina.setCoRequisito(rs.getString("coRequisito"));
-                disciplina.setRegimeDeOferta(rs.getString("regimeDeOferta"));
-                disciplina.setEquivalencias(rs.getString("equivalencias"));
 
                 disciplinas.add(disciplina);
             }
@@ -508,7 +503,7 @@ public class Model{
 
     public boolean cargaHorariaCompleta(ArrayList<Aula> aulas, int cargaHoraria){
         for(Aula aula : aulas){
-            cargaHoraria-=aula.getCargaHoraria();
+            cargaHoraria -= aula.getCargaHoraria();
         }
         return(!(cargaHoraria>0));
     }

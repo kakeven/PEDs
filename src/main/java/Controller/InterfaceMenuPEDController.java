@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.Model;
-import Model.Disciplina;
+import View.InterfaceLogin;
 import View.InterfaceMenu;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,6 +23,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class InterfaceMenuPEDController implements Initializable {
+
     @FXML
     private HTMLEditor justificativaEditor = new HTMLEditor();
 
@@ -48,14 +49,24 @@ public class InterfaceMenuPEDController implements Initializable {
     @FXML
     private ChoiceBox choiceDisciplina;
 
+    //textField
+    @FXML
+    private TextField nomeProfessor;
+
     @FXML
     private Button botaoAddAula;
 
-    private Model model;
+    @FXML
+    private Button botaoVoltar;
 
+    private Model model;
 
     public void setModel(Model model) {
         this.model=model;
+        choiceDisciplina.getItems().clear();
+        choiceDisciplina.getItems().addAll(model.arrayDisciplinas());
+        choiceDisciplina.setValue("Nenhuma Disciplina");
+        nomeProfessor.setText(model.getProfessorAtual().getNome());
     }
 
     @Override
@@ -146,11 +157,14 @@ public class InterfaceMenuPEDController implements Initializable {
                 n.setManaged(false);
             });
         });
-
-       choiceDisciplina.getItems().addAll(model.arrayDisciplinas());
     }
-
     public void aoClicarAula(){
 
+    }
+    public void aoClicarVoltar(){
+        Parent arquivoJanela = new InterfaceMenu(model).getRoot();
+        Stage JanelaAtual = (Stage) botaoVoltar.getScene().getWindow();
+        JanelaAtual.setScene(new Scene(arquivoJanela));
+        JanelaAtual.setTitle("Projeto PEDs");
     }
 }

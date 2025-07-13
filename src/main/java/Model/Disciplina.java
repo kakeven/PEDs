@@ -133,6 +133,6 @@ public class Disciplina {
 
     @Override
     public String toString() {
-        return String.format("%s %20s", codigo, nome);
+        return String.format("%s %s", codigo, nome);
     }
 }

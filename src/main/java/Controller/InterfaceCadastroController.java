@@ -20,8 +20,10 @@ import static Controller.InterfaceLoginController.professorAtual;
 public class InterfaceCadastroController implements Initializable {
 
     private Model model;
+
     @FXML
     public Pane fundoInvisivel;
+
     public void initialize(URL location, ResourceBundle resources) {
         lblMensagemPreencher.setVisible(false);
         lblUsuarioJaExiste.setVisible(false);
@@ -87,6 +89,7 @@ public class InterfaceCadastroController implements Initializable {
                 professorAtual = professorNovo.getNome();
                 try{
                     model.SalvarUsuario(professorNovo); //salva o usuario
+                    model.setProfessorAtual(professorNovo);//pega o professor atual para mostrar no nome do professor no PED
 
                     Parent arquivoJanela = new InterfaceMenu(model).getRoot();
                     Stage janelaAtual = (Stage) botaoCadastro.getScene().getWindow();
