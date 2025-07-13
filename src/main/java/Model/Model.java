@@ -1,6 +1,8 @@
 package Model;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -157,6 +159,26 @@ public class Model{
     public Professor getProfessorAtual() {
         return professorAtual;
     }
+    public Professor pesquisaProfessorPorID(int id){
+        String busca = "SELECT id FROM professor WHERE id = ?";
+
+        try{
+            PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
+            preparar.setInt(0, id);
+            ResultSet rs = preparar.executeQuery();
+
+            if(rs.next()){
+                Professor professor= new Professor();
+                professor.setLogin(rs.getString("login"));
+                professor.setNome(rs.getString("nome"));
+                professor.setSenha(rs.getString("senha"));
+                return professor;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     //Verificacao Disciplina
     public boolean verificarDisciplina(
@@ -288,7 +310,7 @@ public class Model{
         return false;
     }
 
-    public boolean pesquisaPorCodigo(String codigo){
+    public boolean pesquisaDisciplinaPorCodigo(String codigo){
         String busca = "SELECT codigo FROM disciplina WHERE codigo = ?";
 
         try{
@@ -307,6 +329,34 @@ public class Model{
         return false;
     }
 
+    public Disciplina pesquisaDisciplinaPorID(int id){
+        String busca = "SELECT id FROM disciplina WHERE id = ?";
+
+        try{
+            PreparedStatement preparar = conectarDisciplina.prepareStatement(busca);
+            preparar.setInt(0, id);
+            ResultSet rs = preparar.executeQuery();
+
+            if(rs.next()){
+                Disciplina disciplina = new Disciplina();
+                disciplina.setNome(rs.getString("nome"));
+                disciplina.setCodigo(rs.getString("codigo"));
+                disciplina.setCargaTeorica(rs.getInt("cargaTeorica"));
+                disciplina.setCargaPratica(rs.getInt("cargaPratica"));
+                disciplina.setCargaEaD(rs.getInt("cargaEaD"));
+                disciplina.setCargaExtensao(rs.getInt("cargaExtensao"));
+                disciplina.setEstruturaCurricular(rs.getString("estruturaCurricular"));
+                disciplina.setPreRequisitos(rs.getString("preRequisito"));
+                disciplina.setCoRequisito(rs.getString("coRequisito"));
+                disciplina.setRegimeDeOferta(rs.getString("regimeDeOferta"));
+                disciplina.setEquivalencias(rs.getString("equivalencias"));
+                return disciplina;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     //Verificacao PED
     public boolean verificarPed(
@@ -370,6 +420,10 @@ public class Model{
             if(conectarPED == null || conectarPED.isClosed()){
                 conectarPED = DriverManager.getConnection("jdbc:sqlite:bancoPED.db");
             }
+            try (Statement stmt = conectarPED.createStatement()) {
+                stmt.execute("PRAGMA foreign_keys = ON;");
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -379,8 +433,8 @@ public class Model{
                 CREATE TABLE IF NOT EXISTS PED (
                     id INTEGER PRIMARY KEY AUTOINCREMENT, 
                     unidade TEXT NOT NULL,
-                    professor TEXT NOT NULL,
-                    disciplina TEXT NOT NULL,
+                    id_professor INTEGER,
+                    id_disciplina INTEGER,
                     curso TEXT NOT NULL,
                     semestre TEXT NOT NULL,
                     justificativa TEXT NOT NULL,
@@ -391,7 +445,11 @@ public class Model{
                     sistemaDeAvaliacao TEXT NOT NULL,
                     bibliografia TEXT NOT NULL,
                     obrigatoriedade TEXT NOT NULL,
-                    aulas TEXT NOT NULL
+                    aulas TEXT NOT NULL,
+                    FOREIGN KEY (id_professor) REFERENCES professor(id)
+                    FOREIGN KEY (id_disciplina) REFERENCES disciplina(id)
+                    ON DELETE CASCADE
+                    ON DELETE CASCADE
                 )
                 """;
         try (Statement state = conectarPED.createStatement()){
@@ -405,7 +463,7 @@ public class Model{
                 INSERT INTO PED(
                 unidade,
                 professor,
-                disciplina,
+                id_disciplina,
                 curso,
                 semestre,
                 justificativa,
@@ -481,6 +539,15 @@ public class Model{
 
                 disciplina.setNome(rs.getString("nome"));
                 disciplina.setCodigo(rs.getString("codigo"));
+                disciplina.setCargaTeorica(rs.getInt("cargaTeorica"));
+                disciplina.setCargaPratica(rs.getInt("cargaPratica"));
+                disciplina.setCargaEaD(rs.getInt("cargaEaD"));
+                disciplina.setCargaExtensao(rs.getInt("cargaExtensao"));
+                disciplina.setEstruturaCurricular(rs.getString("estruturaCurricular"));
+                disciplina.setPreRequisitos(rs.getString("preRequisito"));
+                disciplina.setCoRequisito(rs.getString("coRequisito"));
+                disciplina.setRegimeDeOferta(rs.getString("regimeDeOferta"));
+                disciplina.setEquivalencias(rs.getString("equivalencias"));
 
                 disciplinas.add(disciplina);
             }
@@ -506,5 +573,47 @@ public class Model{
             cargaHoraria -= aula.getCargaHoraria();
         }
         return(!(cargaHoraria>0));
+    }
+
+
+
+    public ArrayList<PED> arrayPEDs(){
+        ArrayList<PED> peds = new ArrayList<>();
+
+        String selectSql = "SELECT " +
+                "unidade, id_professor, id_disciplina, curso, semestre, justificativa, ementa, objetivos, metodologia,"+
+                "atividadesDiscentes, sistemaDeAvaliacao, bibliografia, obrigatoriedade, aulas"+
+                "FROM PED";
+
+        try (PreparedStatement ps = conectarPED.prepareStatement(selectSql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                PED ped = new PED();
+
+                ped.setUnidade(rs.getString("unidade"));
+                ped.setProfessor(pesquisaProfessorPorID(rs.getInt("id_professor")));
+                ped.setDisciplina(pesquisaDisciplinaPorID(rs.getInt("id_disciplina")));
+                ped.setCurso(rs.getString("curso"));
+                ped.setSemestre(rs.getString("semestre"));
+                ped.setJustificativa(rs.getString("justificativa"));
+                ped.setEmenta(rs.getString("ementa"));
+                ped.setObjetivos(rs.getString("objetivos"));
+                ped.setMetodologia(rs.getString("metodologia"));
+                ped.setAtividadesDiscentes(rs.getString("atividadesDiscentes"));
+                ped.setSistemaDeAvaliacao(rs.getString("sistemaDeAvaliacao"));
+                ped.setBibliografia(rs.getString("bibliografia"));
+                ped.setObrigatoriedade(rs.getString("obrigatoriedade"));
+
+                Type listType = new TypeToken<ArrayList<Aula>>(){}.getType();
+                ArrayList<Aula> aulas = gson.fromJson(rs.getString("aulasJson"), listType);
+                ped.setAulas(aulas);
+
+                peds.add(ped);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return peds;
     }
 }

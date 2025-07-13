@@ -146,7 +146,7 @@ public class InterfaceMenuDisciplinaController implements Initializable{
             });
             timer.play();
         }else{
-            if(model.pesquisaPorCodigo(codigoDisciplina.getText())){
+            if(model.pesquisaDisciplinaPorCodigo(codigoDisciplina.getText())){
                 labelMensagemDisciplinaJaExiste.setVisible(true);
                 labelMensagemAddComSucesso.setVisible(false);
                 labelMensagemErroCampos.setVisible(false);
