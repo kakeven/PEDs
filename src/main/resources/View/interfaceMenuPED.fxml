@@ -40,22 +40,22 @@
             <HTMLEditor fx:id="objetivosEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="572.0" layoutY="410.0" prefHeight="240.0" prefWidth="506.0" />
             <HTMLEditor fx:id="atividadesDoDiscenteEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="1120.0" layoutY="680.0" prefHeight="240.0" prefWidth="506.0" />
             <HTMLEditor fx:id="bibliografiaEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="1120.0" layoutY="134.0" prefHeight="240.0" prefWidth="506.0" />
-            <Button layoutX="572.0" layoutY="938.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" text="Remover">
+            <Button layoutX="572.0" layoutY="938.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" text="Salvar">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button layoutX="767.0" layoutY="938.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" text="Salvar">
+            <Button layoutX="767.0" layoutY="938.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" text="Limpar">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button layoutX="963.0" layoutY="938.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" text="Limpar">
+            <Button layoutX="963.0" layoutY="938.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" text="Remover">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="botaoVoltar" onAction="#aoClicarVoltar" layoutX="1536.0" layoutY="946.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Voltar">
+            <Button fx:id="botaoVoltar" layoutX="1536.0" layoutY="946.0" mnemonicParsing="false" onAction="#aoClicarVoltar" prefHeight="40.0" prefWidth="90.0" text="Voltar">
                <font>
                   <Font size="14.0" />
                </font>
@@ -67,7 +67,7 @@
                </font>
             </Label>
             <ListView fixedCellSize="0.0" layoutX="409.0" layoutY="136.0" prefHeight="240.0" prefWidth="669.0" />
-            <Button fx:id="botaoAddAula" onAction="#aoClicarAula" layoutX="969.0" layoutY="89.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="109.0" text="Adicionar Aula">
+            <Button fx:id="botaoAddAula" layoutX="969.0" layoutY="89.0" mnemonicParsing="false" onAction="#aoClicarAula" prefHeight="40.0" prefWidth="109.0" text="Adicionar Aula">
                <font>
                   <Font size="14.0" />
                </font>
