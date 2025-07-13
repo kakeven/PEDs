@@ -15,6 +15,7 @@ public class Model{
     private Disciplina disciplina;
     private Gson gson;
     private Professor professorAtual;
+    private ArrayList<Aula> aulasTemp;
 
     //construtor
     public Model(){
@@ -26,6 +27,7 @@ public class Model{
         criarTabelaDisciplina();
         criarTabelaPED();
         this.disciplina = new Disciplina();
+        ArrayList<Aula> aulasTemp = new ArrayList<>();
     }
 
     //sets CargaHoraria Disciplina
@@ -589,6 +591,22 @@ public class Model{
             e.printStackTrace();
         }
         return disciplinas;
+    }
+
+    public ArrayList<Aula> criarAula(String data, String descricao, int carga, int cargaTotal){
+        Aula aula = new Aula();
+        aula.setData(data);
+        aula.setDescricao(descricao);
+        aula.setCargaHoraria(carga);
+        aulasTemp.add(aula);
+        if(!addAula(aulasTemp, cargaTotal)){
+            aulasTemp.remove(aula);
+        }
+        ArrayList<Aula> aulasRetorno =  aulasTemp;
+        if(cargaHorariaCompleta(aulasRetorno, cargaTotal)){
+            aulasTemp.clear();
+        }
+        return aulasRetorno;
     }
 
     public boolean addAula(ArrayList<Aula> aulas, int cargaHoraria){
