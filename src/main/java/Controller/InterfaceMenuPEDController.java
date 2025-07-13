@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.Model;
-import View.InterfaceLogin;
 import View.InterfaceMenu;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,16 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.Stage;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
-import javafx.application.*;
-import javafx.scene.*;
-import javafx.scene.control.*;
-import javafx.scene.web.HTMLEditor;
-import javafx.stage.Stage;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 
 public class InterfaceMenuPEDController implements Initializable {
 
@@ -45,19 +36,32 @@ public class InterfaceMenuPEDController implements Initializable {
     @FXML
     private HTMLEditor atividadesDoDiscenteEditor = new HTMLEditor();
 
-    //choices
+    //choices/combo
     @FXML
     private ChoiceBox choiceDisciplina;
+
+    @FXML
+    private ComboBox comboCurso;
 
     //textField
     @FXML
     private TextField nomeProfessor;
 
     @FXML
+    private TextField textoAulas;
+
+    @FXML
     private Button botaoAddAula;
 
     @FXML
     private Button botaoVoltar;
+
+    @FXML
+    private Spinner<Integer> spinnerHoraAula;
+
+    //date picker(datas)
+    @FXML
+    private DatePicker seletorDatas;
 
     private Model model;
 
@@ -157,10 +161,30 @@ public class InterfaceMenuPEDController implements Initializable {
                 n.setManaged(false);
             });
         });
-    }
-    public void aoClicarAula(){
+
+        spinnerHoraAula.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 8, 0, 2));
+
+        //combo box(permite o usuario ou selecionar algo que ja existe ou adicionar)
+        comboCurso.getItems().addAll("Engenharia de Software", "Ciência da Computação", "Engenharia Mecânica", "Engenharia Civíl", "Engharia de Produção");
+        comboCurso.setOnAction(event -> {
+            String txtDigitado = comboCurso.getEditor().getText();
+
+            if(txtDigitado != null && !txtDigitado.trim().isBlank()){
+                if(!comboCurso.getItems().contains(txtDigitado)){
+                    comboCurso.getItems().add(txtDigitado);
+                }
+                comboCurso.setValue(txtDigitado);
+            }
+        });//futuramente se der certo add persistencia
 
     }
+
+    public void aoClicarAddAula(){
+        String data = seletorDatas.getValue().toString();
+        String nomeAula = textoAulas.getText();
+        int horaAula = spinnerHoraAula.getValue();
+    }
+
     public void aoClicarVoltar(){
         Parent arquivoJanela = new InterfaceMenu(model).getRoot();
         Stage JanelaAtual = (Stage) botaoVoltar.getScene().getWindow();
