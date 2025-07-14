@@ -176,7 +176,7 @@ public class InterfaceMenuPEDController implements Initializable {
         spinnerHoraAula.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 8, 0, 2));
 
         //combo box(permite o usuario ou selecionar algo que ja existe ou adicionar)
-        comboCurso.getItems().addAll("Engenharia de Software", "Ciência da Computação", "Engenharia Mecânica", "Engenharia Civíl", "Engharia de Produção");
+        comboCurso.getItems().addAll("Engenharia de Software", "Ciência da Computação", "Engenharia Mecânica", "Engenharia Civíl", "Engenharia de Produção");
         comboCurso.setOnAction(event -> {
             String txtDigitado = comboCurso.getEditor().getText();
 
