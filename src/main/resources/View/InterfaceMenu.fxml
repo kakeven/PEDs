@@ -42,7 +42,7 @@
             </Button>
             <Button fx:id="botaoLogout" onAction="#aoClicarLogout" mnemonicParsing="false" text="Logout" GridPane.rowIndex="6">
                <GridPane.margin>
-                  <Insets left="15.0" />
+                  <Insets bottom="-55" left="15.0" />
                </GridPane.margin>
             </Button>
             <Button fx:id="botaoAddPED" onAction="#aoClicarAddPED" mnemonicParsing="false" prefHeight="25.0" prefWidth="128.0" text="Adicionar PEDs" GridPane.rowIndex="3">

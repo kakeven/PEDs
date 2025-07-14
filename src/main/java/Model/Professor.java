@@ -9,7 +9,9 @@ public class Professor {
     private String senha;
     private ArrayList<String> disciplinas;
 
-
+    public Professor(){
+        super();
+    }
     public Professor(String nome, String login, String senha){
         setNome(nome);
         setLogin(login);

@@ -4,7 +4,8 @@ package Model;
 public class Aula {
     private String descricao;
     private int cargaHoraria;
-    private String data;
+    private String dataFormatada;
+    private String dataNormal;
 
     public String getDescricao() {
         return descricao;
@@ -22,15 +23,20 @@ public class Aula {
         this.cargaHoraria = cargaHoraria;
     }
 
-    public String getData() {
-        return data;
+    public String getDataFormatada() {
+        return dataFormatada;
     }
-
-    public void setData(String data) {
-        this.data = data;
+    public void setDataNormal(String dataNormal) {
+        this.dataNormal = dataNormal;
+    }
+    public String getDataNormal(){
+        return dataNormal;
+    }
+    public void setDataFormatada(String dataFormatada) {
+        this.dataFormatada = dataFormatada;
     }
 
     public String toString(){
-        return String.format("%s %20s %i", data, descricao, cargaHoraria);
+        return String.format("%s %s %d", dataFormatada, descricao, cargaHoraria);
     }
 }
