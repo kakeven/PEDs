@@ -49,6 +49,7 @@ public class InterfaceMenuController implements Initializable {
         Stage JanelaAtual = (Stage) botaoLogout.getScene().getWindow();
         JanelaAtual.setScene(new Scene(arquivoJanela));
         JanelaAtual.setTitle("Projeto PEDs");
+        JanelaAtual.centerOnScreen();
     }
     public void aoCliclarAddDisciplina(){
         try{
@@ -56,31 +57,18 @@ public class InterfaceMenuController implements Initializable {
             Stage JanelaAtual = (Stage) botaoAddDisciplina.getScene().getWindow();
             JanelaAtual.setScene(new Scene(arquivoJanela));
             JanelaAtual.setTitle("Cadastro Disciplina");
+            JanelaAtual.centerOnScreen();
         }catch(Exception e){
             e.printStackTrace();
         }
     }
     public void aoClicarAddPED() {
         try {
-            int largura = 1108;
-            int altura = 680;
-
             Parent arquivoJanela = new InterfaceMenuPED(model).getRoot();
-            Stage JanelaAtual = (Stage) botaoAddDisciplina.getScene().getWindow();
-
-            // Cria a nova cena
-            Scene novaCena = new Scene(arquivoJanela, largura, altura);
-            JanelaAtual.setScene(novaCena);
+            Stage JanelaAtual = (Stage) botaoAddPED.getScene().getWindow();
+            JanelaAtual.setScene(new Scene(arquivoJanela));
             JanelaAtual.setTitle("Cadastro PED");
-
-            // Centraliza
-            Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
-            double posX = (bounds.getWidth() - largura) / 2;
-            double posY = (bounds.getHeight() - altura) / 1.5;
-
-            JanelaAtual.setX(posX);
-            JanelaAtual.setY(posY);
-
+            JanelaAtual.centerOnScreen();
         } catch (Exception e) {
             e.printStackTrace();
         }

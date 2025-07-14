@@ -217,5 +217,6 @@ public class InterfaceMenuPEDController implements Initializable {
         Stage JanelaAtual = (Stage) botaoVoltar.getScene().getWindow();
         JanelaAtual.setScene(new Scene(arquivoJanela));
         JanelaAtual.setTitle("Projeto PEDs");
+        JanelaAtual.centerOnScreen();
     }
 }

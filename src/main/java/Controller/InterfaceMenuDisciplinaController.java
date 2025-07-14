@@ -127,6 +127,7 @@ public class InterfaceMenuDisciplinaController implements Initializable{
         Stage JanelaAtual = (Stage) botaoVoltar.getScene().getWindow();
         JanelaAtual.setScene(new Scene(ArquivoJavela));
         JanelaAtual.setTitle("Menu");
+        JanelaAtual.centerOnScreen();
     }
     private void atualizarCargaTotal(){
         textoHorasTotais.setText(String.valueOf(model.getCargaTotal()));
@@ -143,6 +144,7 @@ public class InterfaceMenuDisciplinaController implements Initializable{
                 Stage JanelaAtual = (Stage) botaoAdicionar.getScene().getWindow();
                 JanelaAtual.setScene(new Scene(ArquivoJavela));
                 JanelaAtual.setTitle("Menu");
+                JanelaAtual.centerOnScreen();
             });
             timer.play();
         }else{
