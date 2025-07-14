@@ -106,18 +106,6 @@ public class Model{
             e.printStackTrace();
         }
     }
-    //NAO USAR ESSE METODO POR ENQUANTO(PQ? NAO PODE PRINT NO MODEL E ELE NAO É UTIL NO MOMENTO, FOI UTIL SO PRA DEBUG)
-//    public void ListarUsuarios(){
-//        String sql = "SELECT * FROM usuarios";
-//
-//        try (Statement state = conectarUsuario.createStatement(); ResultSet resultado = state.executeQuery(sql)){
-//            while(resultado.next()){
-//                System.out.println("ID: " + resultado.getInt("id") + ", Nome: " + resultado.getString("nome") + ", login: " + resultado.getString("login") + ", senha: " + resultado.getString("senha"));
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
     public boolean LoginExiste(Professor professor){//serve para nao cadastrar dois usuarios com mesmo login
         String busca = "SELECT login FROM usuarios WHERE login = ?";
 
@@ -282,7 +270,7 @@ public class Model{
                 coRequisito,
                 regimeDeOferta,
                 equivalencias
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";//
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
         try(PreparedStatement ps = conectarDisciplina.prepareStatement(inserir)) {
             ps.setString(1, disciplina.getNome());
             ps.setString(2, disciplina.getCodigo());
