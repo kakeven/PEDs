@@ -5,7 +5,6 @@ import java.lang.reflect.Type;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 public class Model{
@@ -603,10 +602,11 @@ public class Model{
         return disciplinas;
     }
 
-    public boolean criarAula(String data, String descricao, int carga, int cargaTotal){
+    public boolean criarAula(String data, String descricao, int carga, int cargaTotal, String dataNormal){
         Aula aula = new Aula();
-        aula.setData(data);
+        aula.setDataFormatada(data);
         aula.setDescricao(descricao);
+        aula.setDataNormal(dataNormal);
         aula.setCargaHoraria(carga);
         aulasTemp.add(aula);
         if(!addAula(aulasTemp, cargaTotal)){
@@ -622,10 +622,9 @@ public class Model{
         for(Aula aula : aulas){
             cargaHoraria-=aula.getCargaHoraria();
             System.out.println("Carga horaria restante "+cargaHoraria);
-            if(aulaAdicionar!= aula && (aula.getData().equals(aulaAdicionar.getData())) || cargaHoraria <= 0){
+            if(aulaAdicionar!= aula && (aula.getDataFormatada().equals(aulaAdicionar.getDataFormatada())) || cargaHoraria <= 0){
                 return false;
             }
-            System.out.println("Carga horaria restante "+cargaHoraria);
         }
         return true;
     }
@@ -633,16 +632,19 @@ public class Model{
     public ArrayList<Aula> getAulasTemp(){
         return aulasTemp;
     }
-
+    public ArrayList<String>getAulasLista(){
+        ArrayList<String> listaAulas = new ArrayList<>();
+        for(Aula aulas : aulasTemp){
+            listaAulas.add(aulas.getDescricao() + " em " + aulas.getDataFormatada() + " Com " +  aulas.getCargaHoraria() + " horas de duração");
+        }
+        return listaAulas;
+    }
     public boolean cargaHorariaCompleta(ArrayList<Aula> aulas, int cargaHoraria){
         for(Aula aula : aulas){
             cargaHoraria -= aula.getCargaHoraria();
         }
         return(!(cargaHoraria>0));
     }
-
-
-
     public ArrayList<PED> arrayPEDs(){
         ArrayList<PED> peds = new ArrayList<>();
 

@@ -2,6 +2,8 @@ package Controller;
 
 import Model.Model;
 import View.InterfaceMenu;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -10,6 +12,8 @@ import javafx.scene.control.*;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.Stage;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 
@@ -63,13 +67,20 @@ public class InterfaceMenuPEDController implements Initializable {
     @FXML
     private DatePicker seletorDatas;
 
+    //listview
+    @FXML
+    private ListView<String> listaDeVisualizacao;
+
+    //variaveis gerais
+    private ObservableList<String> listaDeAula = FXCollections.observableArrayList();
+
     private Model model;
 
     public void setModel(Model model) {
         this.model=model;
         choiceDisciplina.getItems().clear();
         choiceDisciplina.getItems().addAll(model.arrayDisciplinas());
-        choiceDisciplina.setValue("Nenhuma Disciplina");
+        choiceDisciplina.setValue("Nenhuma Disciplina Selecionada");
         nomeProfessor.setText(model.getProfessorAtual().getNome());
     }
 
@@ -177,25 +188,32 @@ public class InterfaceMenuPEDController implements Initializable {
             }
         });//futuramente se der certo add persistencia
 
-
+        //listview
+        listaDeVisualizacao.setItems(listaDeAula);
     }
 
     public void aoClicarAddAula(){
-        String data = seletorDatas.getValue().toString();
+        //pegar data formatada
+        LocalDate dataLocal = seletorDatas.getValue();
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd 'do' MMMM 'de' YYYY");
+        String dataFormatada = dataLocal.format(formatador);
+
+        //pegar data normal(padrao brasil, isso vai servir na hora de portar o PED para PDF)
+        String dataNormal =  seletorDatas.getValue().format(DateTimeFormatter.ofPattern("dd/MM"));
+
+        //outras variaveis
         String nomeAula = textoAulas.getText();
         int horaAula = spinnerHoraAula.getValue();
         int cargaHorariaDisciplina = model.getCargaTotal(choiceDisciplina.getValue());
 
-        Boolean aulaCriada = model.criarAula(data, nomeAula, horaAula, cargaHorariaDisciplina);
+        Boolean aulaCriada = model.criarAula(dataFormatada, nomeAula, horaAula, cargaHorariaDisciplina, dataNormal);
 
         if(aulaCriada){
-            System.out.println("deu certo doidin");
+            listaDeAula.setAll(model.getAulasLista());
         }else{
-            System.out.println("nao deu certo");
+            System.out.println("nao deu certo");//TIRAR ISSO DPS
         }
-
     }
-
     public void aoClicarVoltar(){
         Parent arquivoJanela = new InterfaceMenu(model).getRoot();
         Stage JanelaAtual = (Stage) botaoVoltar.getScene().getWindow();
