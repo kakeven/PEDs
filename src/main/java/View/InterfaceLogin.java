@@ -17,8 +17,8 @@ public class InterfaceLogin {
             root = loader.load();
             controller = loader.getController(); // pega o que o FXML criou
             controller.setModel(model);
-        } catch (IOException e) {
-            System.err.println("Erro ao carregar InterfaceLogin.fxml: " + e.getMessage());
+        } catch (IOException _) {
+
         }
     }
 
