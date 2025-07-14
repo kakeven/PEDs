@@ -610,7 +610,7 @@ public class Model{
         Aula aulaAdicionar = aulas.get(aulas.size()-1);
         for(Aula aula : aulas){
             cargaHoraria-=aula.getCargaHoraria();
-            if(aulaAdicionar!= aula && (aula.getDataFormatada().equals(aulaAdicionar.getDataFormatada())) || cargaHoraria <= 0){
+            if(aulaAdicionar!= aula && (aula.getDataFormatada().equals(aulaAdicionar.getDataFormatada())) || cargaHoraria < 0){
                 return false;
             }
         }

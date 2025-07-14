@@ -14,7 +14,10 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
+
 import javafx.application.Platform;
 
 public class InterfaceMenuPEDController implements Initializable {
@@ -55,6 +58,12 @@ public class InterfaceMenuPEDController implements Initializable {
     private TextField textoAulas;
 
     @FXML
+    private TextField nomeUnidade;
+
+    @FXML
+    private TextField textoHorasRestantes;
+
+    @FXML
     private Button botaoAddAula;
 
     @FXML
@@ -71,18 +80,29 @@ public class InterfaceMenuPEDController implements Initializable {
     @FXML
     private ListView<String> listaDeVisualizacao;
 
-    //variaveis gerais
-    private ObservableList<String> listaDeAula = FXCollections.observableArrayList();
 
+    //criação Model(instancia)
     private Model model;
 
+    //variaveis gerais
+    private ObservableList<String> listaDeAula = FXCollections.observableArrayList();
+    int horasRestante = 0;
+
+    //variaveis para data
+    private LocalDate[] dataSelecionada = new LocalDate[1];
+    private boolean primeiraSelecaoData = false;
+    private Set<LocalDate> datasSelecionadas = new HashSet<>();
+
+
     public void setModel(Model model) {
+        //alguns choice ficam no setModel pq se nao ele fica null
         this.model=model;
         choiceDisciplina.getItems().clear();
         choiceDisciplina.getItems().addAll(model.arrayDisciplinas());
         choiceDisciplina.setValue("Nenhuma Disciplina Selecionada");
         nomeProfessor.setText(model.getProfessorAtual().getNome());
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -177,6 +197,7 @@ public class InterfaceMenuPEDController implements Initializable {
 
         //combo box(permite o usuario ou selecionar algo que ja existe ou adicionar)
         comboCurso.getItems().addAll("Engenharia de Software", "Ciência da Computação", "Engenharia Mecânica", "Engenharia Civíl", "Engenharia de Produção");
+        comboCurso.setValue("Nenhuma Curso Selecionado");
         comboCurso.setOnAction(event -> {
             String txtDigitado = comboCurso.getEditor().getText();
 
@@ -188,15 +209,25 @@ public class InterfaceMenuPEDController implements Initializable {
             }
         });//futuramente se der certo add persistencia
 
+        //choice box
+        choiceDisciplina.getSelectionModel().selectedItemProperty().addListener((obs, valorAntigo, valorNovo) -> {
+            if (valorNovo != null && !valorNovo.toString().equals("Nenhuma Disciplina Selecionada")) {
+                horasRestante = model.getCargaTotal(valorNovo);
+                textoHorasRestantes.setText(String.valueOf(horasRestante));
+            } else {
+                textoHorasRestantes.setText("0");
+            }
+        });
+
         //listview
         listaDeVisualizacao.setItems(listaDeAula);
     }
-
     public void aoClicarAddAula(){
         //pegar data formatada
         LocalDate dataLocal = seletorDatas.getValue();
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd 'do' MMMM 'de' YYYY");
         String dataFormatada = dataLocal.format(formatador);
+
 
         //pegar data normal(padrao brasil, isso vai servir na hora de portar o PED para PDF)
         String dataNormal =  seletorDatas.getValue().format(DateTimeFormatter.ofPattern("dd/MM"));
@@ -206,10 +237,41 @@ public class InterfaceMenuPEDController implements Initializable {
         int horaAula = spinnerHoraAula.getValue();
         int cargaHorariaDisciplina = model.getCargaTotal(choiceDisciplina.getValue());
 
+        if(horasRestante == 0){ //garantir q ele receba so a primeira vez
+            horasRestante = cargaHorariaDisciplina;
+        }
+
         Boolean aulaCriada = model.criarAula(dataFormatada, nomeAula, horaAula, cargaHorariaDisciplina, dataNormal);
 
         if(aulaCriada){
             listaDeAula.setAll(model.getAulasLista());
+            horasRestante = horasRestante - spinnerHoraAula.getValue();
+            textoHorasRestantes.setText(String.valueOf(horasRestante));
+
+            //PINTAR AS DATAS A PARTIR Q ADD A AULA(se for a primeira bloqueia a parte de tras)
+            if(!primeiraSelecaoData){
+                dataSelecionada[0] = dataLocal;
+                primeiraSelecaoData = true;
+            }
+            datasSelecionadas.add(dataLocal);
+
+            Platform.runLater(() -> {
+                seletorDatas.setDayCellFactory(dp -> new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if(item.isBefore(dataSelecionada[0])){
+                            setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;");//bloqueiaa, pintando de vermelho
+                        } else if(datasSelecionadas.contains(item)){
+                            setStyle("-fx-background-color: #90ee90;");//pinta de verde tudo selecionado(q ta dentro do array)
+                        } else {
+                            setStyle("");
+                        }
+                    }
+                });
+            });
         }
     }
     public void aoClicarVoltar(){
@@ -217,5 +279,9 @@ public class InterfaceMenuPEDController implements Initializable {
         Stage JanelaAtual = (Stage) botaoVoltar.getScene().getWindow();
         JanelaAtual.setScene(new Scene(arquivoJanela));
         JanelaAtual.setTitle("Projeto PEDs");
+        primeiraSelecaoData = false;
+    }
+    public void aoClicarSalvar(){
+        model.verificarPed(nomeUnidade.getText(),choiceDisciplina.getValue(), )
     }
 }

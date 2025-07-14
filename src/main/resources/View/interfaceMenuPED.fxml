@@ -127,7 +127,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="174.0" layoutY="286.0" prefHeight="25.0" prefWidth="196.0" />
+                  <TextField fx:id="nomeUnidade" layoutX="174.0" layoutY="286.0" prefHeight="25.0" prefWidth="196.0" />
                   <HTMLEditor fx:id="atividadesDoDiscenteEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="24.0" layoutY="950.0" prefHeight="240.0" prefWidth="506.0" />
                   <Button layoutX="333.0" layoutY="1481.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" text="Salvar">
                      <font>
@@ -150,7 +150,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="270.0" layoutY="329.0" prefHeight="25.0" prefWidth="100.0" />
+                  <TextField fx:id="textoHorasRestantes" layoutX="270.0" layoutY="329.0" prefHeight="25.0" prefWidth="100.0" />
                </children>
             </AnchorPane>
          </content>
