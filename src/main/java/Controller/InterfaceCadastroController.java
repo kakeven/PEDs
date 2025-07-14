@@ -68,6 +68,7 @@ public class InterfaceCadastroController implements Initializable {
             Stage janelaAtual = (Stage) linkLogin.getScene().getWindow();
             janelaAtual.setScene(new Scene(arquivoJanela));
             janelaAtual.setTitle("Login");
+            janelaAtual.centerOnScreen();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -95,6 +96,7 @@ public class InterfaceCadastroController implements Initializable {
                     Stage janelaAtual = (Stage) botaoCadastro.getScene().getWindow();
                     janelaAtual.setScene(new Scene(arquivoJanela));
                     janelaAtual.setTitle("Menu");
+                    janelaAtual.centerOnScreen();
                 }catch(Exception e){
                     e.printStackTrace();
                 }

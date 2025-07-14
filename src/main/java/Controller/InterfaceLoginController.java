@@ -57,6 +57,7 @@ public class InterfaceLoginController implements Initializable {
             Stage JanelaAtual = (Stage) linkCadastro.getScene().getWindow();
             JanelaAtual.setScene(new Scene(arquivoJanela));
             JanelaAtual.setTitle("Cadastro");
+            JanelaAtual.centerOnScreen();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,6 +77,7 @@ public class InterfaceLoginController implements Initializable {
                 Stage JanelaAtual = (Stage) botaoLogin.getScene().getWindow();
                 JanelaAtual.setScene(new Scene(arquivoJanela));
                 JanelaAtual.setTitle("Menu");
+                JanelaAtual.centerOnScreen();
             }else{
                 lblMensagemErro.setVisible(true);
             }

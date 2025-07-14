@@ -1,19 +1,20 @@
 package View;
 
+import Controller.InterfaceExibirPEDsController;
 import Controller.InterfaceLoginController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import Model.Model;
 import java.io.IOException;
 
-public class InterfaceLogin {
+public class InterfaceExibirPEDs {
     private Parent root;
-    private InterfaceLoginController controller;
+    private InterfaceExibirPEDsController controller;
 
 
-    public InterfaceLogin(Model model) {
+    public InterfaceExibirPEDs(Model model) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/interfaceLogin.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/interfaceExibirPEDs.fxml"));
             root = loader.load();
             controller = loader.getController(); // pega o que o FXML criou
             controller.setModel(model);
@@ -26,7 +27,7 @@ public class InterfaceLogin {
         return root;
     }
 
-    public InterfaceLoginController getController() {
+    public InterfaceExibirPEDsController getController() {
         return controller;
     }
 }

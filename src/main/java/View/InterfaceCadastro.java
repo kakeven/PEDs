@@ -19,7 +19,7 @@ public class InterfaceCadastro {
             controller = loader.getController(); //pega a interface e cria o controller automatico, por causa do javaFX
             controller.setModel(model);  // passa o model pro controller,== , passar os dados atualizados
         } catch (IOException e) {
-            System.err.println("Erro ao carregar InterfaceCadastro.fxml: " + e.getMessage());
+
         }
     }
 
