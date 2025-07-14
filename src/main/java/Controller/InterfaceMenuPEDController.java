@@ -210,8 +210,6 @@ public class InterfaceMenuPEDController implements Initializable {
 
         if(aulaCriada){
             listaDeAula.setAll(model.getAulasLista());
-        }else{
-            System.out.println("nao deu certo");//TIRAR ISSO DPS
         }
     }
     public void aoClicarVoltar(){
