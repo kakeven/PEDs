@@ -382,7 +382,6 @@ public class Model{
             String justificativa,
             String ementa,
             String objetivos,
-            ArrayList<Aula> aulas,
             String metodologia,
             String atividadesDiscentes,
             String sistemaDeAvaliacao,
@@ -421,7 +420,7 @@ public class Model{
             ped.setBibliografia(bibliografia);
             ped.setProfessor(professorAtual);
             ped.setObrigatoriedade(obrigatoriedade);
-            ped.setAulas(aulas);
+            ped.setAulas(aulasTemp);
             aulasTemp.clear();
             if(PEDExiste(ped)){
                 ped = null;
@@ -482,7 +481,7 @@ public class Model{
         String inserir = """
                 INSERT INTO PED(
                 unidade,
-                professor,
+                id_professor,
                 id_disciplina,
                 curso,
                 semestre,
@@ -523,12 +522,12 @@ public class Model{
         }
     }
     public boolean PEDExiste(PED ped){
-        String busca = "SELECT codigo, semestre FROM PED WHERE codigo = ? AND semestre = ?";
+        String busca = "SELECT curso, semestre FROM PED WHERE curso = ? AND semestre = ?";
 
         try{
             PreparedStatement preparar = conectarPED.prepareStatement(busca);
-            preparar.setString(3, ped.getDisciplina().getCodigo());
-            preparar.setString(5, ped.getSemestre());
+            preparar.setString(1, ped.getCurso());
+            preparar.setString(2, ped.getSemestre());
             ResultSet resultado = preparar.executeQuery();
 
             if(resultado.next()){

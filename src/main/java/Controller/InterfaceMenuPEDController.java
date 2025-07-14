@@ -48,7 +48,10 @@ public class InterfaceMenuPEDController implements Initializable {
     private ChoiceBox choiceDisciplina;
 
     @FXML
-    private ComboBox comboCurso;
+    private ChoiceBox<String> choiceObrigatoriedade;
+
+    @FXML
+    private ComboBox<String> comboCurso;
 
     //textField
     @FXML
@@ -64,10 +67,19 @@ public class InterfaceMenuPEDController implements Initializable {
     private TextField textoHorasRestantes;
 
     @FXML
+    private TextField textoSemestre;
+
+    @FXML
     private Button botaoAddAula;
 
     @FXML
     private Button botaoVoltar;
+
+    @FXML
+    private Button botaoSalvarPED;
+
+    @FXML
+    private Button botaoLimparPED;
 
     @FXML
     private Spinner<Integer> spinnerHoraAula;
@@ -101,6 +113,16 @@ public class InterfaceMenuPEDController implements Initializable {
         choiceDisciplina.getItems().addAll(model.arrayDisciplinas());
         choiceDisciplina.setValue("Nenhuma Disciplina Selecionada");
         nomeProfessor.setText(model.getProfessorAtual().getNome());
+
+        //listerner do choiceBox(pegar carga total da disciplina selecionada)
+        choiceDisciplina.getSelectionModel().selectedItemProperty().addListener((obs, valorAntigo, valorNovo) -> {
+            if (valorNovo != null && !valorNovo.toString().equals("Nenhuma Disciplina Selecionada")) {
+                horasRestante = model.getCargaTotal(valorNovo);
+                textoHorasRestantes.setText(String.valueOf(horasRestante));
+            } else {
+                textoHorasRestantes.setText("0");
+            }
+        });
     }
 
 
@@ -209,15 +231,8 @@ public class InterfaceMenuPEDController implements Initializable {
             }
         });//futuramente se der certo add persistencia
 
-        //choice box
-        choiceDisciplina.getSelectionModel().selectedItemProperty().addListener((obs, valorAntigo, valorNovo) -> {
-            if (valorNovo != null && !valorNovo.toString().equals("Nenhuma Disciplina Selecionada")) {
-                horasRestante = model.getCargaTotal(valorNovo);
-                textoHorasRestantes.setText(String.valueOf(horasRestante));
-            } else {
-                textoHorasRestantes.setText("0");
-            }
-        });
+        choiceObrigatoriedade.getItems().addAll("Obrigatória", "Optativa");
+        choiceObrigatoriedade.setValue("Obrigatória");
 
         //listview
         listaDeVisualizacao.setItems(listaDeAula);
@@ -282,6 +297,6 @@ public class InterfaceMenuPEDController implements Initializable {
         primeiraSelecaoData = false;
     }
     public void aoClicarSalvar(){
-        //model.verificarPed(nomeUnidade.getText(),choiceDisciplina.getValue(), )
+        model.verificarPed(nomeUnidade.getText(),choiceDisciplina.getValue(), comboCurso.getValue(), textoSemestre.getText(), justificativaEditor.getHtmlText(), ementaEditor.getHtmlText(), objetivosEditor.getHtmlText(), metodologiaEditor.getHtmlText(), atividadesDoDiscenteEditor.getHtmlText(), sistemaDeAvaliacaoEditor.getHtmlText(), bibliografiaEditor.getHtmlText(), choiceObrigatoriedade.getValue());
     }
 }
