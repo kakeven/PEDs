@@ -376,8 +376,7 @@ public class Model{
     //Verificacao PED
     public boolean verificarPed(
             String unidade,
-            Professor professor,
-            Disciplina disciplina,
+            Object disciplinaObj,
             String curso,
             String semestre,
             String justificativa,
@@ -404,6 +403,10 @@ public class Model{
                         && !obrigatoriedade.isBlank()
                         && (cargaHorariaCompleta(aulasTemp, disciplina.getCargaTotal()))
         ){
+
+            if (disciplinaObj != null && disciplinaObj instanceof Disciplina disciplinatst) {
+                Disciplina disciplina = disciplinatst;
+            }
             PED ped = new PED();
             ped.setUnidade(unidade);
             ped.setDisciplina(disciplina);
@@ -416,7 +419,7 @@ public class Model{
             ped.setAtividadesDiscentes(atividadesDiscentes);
             ped.setSistemaDeAvaliacao(sistemaDeAvaliacao);
             ped.setBibliografia(bibliografia);
-            ped.setProfessor(professor);
+            ped.setProfessor(professorAtual);
             ped.setObrigatoriedade(obrigatoriedade);
             ped.setAulas(aulas);
             aulasTemp.clear();
