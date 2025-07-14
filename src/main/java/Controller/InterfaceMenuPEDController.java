@@ -86,7 +86,7 @@ public class InterfaceMenuPEDController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //tira alguns botoes da toolbar(q permitira "executar" comandos e outras paradinha)(deixa mais rapido, eu acho)
+        //tira alguns botoes da toolbar(q permitira "executar" comandos e outras paradinhas)(deixa mais rapido tb)
         Platform.runLater(() -> {
             //tirar copiar
             justificativaEditor.lookupAll(".html-editor-copy").forEach(n -> {
