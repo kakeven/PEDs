@@ -282,6 +282,6 @@ public class InterfaceMenuPEDController implements Initializable {
         primeiraSelecaoData = false;
     }
     public void aoClicarSalvar(){
-        model.verificarPed(nomeUnidade.getText(),choiceDisciplina.getValue(), )
+        //model.verificarPed(nomeUnidade.getText(),choiceDisciplina.getValue(), )
     }
 }
