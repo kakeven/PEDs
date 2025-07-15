@@ -263,7 +263,7 @@ public class InterfaceMenuPEDController implements Initializable {
             horasRestante = horasRestante - spinnerHoraAula.getValue();
             textoHorasRestantes.setText(String.valueOf(horasRestante));
 
-            //PINTAR AS DATAS A PARTIR Q ADD A AULA(se for a primeira bloqueia a parte de tras)
+            //PINTAR AS DATAS A PARTIR Q ADD A AULA(se for a primeira bloqueia a parte de tras e pinta de vermelho)
             if(!primeiraSelecaoData){
                 dataSelecionada[0] = dataLocal;
                 primeiraSelecaoData = true;
