@@ -481,7 +481,7 @@ public class Model{
         String inserir = """
                 INSERT INTO PED(
                 unidade,
-                professor,
+                id_professor,
                 id_disciplina,
                 curso,
                 semestre,
@@ -526,8 +526,8 @@ public class Model{
 
         try{
             PreparedStatement preparar = conectarPED.prepareStatement(busca);
-            preparar.setString(4, ped.getCurso());
-            preparar.setString(5, ped.getSemestre());
+            preparar.setString(1, ped.getCurso());
+            preparar.setString(2, ped.getSemestre());
             ResultSet resultado = preparar.executeQuery();
 
             if(resultado.next()){
