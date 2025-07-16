@@ -125,7 +125,7 @@ public class InterfaceMenuController implements Initializable {
                     aoClicarExibirPED();
                     break;
                 case "botaoExibirDisciplina":
-                    ;
+                    ;//testando
             }
         }
     }
