@@ -16,19 +16,10 @@ public class Main extends Application {
         Model model = new Model();
         InterfaceLogin login = new InterfaceLogin(model);
         Parent loginChamada = login.getRoot();
-
-        int largura = 600;
-        int altura = 400;
-
         primaryStage.setTitle("Projeto PEDs");
-        primaryStage.setScene(new Scene(loginChamada, largura, altura));
+        primaryStage.setScene(new Scene(loginChamada));
+        primaryStage.centerOnScreen();
 
-        // Centralizar a janela
-        Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
-        double posX = (bounds.getWidth() - largura) / 2.1;
-        double posY = (bounds.getHeight() - altura) / 2.5;
-        primaryStage.setX(posX);
-        primaryStage.setY(posY);
 
         primaryStage.setResizable(false);
         primaryStage.show();
