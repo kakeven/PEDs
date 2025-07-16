@@ -20,8 +20,8 @@ public class InterfaceMenu {
             root = loader.load();
             controller = loader.getController(); // pega o que o FXML criou
             controller.setModel(model);
-        } catch (IOException _) {
-
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
