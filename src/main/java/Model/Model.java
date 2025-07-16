@@ -10,8 +10,6 @@ import java.util.ArrayList;
 public class Model{
     private Connection conectar;
     private Connection conectarUsuario;
-    private Connection conectarPED;
-    private Connection conectarDisciplina;
     private Disciplina disciplina;
     private Gson gson;
     private Professor professorAtual;
@@ -21,8 +19,6 @@ public class Model{
     public Model(){
         this.gson = new Gson();
         seConectarUsuario();
-        seConectarDisciplina();
-        seConectarPED();
         criarTabelaUsuario();
         criarTabelaDisciplina();
         criarTabelaPED();
@@ -71,6 +67,12 @@ public class Model{
 
     //metodos DB
     //DB Usuário
+    public void verificarUsuario(String nome, String login, String senha){
+        if(senha.length() >= 8 && (!nome.isBlank() && !login.isBlank() && !senha.isBlank())&&!LoginExiste(login)){
+            Professor professor = new Professor(nome, login, senha);
+            SalvarUsuario(professor);
+        }
+    }
     public  void seConectarUsuario(){
         try{
             if(conectarUsuario == null || conectarUsuario.isClosed()){
@@ -106,12 +108,12 @@ public class Model{
             e.printStackTrace();
         }
     }
-    public boolean LoginExiste(Professor professor){//serve para nao cadastrar dois usuarios com mesmo login
+    public boolean LoginExiste(String login){//serve para nao cadastrar dois usuarios com mesmo login
         String busca = "SELECT login FROM usuarios WHERE login = ?";
 
         try{
             PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
-            preparar.setString(1, professor.getLogin());
+            preparar.setString(1, login);
             ResultSet resultado = preparar.executeQuery();
 
             if(resultado.next()){
@@ -124,28 +126,29 @@ public class Model{
         }
         return false;
     }
-    public Professor LoginValido(Professor professor){
+    public boolean LoginValido(String login, String senha){
         String busca = "SELECT nome, login, senha FROM usuarios WHERE login = ?";
 
         try{
             PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
-            preparar.setString(1, professor.getLogin());
+            preparar.setString(1, login);
             ResultSet resultado = preparar.executeQuery();
 
             if(resultado.next()){
-                String senha = resultado.getString("senha");//pega a senha do BANCO
+                String senhaDB = resultado.getString("senha");//pega a senha do BANCO
                 String nomeProfessor = resultado.getString("nome");
 
-                if(senha.equals(professor.getSenha())){
-                    return professorAtual = new Professor(nomeProfessor, professor.getLogin(), senha); //retorna um profesor com Nome para exibir mais tarde em alguma view o professor logado atualmente
+                if(senhaDB.equals(senha)){
+                    professorAtual = new Professor(nomeProfessor, login, senha);
+                    return true;
                 }
             }else{
-                return null;
+                return false;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return false;
     }
 
     public int CalcularEstatistica(){
@@ -154,15 +157,15 @@ public class Model{
     public void setProfessorAtual(Professor professor){
         this.professorAtual = professor;
     }
-    public Professor getProfessorAtual() {
-        return professorAtual;
+    public String getProfessorAtual() {
+        return professorAtual.getNome();
     }
     public Professor pesquisaProfessorPorID(int id){
-        String busca = "SELECT id FROM professor WHERE id = ?";
+        String busca = "SELECT login, nome, senha FROM usuarios WHERE id = ?";
 
         try{
             PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
-            preparar.setInt(0, id);
+            preparar.setInt(1, id);
             ResultSet rs = preparar.executeQuery();
 
             if(rs.next()){
@@ -176,6 +179,22 @@ public class Model{
             e.printStackTrace();
         }
         return null;
+    }
+
+    public int idProfessor(Professor professor){
+        String busca = "SELECT id FROM usuarios WHERE login = ?";
+
+        try{
+            PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
+            preparar.setString(1, professor.getLogin());
+            ResultSet resultado = preparar.executeQuery();
+            if(resultado.next()){
+                return resultado.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     //Verificacao Disciplina
@@ -222,15 +241,6 @@ public class Model{
         }
     }
     //DB Disciplina
-    public void seConectarDisciplina(){
-        try{
-            if(conectarDisciplina == null || conectarDisciplina.isClosed()){
-                conectarDisciplina = DriverManager.getConnection("jdbc:sqlite:bancoDisciplina.db");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
     public void criarTabelaDisciplina(){
         String sql = """
                 CREATE TABLE IF NOT EXISTS disciplina (
@@ -249,7 +259,7 @@ public class Model{
                     equivalencias TEXT NOT NULL
                 )
                 """;
-        try (Statement state = conectarDisciplina.createStatement()){
+        try (Statement state = conectarUsuario.createStatement()){
             state.execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -271,7 +281,7 @@ public class Model{
                 regimeDeOferta,
                 equivalencias
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
-        try(PreparedStatement ps = conectarDisciplina.prepareStatement(inserir)) {
+        try(PreparedStatement ps = conectarUsuario.prepareStatement(inserir)) {
             ps.setString(1, disciplina.getNome());
             ps.setString(2, disciplina.getCodigo());
             ps.setString(3, disciplina.getCargaTeorica());
@@ -293,7 +303,7 @@ public class Model{
         String busca = "SELECT codigo FROM disciplina WHERE codigo = ?";
 
         try{
-            PreparedStatement preparar = conectarDisciplina.prepareStatement(busca);
+            PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
             preparar.setString(1, disciplina.getCodigo());
             ResultSet resultado = preparar.executeQuery();
 
@@ -307,12 +317,12 @@ public class Model{
         }
         return false;
     }
-
     public int idDisciplina(Disciplina disciplina){
-        String busca = "SELECT codigo FROM disciplina WHERE codigo = ?";
+        String busca = "SELECT id FROM disciplina WHERE codigo = ?";
 
         try{
-            PreparedStatement preparar = conectarDisciplina.prepareStatement(busca);
+            PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
+            System.out.println(disciplina.getCodigo());
             preparar.setString(1, disciplina.getCodigo());
             ResultSet resultado = preparar.executeQuery();
 
@@ -324,12 +334,11 @@ public class Model{
         }
         return -1;
     }
-
     public boolean pesquisaDisciplinaPorCodigo(String codigo){
         String busca = "SELECT codigo FROM disciplina WHERE codigo = ?";
 
         try{
-            PreparedStatement preparar = conectarDisciplina.prepareStatement(busca);
+            PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
             preparar.setString(1, codigo);
             ResultSet resultado = preparar.executeQuery();
 
@@ -343,13 +352,16 @@ public class Model{
         }
         return false;
     }
-
     public Disciplina pesquisaDisciplinaPorID(int id){
-        String busca = "SELECT id FROM disciplina WHERE id = ?";
+        String busca = """
+                SELECT nome, codigo, cargaTeorica, cargaPratica, cargaEaD,
+                cargaExtensao, estruturaCurricular, preRequisito,coRequisito,
+                regimeDeOferta, equivalencias 
+                FROM disciplina WHERE id = ?""";
 
         try{
-            PreparedStatement preparar = conectarDisciplina.prepareStatement(busca);
-            preparar.setInt(0, id);
+            PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
+            preparar.setInt(1, id);
             ResultSet rs = preparar.executeQuery();
 
             if(rs.next()){
@@ -400,15 +412,19 @@ public class Model{
                         && !sistemaDeAvaliacao.isBlank()
                         && !bibliografia.isBlank()
                         && !obrigatoriedade.isBlank()
-                        && (cargaHorariaCompleta(aulasTemp, disciplina.getCargaTotal()))
+                      //  && (cargaHorariaCompleta(aulasTemp, disciplina.getCargaTotal()))
         ){
-
+            Disciplina disciplinaAdd = new Disciplina();
             if (disciplinaObj != null && disciplinaObj instanceof Disciplina disciplinatst) {
-                Disciplina disciplina = disciplinatst;
+                disciplinaAdd = disciplinatst;
             }
+            if((!cargaHorariaCompleta(aulasTemp, disciplinaAdd.getCargaTotal()))){
+                return false;
+            }
+
             PED ped = new PED();
             ped.setUnidade(unidade);
-            ped.setDisciplina(disciplina);
+            ped.setDisciplina(disciplinaAdd);
             ped.setCurso(curso);
             ped.setSemestre(semestre);
             ped.setJustificativa(justificativa);
@@ -421,7 +437,7 @@ public class Model{
             ped.setProfessor(professorAtual);
             ped.setObrigatoriedade(obrigatoriedade);
             ped.setAulas(aulasTemp);
-            aulasTemp.clear();
+            //aulasTemp.clear();
             if(PEDExiste(ped)){
                 ped = null;
                 System.gc();
@@ -434,19 +450,6 @@ public class Model{
         }
     }
     //DB PED
-    public void seConectarPED(){
-        try{
-            if(conectarPED == null || conectarPED.isClosed()){
-                conectarPED = DriverManager.getConnection("jdbc:sqlite:bancoPED.db");
-            }
-            try (Statement stmt = conectarPED.createStatement()) {
-                stmt.execute("PRAGMA foreign_keys = ON;");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
     public void criarTabelaPED(){
         String sql = """
                 CREATE TABLE IF NOT EXISTS PED (
@@ -464,14 +467,14 @@ public class Model{
                     sistemaDeAvaliacao TEXT NOT NULL,
                     bibliografia TEXT NOT NULL,
                     obrigatoriedade TEXT NOT NULL,
-                    aulas TEXT NOT NULL,
+                    aulas,
                     FOREIGN KEY (id_professor) REFERENCES professor(id)
                     FOREIGN KEY (id_disciplina) REFERENCES disciplina(id)
                     ON DELETE CASCADE
                     ON DELETE CASCADE
                 )
                 """;
-        try (Statement state = conectarPED.createStatement()){
+        try (Statement state = conectarUsuario.createStatement()){
             state.execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -495,37 +498,41 @@ public class Model{
                 obrigatoriedade,
                 aulas
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
-        try(PreparedStatement ps = conectarPED.prepareStatement(inserir)) {
+        try(PreparedStatement ps = conectarUsuario.prepareStatement(inserir)) {
 
             String aulasJson = null;
             if (ped.getAulas() != null && !ped.getAulas().isEmpty()) {
                 aulasJson = gson.toJson(ped.getAulas());
             }
+            aulasTemp.clear();
 
             ps.setString(1, ped.getUnidade());
-            ps.setString(2, ped.getProfessor().getLogin());
-            ps.setString(3, ped.getDisciplina().getCodigo());
+            ps.setInt(2, (idProfessor(ped.getProfessor())));
+            ps.setInt(3, idDisciplina(ped.getDisciplina()));
             ps.setString(4, ped.getCurso());
             ps.setString(5, ped.getSemestre());
             ps.setString(6, ped.getJustificativa());
             ps.setString(7, ped.getEmenta());
             ps.setString(8, ped.getObjetivos());
-            ps.setString(11,ped.getMetodologia());
-            ps.setString(12,ped.getAtividadesDiscentes());
-            ps.setString(13,ped.getSistemaDeAvaliacao());
-            ps.setString(14,ped.getBibliografia());
-            ps.setString(15, ped.getObrigatoriedade());
-            ps.setString(16, aulasJson);
+            ps.setString(9,ped.getMetodologia());
+            ps.setString(10,ped.getAtividadesDiscentes());
+            ps.setString(11,ped.getSistemaDeAvaliacao());
+            ps.setString(12,ped.getBibliografia());
+            ps.setString(13, ped.getObrigatoriedade());
+            ps.setString(14, aulasJson);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        System.out.println(pesquisaDisciplinaPorID(idDisciplina(ped.getDisciplina())));
+        System.out.println(pesquisaProfessorPorID(idProfessor(ped.getProfessor())));
     }
     public boolean PEDExiste(PED ped){
         String busca = "SELECT curso, semestre FROM PED WHERE curso = ? AND semestre = ?";
 
         try{
-            PreparedStatement preparar = conectarPED.prepareStatement(busca);
+            PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
             preparar.setString(1, ped.getCurso());
             preparar.setString(2, ped.getSemestre());
             ResultSet resultado = preparar.executeQuery();
@@ -544,7 +551,7 @@ public class Model{
         String busca = "SELECT codigo, semestre FROM PED WHERE codigo = ? AND semestre = ?";
 
         try{
-            PreparedStatement preparar = conectarPED.prepareStatement(busca);
+            PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
             preparar.setString(3, ped.getDisciplina().getCodigo());
             preparar.setString(5, ped.getSemestre());
             ResultSet resultado = preparar.executeQuery();
@@ -567,7 +574,7 @@ public class Model{
                 "regimeDeOferta, equivalencias " +
                 "FROM disciplina";
 
-        try (PreparedStatement ps = conectarDisciplina.prepareStatement(selectSql);
+        try (PreparedStatement ps = conectarUsuario.prepareStatement(selectSql);
              ResultSet rs = ps.executeQuery()) { //Executa a consulta e obtém o resultado
 
             while (rs.next()) {
@@ -592,8 +599,10 @@ public class Model{
         }
         return disciplinas;
     }
-
     public boolean criarAula(String data, String descricao, int carga, int cargaTotal, String dataNormal){
+        if(data.isBlank()||descricao.isBlank()){
+            return false;
+        }
         Aula aula = new Aula();
         aula.setDataFormatada(data);
         aula.setDescricao(descricao);
@@ -607,7 +616,6 @@ public class Model{
             return true;
         }
     }
-
     public boolean addAula(ArrayList<Aula> aulas, int cargaHoraria){
         Aula aulaAdicionar = aulas.get(aulas.size()-1);
         for(Aula aula : aulas){
@@ -618,10 +626,10 @@ public class Model{
         }
         return true;
     }
-
     public ArrayList<Aula> getAulasTemp(){
         return aulasTemp;
     }
+    public void resetAulasTemp(){aulasTemp.clear();}
     public ArrayList<String>getAulasLista(){
         ArrayList<String> listaAulas = new ArrayList<>();
         for(Aula aulas : aulasTemp){
@@ -643,7 +651,7 @@ public class Model{
                 "atividadesDiscentes, sistemaDeAvaliacao, bibliografia, obrigatoriedade, aulas"+
                 "FROM PED";
 
-        try (PreparedStatement ps = conectarPED.prepareStatement(selectSql);
+        try (PreparedStatement ps = conectarUsuario.prepareStatement(selectSql);
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
