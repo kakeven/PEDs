@@ -5,6 +5,7 @@ import Model.Professor;
 import View.InterfaceMenu;
 import View.InterfaceCadastro;
 import View.InterfaceLogin;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -20,6 +21,7 @@ import java.util.ResourceBundle;
 public class InterfaceLoginController implements Initializable {
     @FXML
     public Pane fundoInvisivel;
+
     public void initialize(URL location, ResourceBundle resources) {
         lblMensagemErro.setVisible(false);
         fundoInvisivel.requestFocus();
@@ -83,6 +85,29 @@ public class InterfaceLoginController implements Initializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    //metodo Deus
+    @FXML
+    private void metodoDeus(ActionEvent evento){
+        Object fonte = evento.getSource();
+
+        if(fonte instanceof Hyperlink){
+            Hyperlink link = (Hyperlink) fonte;
+            String id = link.getId();
+
+            switch (id){
+                case "linkCadastro":
+                    aoClicarNaoTemCadastro();
+            }
+        }else{
+            Button botao = (Button) fonte;
+            String id = botao.getId();
+
+            switch (id){
+                case "botaoLogin":
+                    aoClicarEntrar();
+            }
         }
     }
 }

@@ -70,12 +70,12 @@
             </rowConstraints>
         
       </GridPane>
-         <Button fx:id="botaoCadastro" mnemonicParsing="false" onAction="#aoClicarCadastrar" text="Cadastrar">
+         <Button fx:id="botaoCadastro" mnemonicParsing="false" onAction="#metodoDeus" text="Cadastrar">
             <VBox.margin>
                <Insets bottom="10.0" />
             </VBox.margin>
          </Button>
-         <Hyperlink fx:id="linkLogin" onAction="#aoClicarJaTemLogin" text="Já tem login?">
+         <Hyperlink fx:id="linkLogin" onAction="#metodoDeus" text="Já tem login?">
             <VBox.margin>
                <Insets bottom="15.0" />
             </VBox.margin>

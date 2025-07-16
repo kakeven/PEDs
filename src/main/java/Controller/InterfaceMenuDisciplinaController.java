@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Model;
 import View.InterfaceMenu;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -171,5 +172,28 @@ public class InterfaceMenuDisciplinaController implements Initializable{
         coRequisitos.setText("");
         equivalencias.setText("");
         regimeDeOferta.setValue("Semestral");
+    }
+
+    //metodo deus
+    @FXML
+    private void metodoDeus(ActionEvent evento){
+        Object fonte = evento.getSource();
+
+        if(fonte instanceof Button){
+            Button botao = (Button) fonte;
+            String id = botao.getId();
+
+            switch (id){
+                case "botaoVoltar":
+                    aoClicarVoltar();
+                    break;
+                case "botaoAdicionar":
+                    aoClicarAdicionar();
+                    break;
+                case "botaoLimpar":
+                    aoClicarLimpar();
+                    break;
+            }
+        }
     }
 }

@@ -4,6 +4,7 @@ import Model.Model;
 import View.InterfaceMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -99,6 +100,7 @@ public class InterfaceMenuPEDController implements Initializable {
     //variaveis gerais
     private ObservableList<String> listaDeAula = FXCollections.observableArrayList();
     int horasRestante = 0;
+    private boolean flagData = false;
 
     //variaveis para data
     private LocalDate[] dataSelecionada = new LocalDate[1];
@@ -234,6 +236,19 @@ public class InterfaceMenuPEDController implements Initializable {
         choiceObrigatoriedade.getItems().addAll("Obrigatória", "Optativa");
         choiceObrigatoriedade.setValue("Obrigatória");
 
+        //limpar listview caso selecione uma disciplina nova(ou seja a primeira vez)
+        choiceDisciplina.getSelectionModel().selectedItemProperty().addListener((obs, valorAntigo, valorNovo) -> {
+            if(valorNovo != null && !valorNovo.equals(valorAntigo)){
+                listaDeVisualizacao.getItems().clear();
+                if(flagData == true){
+                    seletorDatas.setValue(null);
+                    seletorDatas.setDayCellFactory(null);
+                    datasSelecionadas.clear();
+                    listaDeAula.clear();
+                }
+            }
+        });
+
         //listview
         listaDeVisualizacao.setItems(listaDeAula);
     }
@@ -262,6 +277,7 @@ public class InterfaceMenuPEDController implements Initializable {
             listaDeAula.setAll(model.getAulasLista());
             horasRestante = horasRestante - spinnerHoraAula.getValue();
             textoHorasRestantes.setText(String.valueOf(horasRestante));
+            flagData = true;
 
             //PINTAR AS DATAS A PARTIR Q ADD A AULA(se for a primeira bloqueia a parte de tras e pinta de vermelho)
             if(!primeiraSelecaoData){
@@ -298,5 +314,28 @@ public class InterfaceMenuPEDController implements Initializable {
     }
     public void aoClicarSalvar(){
         model.verificarPed(nomeUnidade.getText(),choiceDisciplina.getValue(), comboCurso.getValue(), textoSemestre.getText(), justificativaEditor.getHtmlText(), ementaEditor.getHtmlText(), objetivosEditor.getHtmlText(), metodologiaEditor.getHtmlText(), atividadesDoDiscenteEditor.getHtmlText(), sistemaDeAvaliacaoEditor.getHtmlText(), bibliografiaEditor.getHtmlText(), choiceObrigatoriedade.getValue());
+    }
+
+    //metodo deus
+    @FXML
+    private void metodoDeus(ActionEvent evento){
+        Object fonte = evento.getSource();
+
+        if(fonte instanceof Button){
+            Button botao = (Button) fonte;
+            String id = botao.getId();
+
+            switch (id){
+                case "botaoAddAula":
+                    aoClicarAddAula();
+                    break;
+                case "botaoVoltar":
+                    aoClicarVoltar();
+                    break;
+                case "botaoSalvarPED":
+                    aoClicarSalvar();
+                    break;
+            }
+        }
     }
 }

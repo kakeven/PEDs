@@ -3,6 +3,7 @@ package Controller;
 import Model.Model;
 import View.InterfaceMenuDisciplina;
 import View.InterfaceMenuPED;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import View.InterfaceLogin;
 import javafx.fxml.Initializable;
@@ -74,4 +75,26 @@ public class InterfaceMenuController implements Initializable {
         }
     }
 
+    //metodo deus
+    @FXML
+    private void metodoDeus(ActionEvent evento){
+        Object fonte = evento.getSource();
+
+        if(fonte instanceof Button){
+            Button botao = (Button) fonte;
+            String id = botao.getId();
+
+            switch (id){
+                case "botaoLogout":
+                    aoClicarLogout();
+                    break;
+                case "botaoAddDisciplina":
+                    aoCliclarAddDisciplina();
+                    break;
+                case "botaoAddPED":
+                    aoClicarAddPED();
+                    break;
+            }
+        }
+    }
 }

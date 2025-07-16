@@ -58,12 +58,12 @@
                         <Insets left="2.0" right="150.0" />
                      </GridPane.margin>
                   </PasswordField>
-                  <Hyperlink fx:id="linkCadastro" onAction="#aoClicarNaoTemCadastro" text="É novo ? Cadastre-se" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                  <Hyperlink fx:id="linkCadastro" onAction="#metodoDeus" text="É novo ? Cadastre-se" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets left="30.0" top="20.0" />
                      </GridPane.margin>
                   </Hyperlink>
-                  <Button fx:id="botaoLogin" mnemonicParsing="false" onAction="#aoClicarEntrar" prefHeight="25.0" prefWidth="76.0" text="Logar" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <Button fx:id="botaoLogin" mnemonicParsing="false" onAction="#metodoDeus" prefHeight="25.0" prefWidth="76.0" text="Logar" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="51.0" top="30.0" />
                      </GridPane.margin>

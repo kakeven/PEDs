@@ -4,6 +4,7 @@ import Model.Model;
 import Model.Professor;
 import View.InterfaceLogin;
 import View.InterfaceMenu;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -60,6 +61,7 @@ public class InterfaceCadastroController implements Initializable {
         this.model = model;
     }
 
+
     //metodos
     public void aoClicarJaTemLogin() {
         try {
@@ -110,6 +112,29 @@ public class InterfaceCadastroController implements Initializable {
         }else{
             lblMensagemPreencher.setVisible(false);
             lblSenha8.setVisible(true);
+        }
+    }
+    //metodo deus
+    @FXML
+    private void metodoDeus(ActionEvent evento){
+        Object fonte = evento.getSource();
+
+        if(fonte instanceof Hyperlink){
+            Hyperlink link = (Hyperlink) fonte;
+            String id = link.getId();
+
+            switch (id){
+                case "linkLogin":
+                    aoClicarJaTemLogin();
+            }
+        }else{
+            Button botao = (Button) fonte;
+            String id = botao.getId();
+
+            switch (id){
+                case "botaoCadastro":
+                    aoClicarCadastrar();
+            }
         }
     }
 }
