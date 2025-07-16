@@ -34,7 +34,7 @@ public class InterfaceLoginController implements Initializable {
     //variaveis de campos
     @FXML
     private TextField campoLogin;
-
+    //WDAWD
     @FXML
     private PasswordField campoSenha;
 
