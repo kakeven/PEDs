@@ -30,7 +30,7 @@
             <RowConstraints maxHeight="123.0" minHeight="10.0" prefHeight="86.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="botaoAddDisciplina"  onAction="#aoCliclarAddDisciplina" mnemonicParsing="false" prefHeight="25.0" prefWidth="128.0" text="Adicionar Disciplina" GridPane.rowIndex="2">
+            <Button fx:id="botaoAddDisciplina"  onAction="#metodoDeus" mnemonicParsing="false" prefHeight="25.0" prefWidth="128.0" text="Adicionar Disciplina" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="240.0" top="10.0" />
                </GridPane.margin>
@@ -40,12 +40,12 @@
                   <Insets bottom="30.0" left="240.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="botaoLogout" onAction="#aoClicarLogout" mnemonicParsing="false" text="Logout" GridPane.rowIndex="6">
+            <Button fx:id="botaoLogout" onAction="#metodoDeus" mnemonicParsing="false" text="Logout" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets bottom="-55" left="15.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="botaoAddPED" onAction="#aoClicarAddPED" mnemonicParsing="false" prefHeight="25.0" prefWidth="128.0" text="Adicionar PEDs" GridPane.rowIndex="3">
+            <Button fx:id="botaoAddPED" onAction="#metodoDeus" mnemonicParsing="false" prefHeight="25.0" prefWidth="128.0" text="Adicionar PEDs" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets bottom="-32.0" left="240.0" />
                </GridPane.margin>

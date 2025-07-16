@@ -4,6 +4,7 @@ import Model.Model;
 import Model.Professor;
 import View.InterfaceLogin;
 import View.InterfaceMenu;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -60,6 +61,7 @@ public class InterfaceCadastroController implements Initializable {
         this.model = model;
     }
 
+
     //metodos
     public void aoClicarJaTemLogin() {
         try {
@@ -84,14 +86,9 @@ public class InterfaceCadastroController implements Initializable {
             senhaParaMandar = campoSenha.getText();
 
             //cria o usuario para adicionar no DB(se ja n existir no banco)
-            Professor professorNovo = new Professor(nomeParaMandar, loginParaMandar, senhaParaMandar);
 
-            if(!model.LoginExiste(professorNovo)){
-                professorAtual = professorNovo.getNome();
+            if(model.verificarUsuario(nomeParaMandar, loginParaMandar, senhaParaMandar)){
                 try{
-                    model.SalvarUsuario(professorNovo); //salva o usuario
-                    model.setProfessorAtual(professorNovo);//pega o professor atual para mostrar no nome do professor no PED
-
                     Parent arquivoJanela = new InterfaceMenu(model).getRoot();
                     Stage janelaAtual = (Stage) botaoCadastro.getScene().getWindow();
                     janelaAtual.setScene(new Scene(arquivoJanela));
@@ -110,6 +107,29 @@ public class InterfaceCadastroController implements Initializable {
         }else{
             lblMensagemPreencher.setVisible(false);
             lblSenha8.setVisible(true);
+        }
+    }
+    //metodo deus
+    @FXML
+    private void metodoDeus(ActionEvent evento){
+        Object fonte = evento.getSource();
+
+        if(fonte instanceof Hyperlink){
+            Hyperlink link = (Hyperlink) fonte;
+            String id = link.getId();
+
+            switch (id){
+                case "linkLogin":
+                    aoClicarJaTemLogin();
+            }
+        }else{
+            Button botao = (Button) fonte;
+            String id = botao.getId();
+
+            switch (id){
+                case "botaoCadastro":
+                    aoClicarCadastrar();
+            }
         }
     }
 }
