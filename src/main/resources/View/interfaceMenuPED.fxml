@@ -121,7 +121,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="173.0" layoutY="213.0" prefHeight="25.0" prefWidth="196.0" />
+                  <TextField fx:id="textoSemestre" layoutX="173.0" layoutY="213.0" prefHeight="25.0" prefWidth="196.0" />
                   <Label layoutX="106.0" layoutY="256.0" prefHeight="25.0" text="Unidade:">
                      <font>
                         <Font size="16.0" />
@@ -129,7 +129,7 @@
                   </Label>
                   <TextField fx:id="nomeUnidade" layoutX="173.0" layoutY="256.0" prefHeight="25.0" prefWidth="196.0" />
                   <HTMLEditor fx:id="atividadesDoDiscenteEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="24.0" layoutY="952.0" prefHeight="240.0" prefWidth="506.0" />
-                  <Button layoutX="333.0" layoutY="1483.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" text="Salvar">
+                  <Button  fx:id="botaoSalvarPED" onAction="#aoClicarSalvar" layoutX="333.0" layoutY="1483.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" text="Salvar">
                      <font>
                         <Font size="14.0" />
                      </font>

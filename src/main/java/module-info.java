@@ -16,6 +16,7 @@ module peds_tentativa_2 {
     exports Model;
     exports View;
     requires com.google.gson;
+    opens Model to com.google.gson;
 
     opens Controller to javafx.fxml;
     opens View to javafx.fxml;
