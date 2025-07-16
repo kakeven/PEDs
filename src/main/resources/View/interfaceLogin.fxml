@@ -84,7 +84,7 @@
          </children>
       </VBox>
       <Accordion />
-      <HBox maxHeight="45.0" minWidth="45.0" prefHeight="45.0" prefWidth="600.0" style="-fx-background-color: #4a8fff; -fx-padding: 10;">
+      <HBox prefHeight="45.0" prefWidth="600.0" style="-fx-background-color: #4a8fff; -fx-padding: 10;">
          <children>
             <Label alignment="CENTER" prefHeight="28.0" prefWidth="117.0" text="Login">
                <font>
