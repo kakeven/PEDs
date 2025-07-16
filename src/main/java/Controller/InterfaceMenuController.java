@@ -1,18 +1,17 @@
 package Controller;
 
 import Model.Model;
+import View.InterfaceExibirPEDs;
 import View.InterfaceMenuDisciplina;
 import View.InterfaceMenuPED;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import View.InterfaceLogin;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,10 +29,16 @@ public class InterfaceMenuController implements Initializable {
     @FXML
     private Button botaoAddDisciplina;
 
-    private Model model;
-
     @FXML
     private Button botaoAddPED;
+
+    @FXML
+    private Button botaoExibirDisciplina;
+
+    @FXML
+    private Button botaoExibirPED;
+
+    private Model model;
 
 
     public void setModel(Model model) {
@@ -74,6 +79,28 @@ public class InterfaceMenuController implements Initializable {
             e.printStackTrace();
         }
     }
+    public void aoClicarExibirPED(){
+        try {
+            Parent arquivoJanela = new InterfaceExibirPEDs(model).getRoot();
+            Stage JanelaAtual = (Stage) botaoExibirDisciplina.getScene().getWindow();
+            JanelaAtual.setScene(new Scene(arquivoJanela));
+            JanelaAtual.setTitle("Exibir PEDs");
+            JanelaAtual.centerOnScreen();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void aoClicarExibirDisciplina(){
+        try {
+            Parent arquivoJanela = new InterfaceExibirPEDs(model).getRoot();
+            Stage JanelaAtual = (Stage) botaoExibirDisciplina.getScene().getWindow();
+            JanelaAtual.setScene(new Scene(arquivoJanela));
+            JanelaAtual.setTitle("Exibir PEDs");
+            JanelaAtual.centerOnScreen();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     //metodo deus
     @FXML
@@ -94,6 +121,11 @@ public class InterfaceMenuController implements Initializable {
                 case "botaoAddPED":
                     aoClicarAddPED();
                     break;
+                case "botaoExibirPED":
+                    aoClicarExibirPED();
+                    break;
+                case "botaoExibirDisciplina":
+                    ;
             }
         }
     }

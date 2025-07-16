@@ -18,7 +18,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
-
 import javafx.application.Platform;
 
 public class InterfaceMenuPEDController implements Initializable {

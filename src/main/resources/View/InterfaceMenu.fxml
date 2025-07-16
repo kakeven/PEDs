@@ -35,7 +35,7 @@
                   <Insets left="240.0" top="10.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="botao_exibirDisci" mnemonicParsing="false" prefHeight="25.0" prefWidth="128.0" text="Exibir Disciplinas" GridPane.rowIndex="3">
+            <Button fx:id="botaoExibirDisciplina" onAction="#metodoDeus" mnemonicParsing="false" prefHeight="25.0" prefWidth="128.0" text="Exibir Disciplinas" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets bottom="30.0" left="240.0" />
                </GridPane.margin>
@@ -50,7 +50,7 @@
                   <Insets bottom="-32.0" left="240.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="botao_exibirPEDs" mnemonicParsing="false" prefHeight="25.0" prefWidth="128.0" text="Exibir PEDs" GridPane.rowIndex="4">
+            <Button fx:id="botaoExibirPED" onAction="#metodoDeus" mnemonicParsing="false" prefHeight="25.0" prefWidth="128.0" text="Exibir PEDs" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets bottom="10.0" left="240.0" />
                </GridPane.margin>
