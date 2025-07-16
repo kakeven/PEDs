@@ -104,6 +104,9 @@ public class Model{
             ps.setString(2, professor.getLogin());
             ps.setString(3, professor.getSenha());
             ps.executeUpdate();
+            professorAtual.setNome(professor.getNome());
+            professorAtual.setLogin(professor.getLogin());
+            professorAtual.setSenha(professor.getSenha());
         } catch (SQLException e) {
             e.printStackTrace();
         }
