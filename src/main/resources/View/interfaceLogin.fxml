@@ -15,13 +15,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.layout.Pane?>
 
+<?import javafx.scene.layout.Pane?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E6F0FA;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceLoginController">
     <Pane fx:id="fundoInvisivel" prefWidth="0" prefHeight="0"
           focusTraversable="true" />
     <children>
-      <VBox layoutX="60.0" layoutY="91.0" prefHeight="252.0" prefWidth="478.0">
+      <VBox layoutX="61.0" layoutY="99.0" prefHeight="252.0" prefWidth="478.0">
          <children>
             <GridPane prefHeight="263.0" prefWidth="479.0">
               <columnConstraints>
@@ -84,7 +84,7 @@
          </children>
       </VBox>
       <Accordion />
-      <HBox layoutX="-6.0" layoutY="-2.0" prefHeight="47.0" prefWidth="606.0" style="-fx-background-color: #4a8fff; -fx-padding: 10;">
+      <HBox prefHeight="45.0" prefWidth="600.0" style="-fx-background-color: #4a8fff; -fx-padding: 10;">
          <children>
             <Label alignment="CENTER" prefHeight="28.0" prefWidth="117.0" text="Login">
                <font>

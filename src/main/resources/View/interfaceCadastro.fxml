@@ -16,13 +16,13 @@
 <?import javafx.scene.text.Font?>
 
 <?import javafx.scene.layout.Pane?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E6F0FA;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceCadastroController">
+<AnchorPane maxHeight="400.0" maxWidth="600.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E6F0FA;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceCadastroController">
     <Pane fx:id="fundoInvisivel" prefWidth="0" prefHeight="0"
           focusTraversable="true" />
     <children>
-    <VBox alignment="CENTER" layoutX="23.0" layoutY="34.0" prefHeight="366.0" prefWidth="554.0" spacing="15" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="34.0">
+    <VBox alignment="CENTER" layoutX="23.0" layoutY="52.0" prefHeight="366.0" prefWidth="554.0" spacing="15" AnchorPane.bottomAnchor="-18.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="52.0">
       
-      <GridPane alignment="CENTER" hgap="10" maxWidth="Infinity" prefHeight="181.0" prefWidth="539.0" vgap="10">
+      <GridPane alignment="CENTER" hgap="10" maxWidth="Infinity" prefHeight="193.0" prefWidth="554.0" vgap="10">
         
         <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <TextField fx:id="campoNome" maxWidth="300.0" prefHeight="15.0" prefWidth="270.0" promptText="Nome" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" />
@@ -82,7 +82,7 @@
          </Hyperlink>
       
     </VBox>
-      <HBox alignment="TOP_CENTER" prefHeight="44.0" prefWidth="601.0" style="-fx-background-color: #4a8fff;">
+      <HBox alignment="TOP_CENTER" prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: #4a8fff;">
          <children>
          
          <Label text="Cadastro">
