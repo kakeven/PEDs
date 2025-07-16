@@ -69,7 +69,7 @@
                      <children>
                         <Label style="-fx-alignment: CENTER;" text="Cadastro PEDs">
                            <font>
-                              <Font size="28.0" />
+                              <Font name="Calibri" size="28.0" />
                            </font>
                         </Label>
                      </children>
@@ -129,7 +129,7 @@
                   </Label>
                   <TextField fx:id="nomeUnidade" layoutX="173.0" layoutY="256.0" prefHeight="25.0" prefWidth="196.0" />
                   <HTMLEditor fx:id="atividadesDoDiscenteEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="24.0" layoutY="952.0" prefHeight="240.0" prefWidth="506.0" />
-                  <Button fx:id="botaoSalvarPED" onAction="#metodoDeus" layoutX="333.0" layoutY="1483.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="115.0" text="Salvar">
+                  <Button fx:id="botaoSalvarPED" layoutX="333.0" layoutY="1483.0" mnemonicParsing="false" onAction="#metodoDeus" prefHeight="50.0" prefWidth="115.0" text="Salvar">
                      <font>
                         <Font size="14.0" />
                      </font>

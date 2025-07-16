@@ -8,20 +8,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E6F0FA;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceExibirPEDsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #E6F0FA;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceExibirPEDsController">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="600.0">
+      <AnchorPane prefHeight="450.0" prefWidth="700.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="600.0" style="-fx-background-color: #4a8fff;">
+            <HBox alignment="CENTER" prefHeight="48.0" prefWidth="700.0" style="-fx-background-color: #4a8fff;">
                <children>
                   <Label text="Exibir PEDs">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Calibri" size="24.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <TableView layoutX="25.0" layoutY="70.0" prefHeight="260.0" prefWidth="550.0">
+            <TableView layoutX="75.0" layoutY="78.0" prefHeight="277.0" prefWidth="552.0">
               <columns>
                 <TableColumn prefWidth="137.5" text="ID" />
                 <TableColumn prefWidth="137.5" text="Semestre" />
@@ -29,8 +29,8 @@
                   <TableColumn prefWidth="137.5" text="Disciplina" />
               </columns>
             </TableView>
-            <Button fx:id="botaoVoltar" layoutX="25.0" layoutY="353.0" mnemonicParsing="false" prefWidth="48.0" text="Voltar" />
-            <Button fx:id="botaoPDF" layoutX="229.0" layoutY="349.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="142.0" text="Exportar para PDF">
+            <Button fx:id="botaoVoltar" layoutX="27.0" layoutY="397.0" mnemonicParsing="false" prefWidth="48.0" text="Voltar" />
+            <Button fx:id="botaoPDF" layoutX="279.0" layoutY="394.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="142.0" text="Exportar para PDF">
                <font>
                   <Font size="14.0" />
                </font>
