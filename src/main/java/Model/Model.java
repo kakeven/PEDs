@@ -67,11 +67,13 @@ public class Model{
 
     //metodos DB
     //DB Usuário
-    public void verificarUsuario(String nome, String login, String senha){
+    public boolean verificarUsuario(String nome, String login, String senha){
         if(senha.length() >= 8 && (!nome.isBlank() && !login.isBlank() && !senha.isBlank())&&!LoginExiste(login)){
             Professor professor = new Professor(nome, login, senha);
             SalvarUsuario(professor);
+            return true;
         }
+        return false;
     }
     public  void seConectarUsuario(){
         try{

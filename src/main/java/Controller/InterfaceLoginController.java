@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.Model;
-import Model.Professor;
 import View.InterfaceMenu;
 import View.InterfaceCadastro;
 import View.InterfaceLogin;
@@ -13,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import javax.swing.text.View;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -70,11 +68,7 @@ public class InterfaceLoginController implements Initializable {
             String loginParaMandar = campoLogin.getText();
             String senhaParaMandar = campoSenha.getText();
 
-            Professor professor = new Professor(loginParaMandar, senhaParaMandar);
-            Professor professorValidado = model.LoginValido(professor); //talvez dê um nullpointer, n sei ainda
-
-            if(professorValidado != null){
-                professorAtual = professorValidado.getNome();
+            if(model.LoginValido(loginParaMandar, senhaParaMandar)){
                 Parent arquivoJanela = new InterfaceMenu(model).getRoot();
                 Stage JanelaAtual = (Stage) botaoLogin.getScene().getWindow();
                 JanelaAtual.setScene(new Scene(arquivoJanela));

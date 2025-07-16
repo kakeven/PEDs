@@ -245,7 +245,10 @@ public class InterfaceMenuPEDController implements Initializable {
                     seletorDatas.setDayCellFactory(null);
                     datasSelecionadas.clear();
                     listaDeAula.clear();
+                    model.resetAulasTemp();
                 }
+                textoAulas.clear();
+                spinnerHoraAula.getValueFactory().setValue(0);
             }
         });
 
