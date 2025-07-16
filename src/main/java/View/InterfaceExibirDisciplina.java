@@ -1,6 +1,6 @@
 package View;
 
-import Controller.InterfaceCadastroController;
+import Controller.InterfaceExibirDisciplinaController;
 
 import Model.Model;
 import javafx.fxml.FXMLLoader;
@@ -8,13 +8,13 @@ import javafx.scene.Parent;
 
 import java.io.IOException;
 
-public class InterfaceCadastro {
+public class InterfaceExibirDisciplina {
     private Parent root;
-    private InterfaceCadastroController controller;
+    private InterfaceExibirDisciplinaController controller;
 
-    public InterfaceCadastro(Model model) {
+    public InterfaceExibirDisciplina(Model model) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/interfaceCadastro.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/interfaceExibirDisciplina.fxml"));
             root = loader.load(); //carrega a interface do FXML
             controller = loader.getController(); //pega a interface e cria o controller automatico, por causa do javaFX
             controller.setModel(model);  // passa o model pro controller,== , passar os dados atualizados
@@ -27,7 +27,7 @@ public class InterfaceCadastro {
         return root;
     }
 
-    public InterfaceCadastroController getController() {
+    public InterfaceExibirDisciplinaController getController() {
         return controller;
     }
 
