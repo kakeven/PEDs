@@ -10,8 +10,6 @@ import java.util.ArrayList;
 public class Model{
     private Connection conectar;
     private Connection conectarUsuario;
-    //private Connection conectarUsuario;
-    //private Connection conectarUsuario;
     private Disciplina disciplina;
     private Gson gson;
     private Professor professorAtual;
@@ -21,8 +19,6 @@ public class Model{
     public Model(){
         this.gson = new Gson();
         seConectarUsuario();
-      //  seconectarUsuario();
-       // seconectarUsuario();
         criarTabelaUsuario();
         criarTabelaDisciplina();
         criarTabelaPED();
@@ -71,6 +67,12 @@ public class Model{
 
     //metodos DB
     //DB Usuário
+    public void verificarUsuario(String nome, String login, String senha){
+        if(senha.length() >= 8 && (!nome.isBlank() && !login.isBlank() && !senha.isBlank())&&!LoginExiste(login)){
+            Professor professor = new Professor(nome, login, senha);
+            SalvarUsuario(professor);
+        }
+    }
     public  void seConectarUsuario(){
         try{
             if(conectarUsuario == null || conectarUsuario.isClosed()){
@@ -106,12 +108,12 @@ public class Model{
             e.printStackTrace();
         }
     }
-    public boolean LoginExiste(Professor professor){//serve para nao cadastrar dois usuarios com mesmo login
+    public boolean LoginExiste(String login){//serve para nao cadastrar dois usuarios com mesmo login
         String busca = "SELECT login FROM usuarios WHERE login = ?";
 
         try{
             PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
-            preparar.setString(1, professor.getLogin());
+            preparar.setString(1, login);
             ResultSet resultado = preparar.executeQuery();
 
             if(resultado.next()){
@@ -124,28 +126,29 @@ public class Model{
         }
         return false;
     }
-    public Professor LoginValido(Professor professor){
+    public boolean LoginValido(String login, String senha){
         String busca = "SELECT nome, login, senha FROM usuarios WHERE login = ?";
 
         try{
             PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
-            preparar.setString(1, professor.getLogin());
+            preparar.setString(1, login);
             ResultSet resultado = preparar.executeQuery();
 
             if(resultado.next()){
-                String senha = resultado.getString("senha");//pega a senha do BANCO
+                String senhaDB = resultado.getString("senha");//pega a senha do BANCO
                 String nomeProfessor = resultado.getString("nome");
 
-                if(senha.equals(professor.getSenha())){
-                    return professorAtual = new Professor(nomeProfessor, professor.getLogin(), senha); //retorna um profesor com Nome para exibir mais tarde em alguma view o professor logado atualmente
+                if(senhaDB.equals(senha)){
+                    professorAtual = new Professor(nomeProfessor, login, senha);
+                    return true;
                 }
             }else{
-                return null;
+                return false;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return false;
     }
 
     public int CalcularEstatistica(){
@@ -154,8 +157,8 @@ public class Model{
     public void setProfessorAtual(Professor professor){
         this.professorAtual = professor;
     }
-    public Professor getProfessorAtual() {
-        return professorAtual;
+    public String getProfessorAtual() {
+        return professorAtual.getNome();
     }
     public Professor pesquisaProfessorPorID(int id){
         String busca = "SELECT login, nome, senha FROM usuarios WHERE id = ?";
@@ -238,15 +241,6 @@ public class Model{
         }
     }
     //DB Disciplina
-    public void seConectarDisciplina(){
-        try{
-            if(conectarUsuario == null || conectarUsuario.isClosed()){
-                conectarUsuario = DriverManager.getConnection("jdbc:sqlite:bancoDisciplina.db");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
     public void criarTabelaDisciplina(){
         String sql = """
                 CREATE TABLE IF NOT EXISTS disciplina (
@@ -323,7 +317,6 @@ public class Model{
         }
         return false;
     }
-
     public int idDisciplina(Disciplina disciplina){
         String busca = "SELECT id FROM disciplina WHERE codigo = ?";
 
@@ -341,7 +334,6 @@ public class Model{
         }
         return -1;
     }
-
     public boolean pesquisaDisciplinaPorCodigo(String codigo){
         String busca = "SELECT codigo FROM disciplina WHERE codigo = ?";
 
@@ -360,7 +352,6 @@ public class Model{
         }
         return false;
     }
-
     public Disciplina pesquisaDisciplinaPorID(int id){
         String busca = """
                 SELECT nome, codigo, cargaTeorica, cargaPratica, cargaEaD,
@@ -459,19 +450,6 @@ public class Model{
         }
     }
     //DB PED
-    public void seConectarPED(){
-        try{
-            if(conectarUsuario == null || conectarUsuario.isClosed()){
-                conectarUsuario = DriverManager.getConnection("jdbc:sqlite:bancoUsuarios.db");
-            }
-            try (Statement stmt = conectarUsuario.createStatement()) {
-                stmt.execute("PRAGMA foreign_keys = ON;");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
     public void criarTabelaPED(){
         String sql = """
                 CREATE TABLE IF NOT EXISTS PED (
@@ -621,8 +599,10 @@ public class Model{
         }
         return disciplinas;
     }
-
     public boolean criarAula(String data, String descricao, int carga, int cargaTotal, String dataNormal){
+        if(data.isBlank()||descricao.isBlank()){
+            return false;
+        }
         Aula aula = new Aula();
         aula.setDataFormatada(data);
         aula.setDescricao(descricao);
@@ -636,7 +616,6 @@ public class Model{
             return true;
         }
     }
-
     public boolean addAula(ArrayList<Aula> aulas, int cargaHoraria){
         Aula aulaAdicionar = aulas.get(aulas.size()-1);
         for(Aula aula : aulas){
@@ -647,10 +626,10 @@ public class Model{
         }
         return true;
     }
-
     public ArrayList<Aula> getAulasTemp(){
         return aulasTemp;
     }
+    public void resetAulasTemp(){aulasTemp.clear();}
     public ArrayList<String>getAulasLista(){
         ArrayList<String> listaAulas = new ArrayList<>();
         for(Aula aulas : aulasTemp){

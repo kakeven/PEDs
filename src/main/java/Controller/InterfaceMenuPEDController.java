@@ -114,7 +114,7 @@ public class InterfaceMenuPEDController implements Initializable {
         choiceDisciplina.getItems().clear();
         choiceDisciplina.getItems().addAll(model.arrayDisciplinas());
         choiceDisciplina.setValue("Nenhuma Disciplina Selecionada");
-        nomeProfessor.setText(model.getProfessorAtual().getNome());
+        nomeProfessor.setText(model.getProfessorAtual());
 
         //listerner do choiceBox(pegar carga total da disciplina selecionada)
         choiceDisciplina.getSelectionModel().selectedItemProperty().addListener((obs, valorAntigo, valorNovo) -> {
