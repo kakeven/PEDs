@@ -82,7 +82,7 @@
          </Hyperlink>
       
     </VBox>
-      <HBox alignment="TOP_CENTER" prefHeight="45.0" prefWidth="600.0" style="-fx-background-color: #4a8fff;">
+      <HBox alignment="TOP_CENTER" prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: #4a8fff;">
          <children>
          
          <Label text="Cadastro">
