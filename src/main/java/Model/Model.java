@@ -428,7 +428,7 @@ public class Model{
                 disciplinaAdd = disciplinatst;
             }
             if((!cargaHorariaCompleta(aulasTemp, disciplinaAdd.getCargaTotal()))){
-                return false
+                return false;
             }
 
             PED ped = new PED();
