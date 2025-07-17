@@ -658,6 +658,10 @@ public class Model{
         }
         return id;
     }
+    public void resetArrayPEDsTemp(){
+        arrayPEDsTemp.clear();
+    }
+
     public boolean addAula(ArrayList<Aula> aulas, int cargaHoraria){
         Aula aulaAdicionar = aulas.get(aulas.size()-1);
         for(Aula aula : aulas){
