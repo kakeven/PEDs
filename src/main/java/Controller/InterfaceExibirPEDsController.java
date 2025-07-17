@@ -23,11 +23,11 @@ import javafx.application.Platform;
 
 public class InterfaceExibirPEDsController {
 
+    private Model model;
+
     public void setModel(Model model) {
         this.model = model;
     }
-
-    private Model model;
 
     @FXML
     private Button botaoVoltar;
@@ -48,7 +48,6 @@ public class InterfaceExibirPEDsController {
     @FXML
     private void metodoDeus(ActionEvent evento){
         Object fonte = evento.getSource();
-
 
         if(fonte instanceof Button){
             Button botao = (Button) fonte;

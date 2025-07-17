@@ -39,7 +39,7 @@ public class InterfaceMenuController implements Initializable {
 
 
     public void setModel(Model model) {
-        this.model=model;
+        this.model = model;
     }
 
     public void initialize(URL location, ResourceBundle resources) {
@@ -79,7 +79,7 @@ public class InterfaceMenuController implements Initializable {
     public void aoClicarExibirPED(){
         try {
             Parent arquivoJanela = new InterfaceExibirPEDs(model).getRoot();
-            Stage JanelaAtual = (Stage) botaoExibirDisciplina.getScene().getWindow();
+            Stage JanelaAtual = (Stage) botaoExibirPED.getScene().getWindow();
             JanelaAtual.setScene(new Scene(arquivoJanela));
             JanelaAtual.setTitle("Exibir PEDs");
             JanelaAtual.centerOnScreen();

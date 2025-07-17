@@ -1,8 +1,5 @@
 package View;
 
-
-
-
 import Controller.InterfaceMenuPEDController;
 import Model.Model;
 import javafx.fxml.FXMLLoader;
