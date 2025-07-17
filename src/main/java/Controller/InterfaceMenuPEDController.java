@@ -94,8 +94,14 @@ public class InterfaceMenuPEDController implements Initializable {
     private ListView<String> listaDeVisualizacao;
 
     //labels
-    //@FXML
-    //private Label
+    @FXML
+    private Label labelPreenchaTodosOsCampos;
+
+    @FXML
+    private Label labelPedAdicionadoComSucesso;
+
+    @FXML
+    private Label labelSelecioneAulasDiasDiferente;
 
 
     //criação Model(instancia)
@@ -258,6 +264,11 @@ public class InterfaceMenuPEDController implements Initializable {
 
         //listview
         listaDeVisualizacao.setItems(listaDeAula);
+
+        //labels
+        labelPedAdicionadoComSucesso.setVisible(false);
+        labelPreenchaTodosOsCampos.setVisible(false);
+        labelSelecioneAulasDiasDiferente.setVisible(false);
     }
     public void aoClicarAddAula(){
         //pegar data formatada
@@ -285,6 +296,9 @@ public class InterfaceMenuPEDController implements Initializable {
             horasRestante = horasRestante - spinnerHoraAula.getValue();
             textoHorasRestantes.setText(String.valueOf(horasRestante));
             flagData = true;
+            labelSelecioneAulasDiasDiferente.setVisible(false);
+            labelPreenchaTodosOsCampos.setVisible(false);
+            labelPedAdicionadoComSucesso.setVisible(false);
 
             //PINTAR AS DATAS A PARTIR Q ADD A AULA(se for a primeira bloqueia a parte de tras e pinta de vermelho)
             if(!primeiraSelecaoData){
@@ -310,6 +324,10 @@ public class InterfaceMenuPEDController implements Initializable {
                     }
                 });
             });
+        }else{
+            labelSelecioneAulasDiasDiferente.setVisible(true);
+            labelPreenchaTodosOsCampos.setVisible(false);
+            labelPedAdicionadoComSucesso.setVisible(false);
         }
     }
     public void aoClicarVoltar(){
@@ -329,10 +347,14 @@ public class InterfaceMenuPEDController implements Initializable {
             JanelaAtual.setTitle("Exibir PEDs");
             JanelaAtual.centerOnScreen();
             primeiraSelecaoData = false;
-
+            labelPedAdicionadoComSucesso.setVisible(true);
+            labelSelecioneAulasDiasDiferente.setVisible(false);
+            labelPreenchaTodosOsCampos.setVisible(false);
+        }else{
+            labelPreenchaTodosOsCampos.setVisible(true);
+            labelPedAdicionadoComSucesso.setVisible(false);
+            labelSelecioneAulasDiasDiferente.setVisible(false);
         }
-
-
     }
 
     //metodo deus
