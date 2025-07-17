@@ -152,17 +152,17 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="718.0" layoutY="1329.0" prefHeight="27.0" prefWidth="214.0" text="PED Criado com Sucesso!" textFill="#55ff00">
+                  <Label fx:id="labelPedAdicionadoComSucesso" layoutX="718.0" layoutY="1329.0" prefHeight="27.0" prefWidth="214.0" text="PED Criado com Sucesso!" textFill="#55ff00">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="707.0" layoutY="1329.0" prefHeight="27.0" prefWidth="236.0" text="Preencha todos os Campos!" textFill="#ff6700">
+                  <Label fx:id="labelPreenchaTodosOsCampos" layoutX="707.0" layoutY="1329.0" prefHeight="27.0" prefWidth="236.0" text="Preencha todos os Campos!" textFill="#ff6700">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="778.0" layoutY="368.0" prefHeight="27.0" prefWidth="299.0" text="Selecione aulas em dias diferentes!" textFill="#ff6700">
+                  <Label fx:id="labelSelecioneAulasDiasDiferente" layoutX="778.0" layoutY="368.0" prefHeight="27.0" prefWidth="299.0" text="Selecione aulas em dias diferentes!" textFill="#ff6700">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
