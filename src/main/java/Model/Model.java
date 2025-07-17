@@ -699,8 +699,10 @@ public class Model{
 
         try (PreparedStatement ps = conectarUsuario.prepareStatement(selectSql);
              ResultSet rs = ps.executeQuery()) {
-
             while (rs.next()) {
+                if(!(pesquisaProfessorPorID(rs.getInt("id_professor"))==professorAtual)){
+                    continue;
+                }
                 PED ped = new PED();
 
                 ped.setUnidade(rs.getString("unidade"));
