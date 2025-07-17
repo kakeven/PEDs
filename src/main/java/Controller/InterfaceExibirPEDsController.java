@@ -23,11 +23,11 @@ import javafx.application.Platform;
 
 public class InterfaceExibirPEDsController {
 
-    public void setModel(Model model) {
-        model = new Model();
-    }
-
     private Model model;
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
 
     @FXML
     private Button botaoVoltar;

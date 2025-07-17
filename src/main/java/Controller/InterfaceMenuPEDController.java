@@ -92,6 +92,10 @@ public class InterfaceMenuPEDController implements Initializable {
     @FXML
     private ListView<String> listaDeVisualizacao;
 
+    //labels
+    //@FXML
+    //private Label
+
 
     //criação Model(instancia)
     private Model model;
@@ -109,7 +113,7 @@ public class InterfaceMenuPEDController implements Initializable {
 
     public void setModel(Model model) {
         //alguns choice ficam no setModel pq se nao ele fica null
-        this.model=model;
+        this.model = model;
         choiceDisciplina.getItems().clear();
         choiceDisciplina.getItems().addAll(model.arrayDisciplinas());
         choiceDisciplina.setValue("Nenhuma Disciplina Selecionada");

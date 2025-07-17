@@ -24,7 +24,7 @@ import javafx.application.Platform;
 public class InterfaceExibirDisciplinaController {
 
     public void setModel(Model model) {
-        model = new Model();
+        this.model = model;
     }
 
     private Model model;
