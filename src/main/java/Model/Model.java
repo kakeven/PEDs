@@ -14,7 +14,12 @@ public class Model{
     private Gson gson;
     private Professor professorAtual;
     private ArrayList<Aula> aulasTemp;
+
+    private ArrayList<PED> arrayPEDsTemp;
     private ArrayList<String> semestrePEDs;
+    private ArrayList<String> cursoPEDs;
+    private ArrayList<String> disciplinaPEDs;
+    private ArrayList<Integer> idPEDs;
 
     //construtor
     public Model(){
@@ -25,6 +30,10 @@ public class Model{
         criarTabelaPED();
         this.disciplina = new Disciplina();
         this.aulasTemp = new ArrayList<>();
+        this.semestrePEDs = new ArrayList<>();
+        this.cursoPEDs = new ArrayList<>();
+        this.disciplinaPEDs =  new ArrayList<>();
+        this.idPEDs = new ArrayList<>();
         //this
     }
 
@@ -621,7 +630,34 @@ public class Model{
         }
     }
 
-    //public String
+    public ArrayList<String> getArraySemestrePEDs(){
+        ArrayList<String> semestres = new ArrayList<>();
+        for(PED ped : arrayPEDsTemp){
+            semestres.add(ped.getSemestre());
+        }
+        return semestres;
+    }
+    public ArrayList<String> getArrayCursoPEDs(){
+        ArrayList<String> curso = new ArrayList<>();
+        for(PED ped : arrayPEDsTemp){
+            curso.add(ped.getCurso());
+        }
+        return curso;
+    }
+    public ArrayList<String> getArrayDisciplinaPEDs(){
+        ArrayList<String> disciplina = new ArrayList<>();
+        for(PED ped : arrayPEDsTemp){
+            disciplina.add(ped.getDisciplina().getNome());
+        }
+        return disciplina;
+    }
+    public ArrayList<Integer> getArrayIdPEDs(){
+        ArrayList<Integer> id = new ArrayList<>();
+        for(PED ped : arrayPEDsTemp){
+            id.add(this.idPED(ped));
+        }
+        return id;
+    }
     public boolean addAula(ArrayList<Aula> aulas, int cargaHoraria){
         Aula aulaAdicionar = aulas.get(aulas.size()-1);
         for(Aula aula : aulas){
@@ -686,6 +722,7 @@ public class Model{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        this.arrayPEDsTemp = peds;
         return peds;
     }
 }
