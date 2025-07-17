@@ -8,7 +8,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #E6F0FA;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InterfaceExibirDisciplinaController">
+<?import javafx.scene.layout.Pane?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #E6F0FA;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml" fx:controller="Controller.InterfaceExibirDisciplinaController ">
 
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="900.0">
@@ -19,7 +20,7 @@
                 <TableColumn prefWidth="220.0" text="Código" />
               </columns>
             </TableView>
-            <Button fx:id="botaoVoltar" onAction="#metodoDeus" layoutX="802.0" layoutY="541.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="68.0" text="voltar" />
+            <Button layoutX="802.0" layoutY="541.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="68.0" text="voltar" />
             <HBox alignment="CENTER" prefHeight="48.0" prefWidth="900.0" style="-fx-background-color: #4a8fff;">
                <children>
                   <Label text="Exibir Disciplina">

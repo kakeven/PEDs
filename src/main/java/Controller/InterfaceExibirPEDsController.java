@@ -24,7 +24,7 @@ import javafx.application.Platform;
 public class InterfaceExibirPEDsController {
 
     public void setModel(Model model) {
-        model = new Model();
+        this.model = model;
     }
 
     private Model model;
@@ -48,6 +48,7 @@ public class InterfaceExibirPEDsController {
     @FXML
     private void metodoDeus(ActionEvent evento){
         Object fonte = evento.getSource();
+
 
         if(fonte instanceof Button){
             Button botao = (Button) fonte;

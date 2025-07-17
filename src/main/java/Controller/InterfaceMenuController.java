@@ -92,7 +92,7 @@ public class InterfaceMenuController implements Initializable {
             Parent arquivoJanela = new InterfaceExibirDisciplina(model).getRoot();
             Stage JanelaAtual = (Stage) botaoExibirDisciplina.getScene().getWindow();
             JanelaAtual.setScene(new Scene(arquivoJanela));
-            JanelaAtual.setTitle("Exibir PEDs");
+            JanelaAtual.setTitle("Exibir Disciplina");
             JanelaAtual.centerOnScreen();
         } catch (Exception e) {
             e.printStackTrace();
@@ -123,6 +123,7 @@ public class InterfaceMenuController implements Initializable {
                     break;
                 case "botaoExibirDisciplina":
                     aoClicarExibirDisciplina();
+                    break;
             }
         }
     }
