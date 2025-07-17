@@ -16,7 +16,7 @@
                <children>
                   <Label text="Exibir PEDs">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="20.0" />
                      </font>
                   </Label>
                </children>
@@ -29,7 +29,7 @@
                   <TableColumn prefWidth="137.5" text="Disciplina" />
               </columns>
             </TableView>
-            <Button fx:id="botaoVoltar" onAction="#metodoDeus" layoutX="25.0" layoutY="353.0" mnemonicParsing="false" prefWidth="48.0" text="Voltar" />
+            <Button fx:id="botaoVoltar" layoutX="25.0" layoutY="353.0" mnemonicParsing="false" onAction="#metodoDeus" prefWidth="48.0" text="Voltar" />
             <Button fx:id="botaoPDF" layoutX="229.0" layoutY="349.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="142.0" text="Exportar para PDF">
                <font>
                   <Font size="14.0" />

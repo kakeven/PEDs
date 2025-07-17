@@ -3,6 +3,7 @@ package Controller;
 import Model.Model;
 import View.InterfaceExibirPEDs;
 import View.InterfaceMenu;
+import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,6 +21,7 @@ import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
 import javafx.application.Platform;
+import javafx.util.Duration;
 
 public class InterfaceMenuPEDController implements Initializable {
 
@@ -341,15 +343,20 @@ public class InterfaceMenuPEDController implements Initializable {
     public void aoClicarSalvar(){
         if(model.verificarPed(nomeUnidade.getText(),choiceDisciplina.getValue(), comboCurso.getValue(), textoSemestre.getText(), justificativaEditor.getHtmlText(), ementaEditor.getHtmlText(), objetivosEditor.getHtmlText(), metodologiaEditor.getHtmlText(), atividadesDoDiscenteEditor.getHtmlText(), sistemaDeAvaliacaoEditor.getHtmlText(), bibliografiaEditor.getHtmlText(), choiceObrigatoriedade.getValue())){
 
-            Parent arquivoJanela = new InterfaceExibirPEDs(model).getRoot();
-            Stage JanelaAtual = (Stage) botaoSalvarPED.getScene().getWindow();
-            JanelaAtual.setScene(new Scene(arquivoJanela));
-            JanelaAtual.setTitle("Exibir PEDs");
-            JanelaAtual.centerOnScreen();
             primeiraSelecaoData = false;
             labelPedAdicionadoComSucesso.setVisible(true);
             labelSelecioneAulasDiasDiferente.setVisible(false);
             labelPreenchaTodosOsCampos.setVisible(false);
+            PauseTransition timer = new PauseTransition(Duration.seconds(1.2));
+            timer.setOnFinished(e -> {
+                Parent ArquivoJavela = new InterfaceExibirPEDs(model).getRoot();
+                Stage JanelaAtual = (Stage) botaoSalvarPED.getScene().getWindow();
+                JanelaAtual.setScene(new Scene(ArquivoJavela));
+                JanelaAtual.setTitle("Menu");
+                JanelaAtual.centerOnScreen();
+            });
+            timer.play();
+
         }else{
             labelPreenchaTodosOsCampos.setVisible(true);
             labelPedAdicionadoComSucesso.setVisible(false);

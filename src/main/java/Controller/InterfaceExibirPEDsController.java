@@ -21,16 +21,27 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import javafx.application.Platform;
 
-public class InterfaceExibirPEDsController {
+public class InterfaceExibirPEDsController implements Initializable{
 
     private Model model;
 
-    public void setModel(Model model) {
-        this.model = model;
-    }
-
     @FXML
     private Button botaoVoltar;
+
+    //table view
+    @FXML
+    private TableView<ObservableList<String>> tabelaPED;
+
+    public void setModel(Model model) {
+        this.model = model;
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
 
     public void aoClicarVoltar(){
         try {
@@ -43,6 +54,7 @@ public class InterfaceExibirPEDsController {
             e.printStackTrace();
         }
     }
+
 
     //metodo deus
     @FXML
