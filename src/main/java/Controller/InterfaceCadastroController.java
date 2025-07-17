@@ -109,7 +109,7 @@ public class InterfaceCadastroController implements Initializable {
             lblSenha8.setVisible(true);
         }
     }
-    //metodo deus
+    //metodo deus(serve para gerenciar os botões e isolar a view de saber oq cada botao faz, cada botao tem o mesmo metodo e quem decide é o controller)
     @FXML
     private void metodoDeus(ActionEvent evento){
         Object fonte = evento.getSource();
