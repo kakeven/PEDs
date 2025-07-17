@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Model;
+import View.InterfaceExibirPEDs;
 import View.InterfaceMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -316,7 +317,18 @@ public class InterfaceMenuPEDController implements Initializable {
         primeiraSelecaoData = false;
     }
     public void aoClicarSalvar(){
-        model.verificarPed(nomeUnidade.getText(),choiceDisciplina.getValue(), comboCurso.getValue(), textoSemestre.getText(), justificativaEditor.getHtmlText(), ementaEditor.getHtmlText(), objetivosEditor.getHtmlText(), metodologiaEditor.getHtmlText(), atividadesDoDiscenteEditor.getHtmlText(), sistemaDeAvaliacaoEditor.getHtmlText(), bibliografiaEditor.getHtmlText(), choiceObrigatoriedade.getValue());
+        if(model.verificarPed(nomeUnidade.getText(),choiceDisciplina.getValue(), comboCurso.getValue(), textoSemestre.getText(), justificativaEditor.getHtmlText(), ementaEditor.getHtmlText(), objetivosEditor.getHtmlText(), metodologiaEditor.getHtmlText(), atividadesDoDiscenteEditor.getHtmlText(), sistemaDeAvaliacaoEditor.getHtmlText(), bibliografiaEditor.getHtmlText(), choiceObrigatoriedade.getValue())){
+
+            Parent arquivoJanela = new InterfaceExibirPEDs(model).getRoot();
+            Stage JanelaAtual = (Stage) botaoSalvarPED.getScene().getWindow();
+            JanelaAtual.setScene(new Scene(arquivoJanela));
+            JanelaAtual.setTitle("Exibir PEDs");
+            JanelaAtual.centerOnScreen();
+            primeiraSelecaoData = false;
+
+        }
+
+
     }
 
     //metodo deus

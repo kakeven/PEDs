@@ -14,6 +14,7 @@ public class Model{
     private Gson gson;
     private Professor professorAtual;
     private ArrayList<Aula> aulasTemp;
+    private ArrayList<String> semestrePEDs;
 
     //construtor
     public Model(){
@@ -24,6 +25,7 @@ public class Model{
         criarTabelaPED();
         this.disciplina = new Disciplina();
         this.aulasTemp = new ArrayList<>();
+        //this
     }
 
     //sets CargaHoraria Disciplina
@@ -327,7 +329,6 @@ public class Model{
 
         try{
             PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
-            System.out.println(disciplina.getCodigo());
             preparar.setString(1, disciplina.getCodigo());
             ResultSet resultado = preparar.executeQuery();
 
@@ -530,8 +531,6 @@ public class Model{
             e.printStackTrace();
         }
 
-        System.out.println(pesquisaDisciplinaPorID(idDisciplina(ped.getDisciplina())));
-        System.out.println(pesquisaProfessorPorID(idProfessor(ped.getProfessor())));
     }
     public boolean PEDExiste(PED ped){
         String busca = "SELECT curso, semestre FROM PED WHERE curso = ? AND semestre = ?";
@@ -621,6 +620,8 @@ public class Model{
             return true;
         }
     }
+
+    //public String
     public boolean addAula(ArrayList<Aula> aulas, int cargaHoraria){
         Aula aulaAdicionar = aulas.get(aulas.size()-1);
         for(Aula aula : aulas){
