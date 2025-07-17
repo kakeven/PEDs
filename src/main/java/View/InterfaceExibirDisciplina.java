@@ -21,7 +21,7 @@ public class InterfaceExibirDisciplina {
             e.printStackTrace();
         }
     }
-
+    //testee
     public Parent getRoot() {
         return root;
     }
