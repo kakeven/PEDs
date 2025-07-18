@@ -13,7 +13,7 @@ public class Model {
     private Connection conectarUsuario;
     private Disciplina disciplina;
     private Gson gson;
-    private Professor professorAtual;
+    private Professor professorAtual = new Professor();
     private ArrayList<Aula> aulasTemp;
 
     private ArrayList<PED> arrayPEDsTemp;
