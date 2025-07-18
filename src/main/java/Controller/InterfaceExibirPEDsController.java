@@ -51,17 +51,16 @@ public class InterfaceExibirPEDsController implements Initializable{
     public void setModel(Model model) {
         this.model = model;
 
+        colunaID.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(0)));
+        colunaSemestre.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(1)));
+        colunaCurso.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(2)));
+        colunaDisciplina.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(3)));
+
         Platform.runLater(this::carregarDadosTabela);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(model != null){
-            colunaID.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(0)));
-            colunaSemestre.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(1)));
-            colunaCurso.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(1)));
-            colunaDisciplina.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(1)));
-        }
 
     }
 
