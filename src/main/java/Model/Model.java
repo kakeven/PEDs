@@ -658,6 +658,10 @@ public class Model{
         }
         return id;
     }
+    public void resetArrayPEDsTemp(){
+        arrayPEDsTemp.clear();
+    }
+
     public boolean addAula(ArrayList<Aula> aulas, int cargaHoraria){
         Aula aulaAdicionar = aulas.get(aulas.size()-1);
         for(Aula aula : aulas){
@@ -695,8 +699,10 @@ public class Model{
 
         try (PreparedStatement ps = conectarUsuario.prepareStatement(selectSql);
              ResultSet rs = ps.executeQuery()) {
-
             while (rs.next()) {
+                if(!(pesquisaProfessorPorID(rs.getInt("id_professor"))==professorAtual)){
+                    continue;
+                }
                 PED ped = new PED();
 
                 ped.setUnidade(rs.getString("unidade"));
