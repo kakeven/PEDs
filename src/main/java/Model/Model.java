@@ -745,7 +745,7 @@ public class Model {
 
                     ped.setUnidade(rs.getString("unidade"));
                     ped.setProfessor(pesquisaProfessorPorID(rs.getInt("id_professor")));
-                    //ped.setDisciplina(pesquisaDisciplinaPorID(rs.getInt("id_disciplina")));
+                    ped.setDisciplina(pesquisaDisciplinaPorID(rs.getInt("id_disciplina")));
                     ped.setCurso(rs.getString("curso"));
                     ped.setSemestre(rs.getString("semestre"));
                     ped.setJustificativa(rs.getString("justificativa"));
