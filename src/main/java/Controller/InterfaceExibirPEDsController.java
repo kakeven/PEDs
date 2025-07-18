@@ -48,6 +48,9 @@ public class InterfaceExibirPEDsController implements Initializable{
     @FXML
     private TableColumn<ObservableList<String>, String> colunaDisciplina;
 
+    //variaveis gerais
+    String ID;
+
     public void setModel(Model model) {
         this.model = model;
 
@@ -55,13 +58,19 @@ public class InterfaceExibirPEDsController implements Initializable{
         colunaSemestre.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(1)));
         colunaCurso.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(2)));
         colunaDisciplina.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(3)));
+        colunaID.setStyle("-fx-alignment: CENTER");
+        colunaSemestre.setStyle("-fx-alignment: CENTER");
 
         Platform.runLater(this::carregarDadosTabela);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        tabelaPED.getSelectionModel().selectedItemProperty().addListener((obs, valorAntigo, valorNovo) -> {
+            if(valorNovo != null){
+                ID = valorNovo.get(0);
+            }
+        });
     }
 
     public void carregarDadosTabela(){
@@ -88,7 +97,9 @@ public class InterfaceExibirPEDsController implements Initializable{
             e.printStackTrace();
         }
     }
+    public void aoClicarExportaPDF(){
 
+    }
 
     //metodo deus
     @FXML
@@ -103,6 +114,8 @@ public class InterfaceExibirPEDsController implements Initializable{
                 case "botaoVoltar":
                     aoClicarVoltar();
                     break;
+                case "botaoPDF":
+                    aoClicarExportaPDF();
             }
         }
     }
