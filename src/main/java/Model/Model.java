@@ -2,10 +2,31 @@ package Model;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
+
+import org.apache.poi.xwpf.usermodel.*;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 import java.sql.*;
 import java.util.ArrayList;
+
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
+import org.apache.poi.xwpf.usermodel.XWPFTableCell;
+
+import java.io.FileInputStream; // Usar FileInputStream para testar localmente
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.IOException;
+import java.util.List;
 
 
 public class Model {
@@ -14,6 +35,7 @@ public class Model {
     private Disciplina disciplina;
     private Gson gson;
     private Professor professorAtual = new Professor();
+    private PED pedAtual = new PED();
     private ArrayList<Aula> aulasTemp;
 
     private ArrayList<PED> arrayPEDsTemp;
@@ -474,6 +496,7 @@ public class Model {
                 return false;
             }
             SalvarPED(ped);
+            pedAtual = ped;
             return true;
         } else {
             return false;
@@ -795,4 +818,80 @@ public class Model {
     public ArrayList<PED> getPedsCarregados() {
         return this.arrayPEDsTemp;
     }
+
+    public void setPedAtual(PED ped){
+        pedAtual = ped;
+    }
+
+
+    public void gerarDocx() {
+        try (InputStream fis = getClass().getClassLoader().getResourceAsStream("modeloPED.docx");
+             XWPFDocument doc = new XWPFDocument(fis)) { // Usar try-with-resources para o doc também
+
+
+            preencherCamposDoc(doc.getParagraphs());
+
+            // Processar tabelas
+            for (XWPFTable table : doc.getTables()) {
+                for (XWPFTableRow row : table.getRows()) {
+                    for (XWPFTableCell cell : row.getTableCells()) {
+                        preencherCamposDoc(cell.getParagraphs());
+                    }
+                }
+            }
+
+            try (FileOutputStream fos = new FileOutputStream(String.format("PED_%s_%s.docx", pedAtual.getDisciplina().getNome(), pedAtual.getSemestre()))) {
+                doc.write(fos);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void preencherCamposDoc(java.util.List<XWPFParagraph> doc){
+        for (XWPFParagraph para : doc) {
+
+            String fullParagraphText = para.getText();
+            if (fullParagraphText != null && fullParagraphText.contains("${")) {
+
+                String updatedText = camposAPreencher(fullParagraphText);
+
+                List<XWPFRun> runs = para.getRuns();
+                for (int i = runs.size() - 1; i >= 0; i--) {
+                    para.removeRun(i);
+                }
+                XWPFRun newRun = para.createRun();
+                newRun.setText(updatedText);
+            }
+        }
+    }
+    public String camposAPreencher(String texto){
+        return texto.replace("${semestre}", pedAtual.getSemestre())
+                .replace("${unidade}", pedAtual.getUnidade())
+                .replace("${curso}", pedAtual.getCurso())
+                .replace("${estruturaCurricular}", pedAtual.getDisciplina().getEstruturaCurricular())
+                .replace("${nomeDisciplina}", pedAtual.getDisciplina().getNome())
+                .replace("${codigoDisciplina}", pedAtual.getDisciplina().getCodigo())
+                .replace("${obrigatoriedade}", pedAtual.getObrigatoriedade())
+                .replace("${regimeDeOferta}", pedAtual.getDisciplina().getRegimeDeOferta())
+                .replace("${cargaTotal}", String.valueOf(pedAtual.getDisciplina().getCargaTotal())+"h")
+                .replace("${cargaTeorica}",String.valueOf(pedAtual.getDisciplina().getCargaTeorica()))
+                .replace("${cargaPratica}", String.valueOf(pedAtual.getDisciplina().getCargaPratica()))
+                .replace("${cargaEad}", String.valueOf(pedAtual.getDisciplina().getCargaEaD()))
+                .replace("${cargaExtensao}", String.valueOf(pedAtual.getDisciplina().getCargaExtensao()))
+                .replace("${preRequisitos}", pedAtual.getDisciplina().getPreRequisito())
+                .replace("${coRequisitos}", pedAtual.getDisciplina().getCoRequisito())
+                .replace("${equivalencias}", pedAtual.getDisciplina().getEquivalencias())
+                .replace("${professor}", pedAtual.getProfessor().getNome())
+                .replace("${justificativa}", pedAtual.getJustificativa())
+                .replace("${ementa}", pedAtual.getEmenta())
+                .replace("${objetivos}", pedAtual.getObjetivos())
+                //FAZER EXIBICAO DAS AULAS
+                .replace("${metodologia}", pedAtual.getMetodologia())
+                .replace("${atividadesDiscentes}", pedAtual.getAtividadesDiscentes())
+                .replace("${sistemaDeAvaliacao}", pedAtual.getSistemaDeAvaliacao())
+                .replace("${bibliografia}", pedAtual.getBibliografia());
+    }
+
 }

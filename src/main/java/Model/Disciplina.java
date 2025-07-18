@@ -102,7 +102,12 @@ public class Disciplina {
         }
     }
 
-    public String getPreRequisito(){return preRequisito;}
+    public String getPreRequisito(){
+        if(preRequisito == null){
+            return "---";
+        }
+        return preRequisito;
+    }
 
     public void setCoRequisito(String coRequisito){
 

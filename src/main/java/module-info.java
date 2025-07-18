@@ -10,13 +10,38 @@ module peds_tentativa_2 {
     requires java.compiler;
     requires java.desktop;
 
+    requires org.apache.poi.poi;
+    requires org.apache.poi.ooxml;
+
+
+    requires javafx.graphics;
+    requires javafx.base;
+
+
+
+    requires org.apache.poi.ooxml.schemas;
+
+
+    requires org.apache.xmlbeans;
+    requires org.apache.commons.compress;
+    requires org.apache.commons.collections4;
+
+    requires com.google.gson;
+    requires org.kordamp.ikonli.core;
+
+    requires org.apache.commons.codec;
+    requires org.apache.commons.io;
+    requires org.apache.logging.log4j;
+
+
 
     exports App;
     exports Controller;
     exports Model;
     exports View;
-    requires com.google.gson;
+
     opens Model to com.google.gson;
+    requires java.base;
 
     opens Controller to javafx.fxml;
     opens View to javafx.fxml;
