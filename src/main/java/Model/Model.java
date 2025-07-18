@@ -580,15 +580,15 @@ public class Model {
     }
 
     public int idPED(PED ped) {
-        String busca = "SELECT codigo, semestre FROM PED WHERE codigo = ? AND semestre = ?";
+        String busca = "SELECT id FROM PED WHERE id_disciplina = ? AND semestre = ?";
 
         try {
             PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
-            preparar.setString(3, ped.getDisciplina().getCodigo());
-            preparar.setString(5, ped.getSemestre());
+            preparar.setInt(1, idDisciplina(ped.getDisciplina()));
+            preparar.setString(2, ped.getSemestre());
             ResultSet resultado = preparar.executeQuery();
-
             if (resultado.next()) {
+                //System.out.println(resultado.getInt("id"));
                 return resultado.getInt("id");
             }
         } catch (SQLException e) {
@@ -788,6 +788,7 @@ public class Model {
             row.add(ped.getDisciplina() != null ? ped.getDisciplina().getNome() : "N/A"); // Nome da Disciplina
             pedsParaView.add(row);
         }
+        //System.out.println(pedsParaView);
         return pedsParaView;
     }
 
