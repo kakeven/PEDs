@@ -28,6 +28,12 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JFileChooser; // Importar JFileChooser
+import javax.swing.filechooser.FileNameExtensionFilter; // Para filtrar tipos de arquivo
+import javax.swing.JOptionPane; // Para mensagens de erro/sucesso
+
+import java.io.File; // Para manipular arquivos
+
 
 public class Model {
     private Connection conectar;
