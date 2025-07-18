@@ -3,6 +3,7 @@ package Controller;
 import Model.Model;
 import View.InterfaceCadastro;
 import View.InterfaceMenu;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,9 +17,9 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
+
 import javafx.application.Platform;
 
 public class InterfaceExibirPEDsController implements Initializable{
@@ -28,9 +29,24 @@ public class InterfaceExibirPEDsController implements Initializable{
     @FXML
     private Button botaoVoltar;
 
+    @FXML
+    private Button botaoPDF;
+
     //table view
     @FXML
     private TableView<ObservableList<String>> tabelaPED;
+
+    @FXML
+    private TableColumn<ObservableList<String>, String> colunaID;
+
+    @FXML
+    private TableColumn<ObservableList<String>, String> colunaSemestre;
+
+    @FXML
+    private TableColumn<ObservableList<String>, String> colunaCurso;
+
+    @FXML
+    private TableColumn<ObservableList<String>, String> colunaDisciplina;
 
     public void setModel(Model model) {
         this.model = model;
@@ -40,6 +56,21 @@ public class InterfaceExibirPEDsController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        colunaID.setCellValueFactory(param -> {
+            model.arrayPEDs();
+            int indiceLinha = tabelaPED.getItems().indexOf(param.getValue());
+
+            ArrayList<Integer> itensColunaID = model.getArrayIdPEDs();
+
+            // Converte Integer para String
+            List<String> itensString = itensColunaID.stream()
+                    .map(String::valueOf)
+                    .collect(Collectors.toList());
+
+            String ID = String.join("\n", itensString);
+
+            return new SimpleStringProperty(ID);
+        });
     }
 
 
