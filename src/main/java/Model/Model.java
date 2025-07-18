@@ -899,5 +899,4 @@ public class Model {
                 .replace("${sistemaDeAvaliacao}", pedAtual.getSistemaDeAvaliacao())
                 .replace("${bibliografia}", pedAtual.getBibliografia());
     }
-
 }
