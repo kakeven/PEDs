@@ -870,28 +870,54 @@ public class Model {
     public void gerarDocx() {
 
 
-        try (InputStream fis = getClass().getClassLoader().getResourceAsStream("modeloPED.docx");
-             XWPFDocument doc = new XWPFDocument(fis)) { // Usar try-with-resources para o doc também
+        // 1. Abrir o JFileChooser para o usuário escolher o local e nome do arquivo
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Salvar PED como...");
+
+        // Define um filtro para que o usuário possa escolher apenas arquivos .docx
+        FileNameExtensionFilter docxFilter = new FileNameExtensionFilter("Documentos Word (*.docx)", "docx");
+        fileChooser.addChoosableFileFilter(docxFilter);
+        fileChooser.setFileFilter(docxFilter); // Define o filtro padrão
+
+        // Sugere um nome de arquivo inicial (opcional, mas bom para a UX)
+        String suggestedFileName = "PED_" + pedAtual.getDisciplina().getNome() + "_" + pedAtual.getSemestre() + ".docx";
+        fileChooser.setSelectedFile(new File(suggestedFileName));
 
 
-            preencherCamposDoc(doc.getParagraphs());
+        int userSelection = fileChooser.showSaveDialog(null); // 'null' para centralizar na tela
 
-            // Processar tabelas
-            for (XWPFTable table : doc.getTables()) {
-                for (XWPFTableRow row : table.getRows()) {
-                    for (XWPFTableCell cell : row.getTableCells()) {
-                        preencherCamposDoc(cell.getParagraphs());
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+
+            // Garante que a extensão .docx seja adicionada se o usuário não a digitou
+            String filePath = fileToSave.getAbsolutePath();
+            if (!filePath.toLowerCase().endsWith(".docx")) {
+                fileToSave = new File(filePath + ".docx");
+            }
+
+            // 2. Procede com a geração do documento usando o caminho escolhido
+            try (InputStream fis = getClass().getClassLoader().getResourceAsStream("modeloPED.docx");
+                 XWPFDocument doc = new XWPFDocument(fis)) {
+
+                for (XWPFTable table : doc.getTables()) {
+                    for (XWPFTableRow row : table.getRows()) {
+                        for (XWPFTableCell cell : row.getTableCells()) {
+                            preencherCamposDoc(cell.getParagraphs());
+                        }
                     }
                 }
-            }
 
-            try (FileOutputStream fos = new FileOutputStream(String.format("PED_%s_%s.docx", pedAtual.getDisciplina().getNome(), pedAtual.getSemestre()))) {
-                doc.write(fos);
-            }
+                JOptionPane.showMessageDialog(null, "Documento preenchido e salvo com sucesso em:\n" + fileToSave.getAbsolutePath(), "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao processar ou salvar o documento:\n" + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                System.err.println("Erro ao processar o documento: " + e.getMessage());
+                e.printStackTrace();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Operação de salvar cancelada pelo usuário.", "Informação", JOptionPane.INFORMATION_MESSAGE);
         }
+
     }
 
     public void preencherCamposDoc(java.util.List<XWPFParagraph> doc){
