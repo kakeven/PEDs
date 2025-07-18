@@ -98,7 +98,8 @@ public class InterfaceExibirPEDsController implements Initializable{
         }
     }
     public void aoClicarExportaPDF(){
-        //model.setPedAtual(model.pesqu);
+        model.setPedAtual(model.pesquisaPEDPorID(Integer.valueOf(ID)));
+        model.gerarDocx();
     }
 
     //metodo deus
