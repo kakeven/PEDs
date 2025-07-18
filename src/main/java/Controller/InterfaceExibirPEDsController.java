@@ -51,28 +51,32 @@ public class InterfaceExibirPEDsController implements Initializable{
     public void setModel(Model model) {
         this.model = model;
 
+        Platform.runLater(this::carregarDadosTabela);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if(model != null){
+            colunaID.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(0)));
+            colunaSemestre.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(1)));
+            colunaCurso.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(1)));
+            colunaDisciplina.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(1)));
+        }
 
-        colunaID.setCellValueFactory(param -> {
-            model.arrayPEDs();
-            int indiceLinha = tabelaPED.getItems().indexOf(param.getValue());
-
-            ArrayList<Integer> itensColunaID = model.getArrayIdPEDs();
-
-            // Converte Integer para String
-            List<String> itensString = itensColunaID.stream()
-                    .map(String::valueOf)
-                    .collect(Collectors.toList());
-
-            String ID = String.join("\n", itensString);
-
-            return new SimpleStringProperty(ID);
-        });
     }
 
+    public void carregarDadosTabela(){
+        if(model != null){
+            ArrayList<ArrayList<String>> pedsDoModelFormatados = model.getPedsParaTableView();
+
+            ObservableList<ObservableList<String>> dadosTableView = FXCollections.observableArrayList();
+
+            for(ArrayList<String> row : pedsDoModelFormatados){
+                dadosTableView.add(FXCollections.observableArrayList(row));
+            }
+            tabelaPED.setItems(dadosTableView);
+        }
+    }
 
     public void aoClicarVoltar(){
         try {

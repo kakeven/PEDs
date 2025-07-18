@@ -233,7 +233,7 @@ public class InterfaceMenuPEDController implements Initializable {
 
         //combo box(permite o usuario ou selecionar algo que ja existe ou adicionar)
         comboCurso.getItems().addAll("Engenharia de Software", "Ciência da Computação", "Engenharia Mecânica", "Engenharia Civíl", "Engenharia de Produção");
-        comboCurso.setValue("Nenhuma Curso Selecionado");
+        comboCurso.setValue("Nenhum Curso Selecionado");
         comboCurso.setOnAction(event -> {
             String txtDigitado = comboCurso.getEditor().getText();
 
@@ -347,6 +347,7 @@ public class InterfaceMenuPEDController implements Initializable {
             labelPedAdicionadoComSucesso.setVisible(true);
             labelSelecioneAulasDiasDiferente.setVisible(false);
             labelPreenchaTodosOsCampos.setVisible(false);
+
             PauseTransition timer = new PauseTransition(Duration.seconds(1.2));
             timer.setOnFinished(e -> {
                 Parent ArquivoJavela = new InterfaceExibirPEDs(model).getRoot();
@@ -356,8 +357,7 @@ public class InterfaceMenuPEDController implements Initializable {
                 JanelaAtual.centerOnScreen();
             });
             timer.play();
-
-        }else{
+        }else if(justificativaEditor.getHtmlText().isBlank() || objetivosEditor.getHtmlText().isBlank() || sistemaDeAvaliacaoEditor.getHtmlText().isBlank() || bibliografiaEditor.getHtmlText().isBlank() || ementaEditor.getHtmlText().isBlank() || metodologiaEditor.getHtmlText().isBlank() || atividadesDoDiscenteEditor.getHtmlText().isBlank()){
             labelPreenchaTodosOsCampos.setVisible(true);
             labelPedAdicionadoComSucesso.setVisible(false);
             labelSelecioneAulasDiasDiferente.setVisible(false);
