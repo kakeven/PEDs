@@ -626,6 +626,43 @@ public class Model {
         return -1;
     }
 
+    public PED pesquisaPEDPorID(int id){
+
+            String busca = """
+                SELECT id, unidade, id_professor, id_disciplina, curso, semestre, justificativa, ementa, objetivos, metodologia,
+                atividadesDiscentes, sistemaDeAvaliacao, bibliografia, obrigatoriedade, aulas 
+                FROM PED WHERE id = ?""";
+
+
+            try {
+                PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
+                preparar.setInt(1, id);
+                ResultSet rs = preparar.executeQuery();
+
+                if (rs.next()) {
+                    PED ped = new PED();
+                    ped.setUnidade(rs.getString("unidade"));
+                    ped.setProfessor(pesquisaProfessorPorID(rs.getInt("id_professor")));
+                    ped.setDisciplina(pesquisaDisciplinaPorID(rs.getInt("id_disciplina")));
+                    ped.setCurso(rs.getString("curso"));
+                    ped.setSemestre(rs.getString("semestre"));
+                    ped.setJustificativa(rs.getString("justificativa"));
+                    ped.setEmenta(rs.getString("ementa"));
+                    ped.setObjetivos(rs.getString("objetivos"));
+                    ped.setMetodologia(rs.getString("metodologia"));
+                    ped.setAtividadesDiscentes(rs.getString("atividadesDiscentes"));
+                    ped.setSistemaDeAvaliacao(rs.getString("sistemaDeAvaliacao"));
+                    ped.setBibliografia(rs.getString("bibliografia"));
+                    ped.setObrigatoriedade(rs.getString("obrigatoriedade"));
+                    return ped;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return null;
+
+    }
+
     public ArrayList<Disciplina> arrayDisciplinas() {
         ArrayList<Disciplina> disciplinas = new ArrayList<>();
 
@@ -831,6 +868,8 @@ public class Model {
 
 
     public void gerarDocx() {
+
+
         try (InputStream fis = getClass().getClassLoader().getResourceAsStream("modeloPED.docx");
              XWPFDocument doc = new XWPFDocument(fis)) { // Usar try-with-resources para o doc também
 
