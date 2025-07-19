@@ -510,6 +510,7 @@ public class Model {
             }
             SalvarPED(ped);
             pedAtual = ped;
+            gerarDocx();
             return true;
         } else {
             return false;
@@ -801,9 +802,6 @@ public class Model {
     public ArrayList<Aula> ordenarAulas(ArrayList<Aula> aulas){
         ArrayList<Aula> aulasReturn = new ArrayList<>();
         aulasReturn.add(aulas.get(0));
-        System.out.println("Dias: "+Integer.parseInt(aulas.get(0).getDataNormal().substring(0,2)));
-        System.out.println("Dias: "+Integer.parseInt(aulas.get(0).getDataNormal().substring(3,5)));
-        System.out.println("Dias: "+Integer.parseInt(aulas.get(0).getDataNormal().substring(6)));
         aulas.sort(Comparator.comparingInt(aula -> (Integer.parseInt(aula.getDataNormal().substring(0,2))+100*Integer.parseInt(aula.getDataNormal().substring(3,5))+10000*Integer.parseInt(aula.getDataNormal().substring(6)))));
        // System.out.println(aulas);
         return aulas;
@@ -892,8 +890,8 @@ public class Model {
         ArrayList<Disciplina> disciplinasBanco = arrayDisciplinas();
 
         for (Disciplina disciplina : disciplinasBanco) {
+            System.out.println(disciplina.getCodigo());
             ArrayList<String> row = new ArrayList<>();
-            row.add(String.valueOf(idDisciplina(disciplina)));
             row.add(disciplina.getNome());
             row.add(disciplina.getCodigo());
             disciplinasParaView.add(row);

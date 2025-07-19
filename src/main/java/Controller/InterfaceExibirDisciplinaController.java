@@ -3,6 +3,7 @@ package Controller;
 import Model.Model;
 import View.InterfaceCadastro;
 import View.InterfaceMenu;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,21 +17,47 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
 import javafx.application.Platform;
 //testee
 public class InterfaceExibirDisciplinaController {
-
-    public void setModel(Model model) {
-        this.model = model;
-    }
-
     private Model model;
 
     @FXML
+    private TableView<ObservableList<String>> tabelaDisciplina;
+
+    @FXML
     private Button botaoVoltar;
+
+    @FXML
+    private TableColumn<ObservableList<String>, String> colunaNome;
+
+    @FXML
+    private TableColumn<ObservableList<String>, String> colunaCodigo;
+
+    public void setModel(Model model) {
+        this.model = model;
+        colunaNome.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(0)));
+        colunaCodigo.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(1)));
+
+        Platform.runLater(this::carregarDadosTabela);
+    }
+    public void carregarDadosTabela(){
+        if(model != null){
+            ArrayList<ArrayList<String>> disciplinasDoModelFormatadas = model.getDisciplinasParaTableView();
+
+            ObservableList<ObservableList<String>> dadosTableView = FXCollections.observableArrayList();
+
+            for(ArrayList<String> row : disciplinasDoModelFormatadas){
+                dadosTableView.add(FXCollections.observableArrayList(row));
+            }
+            tabelaDisciplina.setItems(dadosTableView);
+        }
+    }
+
 
     public void aoClicarVoltar(){
         try {

@@ -342,7 +342,8 @@ public class InterfaceMenuPEDController implements Initializable {
     }
     public void aoClicarSalvar(){
         if(model.verificarPed(nomeUnidade.getText(),choiceDisciplina.getValue(), comboCurso.getValue(), textoSemestre.getText(), justificativaEditor.getHtmlText(), ementaEditor.getHtmlText(), objetivosEditor.getHtmlText(), metodologiaEditor.getHtmlText(), atividadesDoDiscenteEditor.getHtmlText(), sistemaDeAvaliacaoEditor.getHtmlText(), bibliografiaEditor.getHtmlText(), choiceObrigatoriedade.getValue())){
-            model.gerarDocx();
+            //System.out.println("KABUM");
+            //model.gerarDocx();
             primeiraSelecaoData = false;
             labelPedAdicionadoComSucesso.setVisible(true);
             labelSelecioneAulasDiasDiferente.setVisible(false);
@@ -366,7 +367,7 @@ public class InterfaceMenuPEDController implements Initializable {
 
     //metodo deus
     @FXML
-    private void metodoDeus(ActionEvent evento){
+    public void metodoDeus(ActionEvent evento){
         Object fonte = evento.getSource();
 
         if(fonte instanceof Button){
