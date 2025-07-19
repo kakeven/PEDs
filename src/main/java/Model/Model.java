@@ -510,7 +510,6 @@ public class Model {
             }
             SalvarPED(ped);
             pedAtual = ped;
-            gerarDocx();
             return true;
         } else {
             return false;
