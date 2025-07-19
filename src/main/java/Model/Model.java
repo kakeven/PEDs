@@ -40,12 +40,10 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.BodyType;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -61,7 +59,6 @@ public class Model {
     private Professor professorAtual = new Professor();
     private PED pedAtual = new PED();
     private ArrayList<Aula> aulasTemp;
-
     private ArrayList<PED> arrayPEDsTemp;
     private ArrayList<String> semestrePEDs;
     private ArrayList<String> cursoPEDs;
@@ -1068,7 +1065,6 @@ public class Model {
                 Element childElement = (Element) node;
                 XWPFRun run = paragraph.createRun();
 
-                // Aplicar formatação ao run ANTES de adicionar o texto
                 if (childElement.tagName().equals("b") || childElement.tagName().equals("strong")) {
                     run.setBold(true);
                 } else if (childElement.tagName().equals("i") || childElement.tagName().equals("em")) {
@@ -1078,17 +1074,12 @@ public class Model {
                     run.setUnderline(UnderlinePatterns.SINGLE);
                 }
 
-                // Adiciona o texto próprio do elemento (se houver)
                 if (!childElement.ownText().isEmpty()) {
                     run.setText(childElement.ownText());
                 }
-
-                // Processa os filhos recursivamente, mas no MESMO parágrafo
-                // Isso é crucial para formatação aninhada (ex: <b><i>texto</i></b>)
                 processarElementosInline(paragraph, childElement);
 
             } else if (node instanceof TextNode) {
-                // Para texto puro que não está dentro de uma tag específica
                 XWPFRun run = paragraph.createRun();
                 run.setText(((TextNode) node).text());
             }
