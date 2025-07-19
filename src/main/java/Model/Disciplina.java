@@ -37,7 +37,7 @@ public class Disciplina {
 
     public String getCargaTeorica() {
         if(cargaTeorica == 0){
-            return "---";
+            return "-";
         } else {
             return String.format("%dh",cargaTeorica);
         }
@@ -49,7 +49,7 @@ public class Disciplina {
 
     public String getCargaPratica() {
         if(cargaPratica == 0){
-            return "---";
+            return "-";
         } else {
             return String.format("%dh",cargaPratica);
         }
@@ -61,7 +61,7 @@ public class Disciplina {
 
     public String getCargaEaD() {
         if(cargaEaD == 0){
-            return "---";
+            return "-";
         } else {
             return String.format("%dh",cargaEaD);
         }
@@ -73,7 +73,7 @@ public class Disciplina {
 
     public String getCargaExtensao() {
         if(cargaExtensao == 0){
-            return "---";
+            return "-";
         } else {
             return String.format("%d",cargaExtensao);
         }
@@ -98,13 +98,13 @@ public class Disciplina {
     public void setPreRequisitos(String preRequisito){
         this.preRequisito = preRequisito;
         if(preRequisito.isBlank()){
-            this.preRequisito = "---";
+            this.preRequisito = "-";
         }
     }
 
     public String getPreRequisito(){
         if(preRequisito == null){
-            return "---";
+            return "-";
         }
         return preRequisito;
     }
@@ -113,7 +113,7 @@ public class Disciplina {
 
         this.coRequisito= coRequisito;
         if(coRequisito.isBlank()){
-            this.coRequisito = "---";
+            this.coRequisito = "-";
         }
     }
 
@@ -124,7 +124,7 @@ public class Disciplina {
     public void setEquivalencias(String equivalencias){
         this.equivalencias= equivalencias;
         if(equivalencias.isBlank()){
-            this.equivalencias = "---";
+            this.equivalencias = "-";
         }
     }
 
