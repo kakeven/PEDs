@@ -8,8 +8,10 @@ import java.lang.reflect.Type;
 import org.apache.poi.xwpf.usermodel.*;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.math.BigInteger;
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
+
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
@@ -20,13 +22,13 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.IOException;
-import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JOptionPane;
 import java.util.List;
-import java.util.Iterator;
 import java.io.File;
+
+import org.apache.xmlbeans.XmlCursor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
 import org.jsoup.select.Elements;
@@ -44,10 +46,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.*;
+
 import java.util.function.Supplier;
 
 
@@ -60,10 +60,6 @@ public class Model {
     private PED pedAtual = new PED();
     private ArrayList<Aula> aulasTemp;
     private ArrayList<PED> arrayPEDsTemp;
-    private ArrayList<String> semestrePEDs;
-    private ArrayList<String> cursoPEDs;
-    private ArrayList<String> disciplinaPEDs;
-    private ArrayList<Integer> idPEDs;
 
     //construtor
     public Model() {
@@ -74,10 +70,6 @@ public class Model {
         criarTabelaPED();
         this.disciplina = new Disciplina();
         this.aulasTemp = new ArrayList<>();
-        this.semestrePEDs = new ArrayList<>();
-        this.cursoPEDs = new ArrayList<>();
-        this.disciplinaPEDs = new ArrayList<>();
-        this.idPEDs = new ArrayList<>();
         //this
     }
 
@@ -669,6 +661,17 @@ public class Model {
                 ped.setSistemaDeAvaliacao(rs.getString("sistemaDeAvaliacao"));
                 ped.setBibliografia(rs.getString("bibliografia"));
                 ped.setObrigatoriedade(rs.getString("obrigatoriedade"));
+
+                Type listType = new TypeToken<ArrayList<Aula>>() {
+                }.getType();
+                String aulasJson = rs.getString("aulas");
+                if (aulasJson != null && !aulasJson.isEmpty()) {
+                    ArrayList<Aula> aulas = gson.fromJson(aulasJson, listType);
+                    ped.setAulas(aulas);
+                } else {
+                    ped.setAulas(new ArrayList<>());
+                }
+
                 return ped;
             }
         } catch (SQLException e) {
@@ -788,10 +791,22 @@ public class Model {
 
     public ArrayList<String> getAulasLista() {
         ArrayList<String> listaAulas = new ArrayList<>();
+        aulasTemp = ordenarAulas(aulasTemp);
         for (Aula aulas : aulasTemp) {
             listaAulas.add(aulas.getDescricao() + " em " + aulas.getDataFormatada() + " Com " + aulas.getCargaHoraria() + " horas de duração");
         }
         return listaAulas;
+    }
+
+    public ArrayList<Aula> ordenarAulas(ArrayList<Aula> aulas){
+        ArrayList<Aula> aulasReturn = new ArrayList<>();
+        aulasReturn.add(aulas.get(0));
+        System.out.println("Dias: "+Integer.parseInt(aulas.get(0).getDataNormal().substring(0,2)));
+        System.out.println("Dias: "+Integer.parseInt(aulas.get(0).getDataNormal().substring(3,5)));
+        System.out.println("Dias: "+Integer.parseInt(aulas.get(0).getDataNormal().substring(6)));
+        aulas.sort(Comparator.comparingInt(aula -> (Integer.parseInt(aula.getDataNormal().substring(0,2))+100*Integer.parseInt(aula.getDataNormal().substring(3,5))+10000*Integer.parseInt(aula.getDataNormal().substring(6)))));
+       // System.out.println(aulas);
+        return aulas;
     }
 
     public boolean cargaHorariaCompleta(ArrayList<Aula> aulas, int cargaHoraria) {
@@ -872,6 +887,20 @@ public class Model {
         //System.out.println(pedsParaView);
         return pedsParaView;
     }
+    public ArrayList<ArrayList<String>> getDisciplinasParaTableView(){
+        ArrayList<ArrayList<String>> disciplinasParaView = new ArrayList<>();
+        ArrayList<Disciplina> disciplinasBanco = arrayDisciplinas();
+
+        for (Disciplina disciplina : disciplinasBanco) {
+            ArrayList<String> row = new ArrayList<>();
+            row.add(String.valueOf(idDisciplina(disciplina)));
+            row.add(disciplina.getNome());
+            row.add(disciplina.getCodigo());
+            disciplinasParaView.add(row);
+        }
+        //System.out.println(pedsParaView);
+        return disciplinasParaView;
+    }
 
     public ArrayList<PED> getPedsCarregados() {
         return this.arrayPEDsTemp;
@@ -905,17 +934,156 @@ public class Model {
                  XWPFDocument doc = new XWPFDocument(fis);
                  FileOutputStream fos = new FileOutputStream(fileToSave)) {
 
-                List<XWPFParagraph> paragraphsToProcess = new ArrayList<>(doc.getParagraphs());
-                for (XWPFParagraph para : paragraphsToProcess) {
-                    preencherCampoDocSimplesOuHtml(para, doc, null);
+                // Processar tabelas
+                for (XWPFTable table : doc.getTables()) {
+                    if (table.getRows().size() > 0 && table.getRow(0).getTableCells().size() >= 3) {
+                        String cellText = table.getRow(0).getCell(0).getText();
+                        if (cellText != null && cellText.toLowerCase().contains("data")) {
+                            while (table.getNumberOfRows() > 1) {
+                                table.removeRow(1);
+                            }
+
+                            XWPFTableRow headerRow = table.getRow(0);
+
+                            for(int i = 1; i<=pedAtual.getAulas().size(); i++) {
+                                XWPFTableRow row = table.insertNewTableRow(i);
+
+                                for (int j = 0; j < 3; j++) {
+                                    XWPFTableCell cell = row.createCell();
+
+                                    CTTcPr tcPr = cell.getCTTc().addNewTcPr();
+                                    CTTcBorders borders = tcPr.addNewTcBorders();
+
+                                    borders.addNewTop().setVal(STBorder.NONE);
+                                    borders.addNewBottom().setVal(STBorder.NONE);
+                                    borders.addNewLeft().setVal(STBorder.NONE);
+                                    borders.addNewRight().setVal(STBorder.NONE);
+
+                                }
+                            }
+                            int rowIndice =1;
+                            // Adicionar linhas de dados
+                            for (Aula aula : pedAtual.getAulas()) {
+                                table.setInsideHBorder(XWPFTable.XWPFBorderType.SINGLE, 1, 0, "000000");
+                                table.setInsideVBorder(XWPFTable.XWPFBorderType.SINGLE, 1, 0, "000000");
+                                table.setTopBorder(XWPFTable.XWPFBorderType.SINGLE, 1, 0, "000000");
+                                table.setBottomBorder(XWPFTable.XWPFBorderType.SINGLE, 1, 0, "000000");
+                                table.setLeftBorder(XWPFTable.XWPFBorderType.SINGLE, 1, 0, "000000");
+                                table.setRightBorder(XWPFTable.XWPFBorderType.SINGLE, 1, 0, "000000");
+
+                                XWPFTableRow newRow = table.getRow(rowIndice);
+
+
+                                newRow.getCell(0).setText(aula.getDataNormal());
+                                newRow.getCell(1).setText(aula.getDescricao());
+                                if(aula.getCargaHoraria()==0){
+                                    newRow.getCell(2).setText("--");
+                                }else{
+                                    newRow.getCell(2).setText(String.valueOf(aula.getCargaHoraria())+"h");
+                                }
+
+                                for (int i = 0; i < 3; i++) {
+                                    if (headerRow.getCell(i).getCTTc().getTcPr() != null) {
+                                        newRow.getCell(i).getCTTc().setTcPr(headerRow.getCell(i).getCTTc().getTcPr());
+                                    }
+                                }
+                                rowIndice++;
+
+                                for (XWPFTableRow row : table.getRows()) {
+                                    for (XWPFTableCell cell : row.getTableCells()) {
+
+                                        CTTcPr tcPr = cell.getCTTc().isSetTcPr() ? cell.getCTTc().getTcPr() : cell.getCTTc().addNewTcPr();
+
+                                        CTTcBorders borders = tcPr.isSetTcBorders() ? tcPr.getTcBorders() : tcPr.addNewTcBorders();
+
+                                        borders.setTop(CTBorder.Factory.newInstance());
+                                        borders.getTop().setVal(STBorder.NONE);
+
+                                        borders.setBottom(CTBorder.Factory.newInstance());
+                                        borders.getBottom().setVal(STBorder.NONE);
+
+                                        borders.setLeft(CTBorder.Factory.newInstance());
+                                        borders.getLeft().setVal(STBorder.NONE);
+
+                                        borders.setRight(CTBorder.Factory.newInstance());
+                                        borders.getRight().setVal(STBorder.NONE);
+
+                                    }
+                                }
+
+                                for (XWPFTableCell cell : newRow.getTableCells()) {
+                                    CTTc ctTc = cell.getCTTc();
+                                    CTTcPr tcPr = ctTc.isSetTcPr() ? ctTc.getTcPr() : ctTc.addNewTcPr();
+                                    CTShd shd = tcPr.isSetShd() ? tcPr.getShd() : tcPr.addNewShd();
+
+                                    shd.setFill("FFFFFF");
+                                    shd.setVal(STShd.CLEAR); // Define o tipo de preenchimento como sólido
+                                    shd.setColor("auto");
+
+                                    // Define a cor do primeiro plano como automática
+                                }
+
+                            }
+                            int[] larguras = {2000, 8000, 2000};
+                            for (int i = 0; i < 3; i++) {
+                                XWPFTableCell cell = headerRow.getCell(i);
+                                if (cell != null) {
+                                    CTTcPr tcPr = cell.getCTTc().isSetTcPr() ? cell.getCTTc().getTcPr() : cell.getCTTc().addNewTcPr();
+                                    CTTblWidth cellWidth = tcPr.isSetTcW() ? tcPr.getTcW() : tcPr.addNewTcW();
+                                    cellWidth.setType(STTblWidth.DXA);
+                                    cellWidth.setW(BigInteger.valueOf(larguras[i]));
+                                }
+                            }
+                            for (XWPFTableRow row : table.getRows()) {
+                                while (row.getTableCells().size() < 3) {
+                                    row.createCell(); // Garante 3 células
+                                }
+
+                                for (XWPFTableCell cell : row.getTableCells()) {
+                                    // Garante que a célula tem propriedades
+                                    CTTcPr tcPr = cell.getCTTc().isSetTcPr() ? cell.getCTTc().getTcPr() : cell.getCTTc().addNewTcPr();
+
+                                    // Cria bordas se não existirem
+                                    CTTcBorders borders = tcPr.isSetTcBorders() ? tcPr.getTcBorders() : tcPr.addNewTcBorders();
+
+                                    CTBorder top = borders.isSetTop() ? borders.getTop() : borders.addNewTop();
+                                    CTBorder bottom = borders.isSetBottom() ? borders.getBottom() : borders.addNewBottom();
+                                    CTBorder left = borders.isSetLeft() ? borders.getLeft() : borders.addNewLeft();
+                                    CTBorder right = borders.isSetRight() ? borders.getRight() : borders.addNewRight();
+
+                                    top.setVal(STBorder.NONE);
+                                    bottom.setVal(STBorder.NONE);
+                                    left.setVal(STBorder.NONE);
+                                    right.setVal(STBorder.NONE);
+
+                                    // Zera cor de preenchimento, só por garantia
+                                    CTShd shd = tcPr.isSetShd() ? tcPr.getShd() : tcPr.addNewShd();
+                                    shd.setFill("FFFFFF");
+                                    shd.setVal(STShd.CLEAR);
+                                    shd.setColor("auto");
+                                }
+
+                                for (XWPFTableCell cell : headerRow.getTableCells()) {
+                                    CTTcPr tcPr = cell.getCTTc().isSetTcPr() ? cell.getCTTc().getTcPr() : cell.getCTTc().addNewTcPr();
+                                    CTShd shd = tcPr.isSetShd() ? tcPr.getShd() : tcPr.addNewShd();
+
+                                    shd.setFill("D3D3D3");
+                                    shd.setVal(STShd.CLEAR);
+                                    shd.setColor("auto");
+                                }
+                            }
+                            break;
+                        }
+                    }
                 }
 
+
+                // Processar outros campos do documento
                 for (XWPFTable table : doc.getTables()) {
                     for (XWPFTableRow row : table.getRows()) {
                         for (XWPFTableCell cell : row.getTableCells()) {
-                            List<XWPFParagraph> cellParagraphsToProcess = new ArrayList<>(cell.getParagraphs());
-                            for (XWPFParagraph cellPara : cellParagraphsToProcess) {
-                                preencherCampoDocSimplesOuHtml(cellPara, doc, cell);
+                            for (XWPFParagraph para : cell.getParagraphs()) {
+                                preencherCampoDocSimplesOuHtml(para, doc, cell);
                             }
                         }
                     }
@@ -923,6 +1091,9 @@ public class Model {
 
                 doc.write(fos);
                 JOptionPane.showMessageDialog(null, "Documento preenchido e salvo com sucesso em:\n" + fileToSave.getAbsolutePath(), "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                fos.close();
+                doc.close();
+                fis.close();
 
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Erro ao processar ou salvar o documento:\n" + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);

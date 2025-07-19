@@ -280,7 +280,7 @@ public class InterfaceMenuPEDController implements Initializable {
 
 
         //pegar data normal(padrao brasil, isso vai servir na hora de portar o PED para PDF)
-        String dataNormal =  seletorDatas.getValue().format(DateTimeFormatter.ofPattern("dd/MM"));
+        String dataNormal =  seletorDatas.getValue().format(DateTimeFormatter.ofPattern("dd/MM/YYYY"));
 
         //outras variaveis
         String nomeAula = textoAulas.getText();
