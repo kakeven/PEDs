@@ -2,37 +2,55 @@ package Model;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
-
 import org.apache.poi.xwpf.usermodel.*;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-
 import java.sql.*;
 import java.util.ArrayList;
-
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
-
-import java.io.FileInputStream; // Usar FileInputStream para testar localmente
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.IOException;
 import java.util.List;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JOptionPane;
+import java.util.List;
+import java.util.Iterator;
+import java.io.File;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.*;
+import org.jsoup.select.Elements;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFTableCell;
+import org.apache.poi.xwpf.usermodel.BodyType;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFTableCell;
+import org.apache.poi.xwpf.usermodel.BodyType;
 
-import javax.swing.JFileChooser; // Importar JFileChooser
-import javax.swing.filechooser.FileNameExtensionFilter; // Para filtrar tipos de arquivo
-import javax.swing.JOptionPane; // Para mensagens de erro/sucesso
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
-import java.io.File; // Para manipular arquivos
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Supplier;
 
 
 public class Model {
@@ -628,38 +646,38 @@ public class Model {
 
     public PED pesquisaPEDPorID(int id){
 
-            String busca = """
+        String busca = """
                 SELECT id, unidade, id_professor, id_disciplina, curso, semestre, justificativa, ementa, objetivos, metodologia,
                 atividadesDiscentes, sistemaDeAvaliacao, bibliografia, obrigatoriedade, aulas 
                 FROM PED WHERE id = ?""";
 
 
-            try {
-                PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
-                preparar.setInt(1, id);
-                ResultSet rs = preparar.executeQuery();
+        try {
+            PreparedStatement preparar = conectarUsuario.prepareStatement(busca);
+            preparar.setInt(1, id);
+            ResultSet rs = preparar.executeQuery();
 
-                if (rs.next()) {
-                    PED ped = new PED();
-                    ped.setUnidade(rs.getString("unidade"));
-                    ped.setProfessor(pesquisaProfessorPorID(rs.getInt("id_professor")));
-                    ped.setDisciplina(pesquisaDisciplinaPorID(rs.getInt("id_disciplina")));
-                    ped.setCurso(rs.getString("curso"));
-                    ped.setSemestre(rs.getString("semestre"));
-                    ped.setJustificativa(rs.getString("justificativa"));
-                    ped.setEmenta(rs.getString("ementa"));
-                    ped.setObjetivos(rs.getString("objetivos"));
-                    ped.setMetodologia(rs.getString("metodologia"));
-                    ped.setAtividadesDiscentes(rs.getString("atividadesDiscentes"));
-                    ped.setSistemaDeAvaliacao(rs.getString("sistemaDeAvaliacao"));
-                    ped.setBibliografia(rs.getString("bibliografia"));
-                    ped.setObrigatoriedade(rs.getString("obrigatoriedade"));
-                    return ped;
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if (rs.next()) {
+                PED ped = new PED();
+                ped.setUnidade(rs.getString("unidade"));
+                ped.setProfessor(pesquisaProfessorPorID(rs.getInt("id_professor")));
+                ped.setDisciplina(pesquisaDisciplinaPorID(rs.getInt("id_disciplina")));
+                ped.setCurso(rs.getString("curso"));
+                ped.setSemestre(rs.getString("semestre"));
+                ped.setJustificativa(rs.getString("justificativa"));
+                ped.setEmenta(rs.getString("ementa"));
+                ped.setObjetivos(rs.getString("objetivos"));
+                ped.setMetodologia(rs.getString("metodologia"));
+                ped.setAtividadesDiscentes(rs.getString("atividadesDiscentes"));
+                ped.setSistemaDeAvaliacao(rs.getString("sistemaDeAvaliacao"));
+                ped.setBibliografia(rs.getString("bibliografia"));
+                ped.setObrigatoriedade(rs.getString("obrigatoriedade"));
+                return ped;
             }
-            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
 
     }
 
@@ -865,48 +883,48 @@ public class Model {
     public void setPedAtual(PED ped){
         pedAtual = ped;
     }
-
-
     public void gerarDocx() {
-
-
-        // 1. Abrir o JFileChooser para o usuário escolher o local e nome do arquivo
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Salvar PED como...");
 
-        // Define um filtro para que o usuário possa escolher apenas arquivos .docx
         FileNameExtensionFilter docxFilter = new FileNameExtensionFilter("Documentos Word (*.docx)", "docx");
         fileChooser.addChoosableFileFilter(docxFilter);
-        fileChooser.setFileFilter(docxFilter); // Define o filtro padrão
+        fileChooser.setFileFilter(docxFilter);
 
-        // Sugere um nome de arquivo inicial (opcional, mas bom para a UX)
         String suggestedFileName = "PED_" + pedAtual.getDisciplina().getNome() + "_" + pedAtual.getSemestre() + ".docx";
         fileChooser.setSelectedFile(new File(suggestedFileName));
 
-
-        int userSelection = fileChooser.showSaveDialog(null); // 'null' para centralizar na tela
+        int userSelection = fileChooser.showSaveDialog(null);
 
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
 
-            // Garante que a extensão .docx seja adicionada se o usuário não a digitou
             String filePath = fileToSave.getAbsolutePath();
             if (!filePath.toLowerCase().endsWith(".docx")) {
                 fileToSave = new File(filePath + ".docx");
             }
 
-            // 2. Procede com a geração do documento usando o caminho escolhido
             try (InputStream fis = getClass().getClassLoader().getResourceAsStream("modeloPED.docx");
-                 XWPFDocument doc = new XWPFDocument(fis)) {
+                 XWPFDocument doc = new XWPFDocument(fis);
+                 FileOutputStream fos = new FileOutputStream(fileToSave)) {
+
+                List<XWPFParagraph> paragraphsToProcess = new ArrayList<>(doc.getParagraphs());
+                for (XWPFParagraph para : paragraphsToProcess) {
+                    preencherCampoDocSimplesOuHtml(para, doc, null);
+                }
 
                 for (XWPFTable table : doc.getTables()) {
                     for (XWPFTableRow row : table.getRows()) {
                         for (XWPFTableCell cell : row.getTableCells()) {
-                            preencherCamposDoc(cell.getParagraphs());
+                            List<XWPFParagraph> cellParagraphsToProcess = new ArrayList<>(cell.getParagraphs());
+                            for (XWPFParagraph cellPara : cellParagraphsToProcess) {
+                                preencherCampoDocSimplesOuHtml(cellPara, doc, cell);
+                            }
                         }
                     }
                 }
 
+                doc.write(fos);
                 JOptionPane.showMessageDialog(null, "Documento preenchido e salvo com sucesso em:\n" + fileToSave.getAbsolutePath(), "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (IOException e) {
@@ -917,51 +935,163 @@ public class Model {
         } else {
             JOptionPane.showMessageDialog(null, "Operação de salvar cancelada pelo usuário.", "Informação", JOptionPane.INFORMATION_MESSAGE);
         }
-
     }
 
-    public void preencherCamposDoc(java.util.List<XWPFParagraph> doc){
-        for (XWPFParagraph para : doc) {
+    public void preencherCampoDocSimplesOuHtml(XWPFParagraph para, XWPFDocument doc, XWPFTableCell parentCell) {
+        String fullParagraphText = para.getText();
+        if (fullParagraphText == null || !fullParagraphText.contains("${")) {
+            return;
+        }
 
-            String fullParagraphText = para.getText();
-            if (fullParagraphText != null && fullParagraphText.contains("${")) {
+        Map<String, Supplier<String>> camposMap = new HashMap<>();
+        camposMap.put("${semestre}", pedAtual::getSemestre);
+        camposMap.put("${unidade}", pedAtual::getUnidade);
+        camposMap.put("${curso}", pedAtual::getCurso);
+        camposMap.put("${estruturaCurricular}", () -> pedAtual.getDisciplina().getEstruturaCurricular());
+        camposMap.put("${nomeDisciplina}", () -> pedAtual.getDisciplina().getNome());
+        camposMap.put("${codigoDisciplina}", () -> pedAtual.getDisciplina().getCodigo());
+        camposMap.put("${obrigatoriedade}", pedAtual::getObrigatoriedade);
+        camposMap.put("${regimeDeOferta}", () -> pedAtual.getDisciplina().getRegimeDeOferta());
+        camposMap.put("${cargaTotal}", () -> String.valueOf(pedAtual.getDisciplina().getCargaTotal()) + "h");
+        camposMap.put("${cargaTeorica}", () -> String.valueOf(pedAtual.getDisciplina().getCargaTeorica()));
+        camposMap.put("${cargaPratica}", () -> String.valueOf(pedAtual.getDisciplina().getCargaPratica()));
+        camposMap.put("${cargaEad}", () -> String.valueOf(pedAtual.getDisciplina().getCargaEaD()));
+        camposMap.put("${cargaExtensao}", () -> String.valueOf(pedAtual.getDisciplina().getCargaExtensao()));
+        camposMap.put("${preRequisitos}", () -> pedAtual.getDisciplina().getPreRequisito());
+        camposMap.put("${coRequisitos}", () -> pedAtual.getDisciplina().getCoRequisito());
+        camposMap.put("${equivalencias}", () -> pedAtual.getDisciplina().getEquivalencias());
+        camposMap.put("${professor}", () -> pedAtual.getProfessor().getNome());
+        camposMap.put("${justificativa}", pedAtual::getJustificativa);
+        camposMap.put("${ementa}", pedAtual::getEmenta);
+        camposMap.put("${objetivos}", pedAtual::getObjetivos);
+        camposMap.put("${metodologia}", pedAtual::getMetodologia);
+        camposMap.put("${atividadesDiscentes}", pedAtual::getAtividadesDiscentes);
+        camposMap.put("${sistemaDeAvaliacao}", pedAtual::getSistemaDeAvaliacao);
+        camposMap.put("${bibliografia}", pedAtual::getBibliografia);
 
-                String updatedText = camposAPreencher(fullParagraphText);
+        Set<String> camposHtml = new HashSet<>();
+        camposHtml.add("${justificativa}");
+        camposHtml.add("${ementa}");
+        camposHtml.add("${objetivos}");
+        camposHtml.add("${metodologia}");
+        camposHtml.add("${atividadesDiscentes}");
+        camposHtml.add("${sistemaDeAvaliacao}");
+        camposHtml.add("${bibliografia}");
 
-                List<XWPFRun> runs = para.getRuns();
-                for (int i = runs.size() - 1; i >= 0; i--) {
-                    para.removeRun(i);
+        boolean htmlProcessed = false;
+
+        for (Map.Entry<String, Supplier<String>> entry : camposMap.entrySet()) {
+            String marcador = entry.getKey();
+            if (fullParagraphText.contains(marcador)) {
+                if (camposHtml.contains(marcador)) {
+                    String htmlContent = entry.getValue().get();
+
+                    if (htmlContent == null || htmlContent.trim().isEmpty()) {
+                        while (para.getRuns().size() > 0) {
+                            para.removeRun(0);
+                        }
+                        para.createRun().setText("");
+                        htmlProcessed = true;
+                        continue;
+                    }
+
+                    inserirConteudoHtml(para, htmlContent, doc, parentCell);
+                    htmlProcessed = true;
+                    break;
+                } else {
+                    String valor = entry.getValue().get();
+                    fullParagraphText = fullParagraphText.replace(marcador, valor);
                 }
-                XWPFRun newRun = para.createRun();
-                newRun.setText(updatedText);
+            }
+        }
+
+        if (!htmlProcessed) {
+            while (para.getRuns().size() > 0) {
+                para.removeRun(0);
+            }
+            XWPFRun newRun = para.createRun();
+            newRun.setText(fullParagraphText);
+        }
+    }
+
+    private void inserirConteudoHtml(XWPFParagraph targetParagraph, String htmlContent, XWPFDocument doc, XWPFTableCell parentCell) {
+        while (targetParagraph.getRuns().size() > 0) {
+            targetParagraph.removeRun(0);
+        }
+
+        Document htmlDoc = Jsoup.parse(htmlContent);
+
+        Elements blockElements = htmlDoc.body().children();
+
+        if (blockElements.isEmpty() && !htmlDoc.body().text().isEmpty()) {
+            processarElementosInline(targetParagraph, htmlDoc.body());
+        } else {
+            boolean firstBlock = true;
+            for (Element element : blockElements) {
+                XWPFParagraph currentParagraph;
+                if (firstBlock) {
+                    currentParagraph = targetParagraph;
+                    firstBlock = false;
+                } else {
+                    if (parentCell != null) {
+                        currentParagraph = parentCell.addParagraph();
+                    } else {
+                        currentParagraph = doc.createParagraph();
+                    }
+                }
+                processarHtmlBlock(currentParagraph, element);
             }
         }
     }
-    public String camposAPreencher(String texto){
-        return texto.replace("${semestre}", pedAtual.getSemestre())
-                .replace("${unidade}", pedAtual.getUnidade())
-                .replace("${curso}", pedAtual.getCurso())
-                .replace("${estruturaCurricular}", pedAtual.getDisciplina().getEstruturaCurricular())
-                .replace("${nomeDisciplina}", pedAtual.getDisciplina().getNome())
-                .replace("${codigoDisciplina}", pedAtual.getDisciplina().getCodigo())
-                .replace("${obrigatoriedade}", pedAtual.getObrigatoriedade())
-                .replace("${regimeDeOferta}", pedAtual.getDisciplina().getRegimeDeOferta())
-                .replace("${cargaTotal}", String.valueOf(pedAtual.getDisciplina().getCargaTotal())+"h")
-                .replace("${cargaTeorica}",String.valueOf(pedAtual.getDisciplina().getCargaTeorica()))
-                .replace("${cargaPratica}", String.valueOf(pedAtual.getDisciplina().getCargaPratica()))
-                .replace("${cargaEad}", String.valueOf(pedAtual.getDisciplina().getCargaEaD()))
-                .replace("${cargaExtensao}", String.valueOf(pedAtual.getDisciplina().getCargaExtensao()))
-                .replace("${preRequisitos}", pedAtual.getDisciplina().getPreRequisito())
-                .replace("${coRequisitos}", pedAtual.getDisciplina().getCoRequisito())
-                .replace("${equivalencias}", pedAtual.getDisciplina().getEquivalencias())
-                .replace("${professor}", pedAtual.getProfessor().getNome())
-                .replace("${justificativa}", pedAtual.getJustificativa())
-                .replace("${ementa}", pedAtual.getEmenta())
-                .replace("${objetivos}", pedAtual.getObjetivos())
-                //FAZER EXIBICAO DAS AULAS
-                .replace("${metodologia}", pedAtual.getMetodologia())
-                .replace("${atividadesDiscentes}", pedAtual.getAtividadesDiscentes())
-                .replace("${sistemaDeAvaliacao}", pedAtual.getSistemaDeAvaliacao())
-                .replace("${bibliografia}", pedAtual.getBibliografia());
+
+    private static void processarHtmlBlock(XWPFParagraph paragraph, Element element) {
+        if (element.tagName().equals("ul") || element.tagName().equals("ol")) {
+            for (Element li : element.select("li")) {
+                XWPFRun run = paragraph.createRun();
+                if (element.tagName().equals("ul")) {
+                    run.setText("• " + li.text());
+                } else {
+                    run.setText(element.children().indexOf(li) + 1 + ". " + li.text());
+                }
+                run.addBreak();
+            }
+        } else if (element.tagName().equals("p") || element.tagName().equals("div")) {
+            processarElementosInline(paragraph, element);
+        } else {
+            processarElementosInline(paragraph, element);
+        }
+    }
+
+    private static void processarElementosInline(XWPFParagraph paragraph, Element element) {
+        for (Node node : element.childNodes()) {
+            if (node instanceof Element) {
+                Element childElement = (Element) node;
+                XWPFRun run = paragraph.createRun();
+
+                // Aplicar formatação ao run ANTES de adicionar o texto
+                if (childElement.tagName().equals("b") || childElement.tagName().equals("strong")) {
+                    run.setBold(true);
+                } else if (childElement.tagName().equals("i") || childElement.tagName().equals("em")) {
+                    run.setItalic(true);
+                } else if (childElement.tagName().equals("a")) {
+                    run.setColor("0000FF");
+                    run.setUnderline(UnderlinePatterns.SINGLE);
+                }
+
+                // Adiciona o texto próprio do elemento (se houver)
+                if (!childElement.ownText().isEmpty()) {
+                    run.setText(childElement.ownText());
+                }
+
+                // Processa os filhos recursivamente, mas no MESMO parágrafo
+                // Isso é crucial para formatação aninhada (ex: <b><i>texto</i></b>)
+                processarElementosInline(paragraph, childElement);
+
+            } else if (node instanceof TextNode) {
+                // Para texto puro que não está dentro de uma tag específica
+                XWPFRun run = paragraph.createRun();
+                run.setText(((TextNode) node).text());
+            }
+        }
     }
 }

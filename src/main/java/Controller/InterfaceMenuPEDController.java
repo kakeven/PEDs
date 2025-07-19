@@ -275,7 +275,7 @@ public class InterfaceMenuPEDController implements Initializable {
     public void aoClicarAddAula(){
         //pegar data formatada
         LocalDate dataLocal = seletorDatas.getValue();
-        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd 'do' MMMM 'de' YYYY");
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' YYYY");
         String dataFormatada = dataLocal.format(formatador);
 
 
