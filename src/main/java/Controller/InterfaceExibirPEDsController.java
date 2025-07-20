@@ -115,7 +115,7 @@ public class InterfaceExibirPEDsController implements Initializable{
                 case "botaoVoltar":
                     aoClicarVoltar();
                     break;
-                case "botaoPDF":
+                case "botaoDocx":
                     aoClicarExportaPDF();
             }
         }
