@@ -13,10 +13,10 @@
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="900.0">
          <children>
-            <TableView layoutX="232.0" layoutY="65.0" prefHeight="517.0" prefWidth="440.0">
+            <TableView fx:id="tabelaDisciplina" layoutX="232.0" layoutY="65.0" prefHeight="517.0" prefWidth="440.0">
               <columns>
-                <TableColumn editable="false" prefWidth="220.0" sortable="false" text="Nome" />
-                <TableColumn prefWidth="220.0" text="Código" />
+                <TableColumn fx:id="colunaNome" editable="false" prefWidth="220.0" sortable="false" text="Nome" />
+                <TableColumn fx:id="colunaCodigo" prefWidth="220.0" text="Código" />
               </columns>
             </TableView>
             <Button fx:id="botaoVoltar" layoutX="14.0" layoutY="543.0" mnemonicParsing="false" onAction="#metodoDeus" prefHeight="39.0" prefWidth="77.0" text="Voltar" />
