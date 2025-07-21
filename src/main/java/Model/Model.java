@@ -889,7 +889,6 @@ public class Model {
         ArrayList<Disciplina> disciplinasBanco = arrayDisciplinas();
 
         for (Disciplina disciplina : disciplinasBanco) {
-            System.out.println(disciplina.getCodigo());
             ArrayList<String> row = new ArrayList<>();
             row.add(disciplina.getNome());
             row.add(disciplina.getCodigo());
