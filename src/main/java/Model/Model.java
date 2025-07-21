@@ -889,6 +889,7 @@ public class Model {
         ArrayList<Disciplina> disciplinasBanco = arrayDisciplinas();
 
         for (Disciplina disciplina : disciplinasBanco) {
+           // System.out.println(disciplina.getCodigo());
             ArrayList<String> row = new ArrayList<>();
             row.add(disciplina.getNome());
             row.add(disciplina.getCodigo());
@@ -1013,10 +1014,8 @@ public class Model {
                                     CTShd shd = tcPr.isSetShd() ? tcPr.getShd() : tcPr.addNewShd();
 
                                     shd.setFill("FFFFFF");
-                                    shd.setVal(STShd.CLEAR); // Define o tipo de preenchimento como sólido
+                                    shd.setVal(STShd.CLEAR);
                                     shd.setColor("auto");
-
-                                    // Define a cor do primeiro plano como automática
                                 }
 
                             }
@@ -1032,14 +1031,11 @@ public class Model {
                             }
                             for (XWPFTableRow row : table.getRows()) {
                                 while (row.getTableCells().size() < 3) {
-                                    row.createCell(); // Garante 3 células
+                                    row.createCell();
                                 }
 
                                 for (XWPFTableCell cell : row.getTableCells()) {
-                                    // Garante que a célula tem propriedades
                                     CTTcPr tcPr = cell.getCTTc().isSetTcPr() ? cell.getCTTc().getTcPr() : cell.getCTTc().addNewTcPr();
-
-                                    // Cria bordas se não existirem
                                     CTTcBorders borders = tcPr.isSetTcBorders() ? tcPr.getTcBorders() : tcPr.addNewTcBorders();
 
                                     CTBorder top = borders.isSetTop() ? borders.getTop() : borders.addNewTop();
@@ -1052,7 +1048,6 @@ public class Model {
                                     left.setVal(STBorder.NONE);
                                     right.setVal(STBorder.NONE);
 
-                                    // Zera cor de preenchimento, só por garantia
                                     CTShd shd = tcPr.isSetShd() ? tcPr.getShd() : tcPr.addNewShd();
                                     shd.setFill("FFFFFF");
                                     shd.setVal(STShd.CLEAR);
@@ -1074,7 +1069,6 @@ public class Model {
                 }
 
 
-                // Processar outros campos do documento
                 for (XWPFTable table : doc.getTables()) {
                     for (XWPFTableRow row : table.getRows()) {
                         for (XWPFTableCell cell : row.getTableCells()) {
