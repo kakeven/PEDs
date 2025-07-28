@@ -624,7 +624,6 @@ public class Model {
             preparar.setString(2, ped.getSemestre());
             ResultSet resultado = preparar.executeQuery();
             if (resultado.next()) {
-                //System.out.println(resultado.getInt("id"));
                 return resultado.getInt("id");
             }
         } catch (SQLException e) {
@@ -802,7 +801,6 @@ public class Model {
         ArrayList<Aula> aulasReturn = new ArrayList<>();
         aulasReturn.add(aulas.get(0));
         aulas.sort(Comparator.comparingInt(aula -> (Integer.parseInt(aula.getDataNormal().substring(0,2))+100*Integer.parseInt(aula.getDataNormal().substring(3,5))+10000*Integer.parseInt(aula.getDataNormal().substring(6)))));
-       // System.out.println(aulas);
         return aulas;
     }
 
@@ -881,7 +879,6 @@ public class Model {
             row.add(ped.getDisciplina() != null ? ped.getDisciplina().getNome() : "N/A"); // Nome da Disciplina
             pedsParaView.add(row);
         }
-        //System.out.println(pedsParaView);
         return pedsParaView;
     }
     public ArrayList<ArrayList<String>> getDisciplinasParaTableView(){
@@ -889,13 +886,11 @@ public class Model {
         ArrayList<Disciplina> disciplinasBanco = arrayDisciplinas();
 
         for (Disciplina disciplina : disciplinasBanco) {
-           // System.out.println(disciplina.getCodigo());
             ArrayList<String> row = new ArrayList<>();
             row.add(disciplina.getNome());
             row.add(disciplina.getCodigo());
             disciplinasParaView.add(row);
         }
-        //System.out.println(pedsParaView);
         return disciplinasParaView;
     }
 
