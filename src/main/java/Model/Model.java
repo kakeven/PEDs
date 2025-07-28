@@ -535,7 +535,7 @@ public class Model {
                     bibliografia TEXT NOT NULL,
                     obrigatoriedade TEXT NOT NULL,
                     aulas,
-                    FOREIGN KEY (id_professor) REFERENCES professor(id)
+                    FOREIGN KEY (id_professor) REFERENCES usuarios(id)
                     FOREIGN KEY (id_disciplina) REFERENCES disciplina(id)
                     ON DELETE CASCADE
                     ON DELETE CASCADE

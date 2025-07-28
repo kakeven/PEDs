@@ -30,7 +30,7 @@
               </columns>
             </TableView>
             <Button fx:id="botaoVoltar" layoutX="25.0" layoutY="554.0" mnemonicParsing="false" onAction="#metodoDeus" prefHeight="32.0" prefWidth="58.0" text="Voltar" />
-            <Button fx:id="botaoPDF" layoutX="375.0" layoutY="541.0" mnemonicParsing="false" onAction="#metodoDeus" prefHeight="45.0" prefWidth="150.0" text="Exportar para PDF">
+            <Button fx:id="botaoPDF" layoutX="375.0" layoutY="541.0" mnemonicParsing="false" onAction="#metodoDeus" prefHeight="45.0" prefWidth="150.0" text="Exportar para docx">
                <font>
                   <Font size="14.0" />
                </font>
