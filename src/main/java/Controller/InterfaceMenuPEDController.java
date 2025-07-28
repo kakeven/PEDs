@@ -338,7 +338,11 @@ public class InterfaceMenuPEDController implements Initializable {
         primeiraSelecaoData = false;
     }
     public void aoClicarSalvar(){
-        if(model.verificarPed(nomeUnidade.getText(),choiceDisciplina.getValue(), comboCurso.getValue(), textoSemestre.getText(), justificativaEditor.getHtmlText(), ementaEditor.getHtmlText(), objetivosEditor.getHtmlText(), metodologiaEditor.getHtmlText(), atividadesDoDiscenteEditor.getHtmlText(), sistemaDeAvaliacaoEditor.getHtmlText(), bibliografiaEditor.getHtmlText(), choiceObrigatoriedade.getValue())){
+        if(justificativaEditor.getHtmlText().isBlank() || objetivosEditor.getHtmlText().isBlank() || sistemaDeAvaliacaoEditor.getHtmlText().isBlank() || bibliografiaEditor.getHtmlText().isBlank() || ementaEditor.getHtmlText().isBlank() || metodologiaEditor.getHtmlText().isBlank() || atividadesDoDiscenteEditor.getHtmlText().isBlank() || comboCurso.getEditor().getText().equals("Nenhum Curso Selecionado")){
+            labelPreenchaTodosOsCampos.setVisible(true);
+            labelPedAdicionadoComSucesso.setVisible(false);
+            labelSelecioneAulasDiasDiferente.setVisible(false);
+        }else if(model.verificarPed(nomeUnidade.getText(),choiceDisciplina.getValue(), comboCurso.getValue(), textoSemestre.getText(), justificativaEditor.getHtmlText(), ementaEditor.getHtmlText(), objetivosEditor.getHtmlText(), metodologiaEditor.getHtmlText(), atividadesDoDiscenteEditor.getHtmlText(), sistemaDeAvaliacaoEditor.getHtmlText(), bibliografiaEditor.getHtmlText(), choiceObrigatoriedade.getValue())){
             primeiraSelecaoData = false;
             labelPedAdicionadoComSucesso.setVisible(true);
             labelSelecioneAulasDiasDiferente.setVisible(false);
@@ -353,10 +357,6 @@ public class InterfaceMenuPEDController implements Initializable {
                 JanelaAtual.centerOnScreen();
             });
             timer.play();
-        }else if(justificativaEditor.getHtmlText().isBlank() || objetivosEditor.getHtmlText().isBlank() || sistemaDeAvaliacaoEditor.getHtmlText().isBlank() || bibliografiaEditor.getHtmlText().isBlank() || ementaEditor.getHtmlText().isBlank() || metodologiaEditor.getHtmlText().isBlank() || atividadesDoDiscenteEditor.getHtmlText().isBlank()){
-            labelPreenchaTodosOsCampos.setVisible(true);
-            labelPedAdicionadoComSucesso.setVisible(false);
-            labelSelecioneAulasDiasDiferente.setVisible(false);
         }
     }
 

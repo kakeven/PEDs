@@ -30,7 +30,7 @@ public class InterfaceExibirPEDsController implements Initializable{
     private Button botaoVoltar;
 
     @FXML
-    private Button botaoPDF;
+    private Button botaoDocx;
 
     //table view
     @FXML
