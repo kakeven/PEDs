@@ -82,9 +82,6 @@ public class InterfaceMenuPEDController implements Initializable {
     private Button botaoSalvarPED;
 
     @FXML
-    private Button botaoLimparPED;
-
-    @FXML
     private Spinner<Integer> spinnerHoraAula;
 
     //date picker(datas)
