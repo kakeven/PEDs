@@ -57,8 +57,6 @@ public class InterfaceExibirDisciplinaController {
             tabelaDisciplina.setItems(dadosTableView);
         }
     }
-
-
     public void aoClicarVoltar(){
         try {
             Parent arquivoJanela = new InterfaceMenu(model).getRoot();
@@ -71,7 +69,6 @@ public class InterfaceExibirDisciplinaController {
         }
     }
 
-    //metodo deus
     @FXML
     private void metodoDeus(ActionEvent evento){
         Object fonte = evento.getSource();

@@ -81,7 +81,6 @@ public class InterfaceLoginController implements Initializable {
             e.printStackTrace();
         }
     }
-    //metodo Deus
     @FXML
     private void metodoDeus(ActionEvent evento){
         Object fonte = evento.getSource();

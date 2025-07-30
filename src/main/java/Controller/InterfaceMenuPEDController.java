@@ -359,8 +359,6 @@ public class InterfaceMenuPEDController implements Initializable {
             timer.play();
         }
     }
-
-    //metodo deus
     @FXML
     public void metodoDeus(ActionEvent evento){
         Object fonte = evento.getSource();
